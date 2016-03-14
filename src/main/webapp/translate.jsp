@@ -4,13 +4,13 @@
     <head>        
         <title>Translator</title>
         <style>
-            input{
+            input:not([type=checkbox]){
                 border: 2px solid #dadada;
                 height: 35px;
                 width: 100%;
                 /*border-radius: 7px;*/
             }
-            input:focus{
+            input:focus:not([type=checkbox]){
                 outline: none;
                 border-color: #9ecaed;
                 box-shadow: 0 0 10px #9ecaed;
@@ -57,7 +57,7 @@
                 background-color: #4d90fe;
                 font-size: 20px;
             }
-            input[type=text], input[type=password]{
+            input[type=text]{
                 height: 44px;
                 font-size: 16px;
                 width: 100%;
@@ -82,6 +82,10 @@
                 padding: 0 8px;
                 box-sizing: border-box;
             }
+
+            input[type=checkbox]{
+                transform: scale(1.3);
+            }
         </style>
     </head>
 
@@ -96,7 +100,15 @@
                 <table>
                     <tr>
                         <td>
-                            <input type="text" name="fromtext" placeholder="Enter text to translate"/>
+
+                            <%
+                                if (request.getAttribute("fromtext") == null) {
+                                    out.println("<input type=\"text\" name=\"fromtext\" placeholder=\"Enter text to translate\"/>");
+                                } else {
+                                    out.println("<input type=\"text\" name=\"fromtext\" placeholder=\"Enter text to translate\" value=" + request.getAttribute("fromtext") + ">");
+                                }
+                            %>
+
                         </td>
                         <td>
                             <select name="fromlang">
@@ -104,15 +116,34 @@
                                     ArrayList<String> ar2 = new ArrayList<String>();
                                     ar2 = (ArrayList<String>) request.getAttribute("langs");
                                     for (int i = 0; i < ar2.size(); i++) {
-                                        out.println("<option>" + ar2.get(i) + "</option>");
+                                        if (ar2.get(i).equals(request.getAttribute("fromlang"))) {
+                                            out.println("<option selected>" + ar2.get(i) + "</option>");
+                                        } else {
+                                            out.println("<option>" + ar2.get(i) + "</option>");
+                                        }
                                     }
                                 %>
                             </select>
                         </td>
                     </tr>
+
+                    <tr>
+                        <td><input type="checkbox" name="autodetect" value="1"/>Auto detect language
+                        </td>
+                    </tr>
+
                     <tr>
                         <td>
-                            <input type="text" name="totext" placeholder="Translated text will be here" disabled />
+
+                            <%
+                                if (request.getAttribute("final_result") == null) {
+                                    out.println("<input type=\"text\" name=\"totext\" placeholder=\"Translated text\" disabled/>");
+                                } else {
+                                    response.setCharacterEncoding("UTF-8");
+                                    out.println("<input type=\"text\" name=\"fromtext\" placeholder=\"Translated text\" disabled value=" + request.getAttribute("final_result") + ">");
+                                }
+                            %>
+
                         </td>
                         <td>
                             <select name="tolang">
@@ -120,7 +151,11 @@
                                     ArrayList<String> ar = new ArrayList<String>();
                                     ar = (ArrayList<String>) request.getAttribute("langs");
                                     for (int i = 0; i < ar.size(); i++) {
-                                        out.println("<option>" + ar.get(i) + "</option>");
+                                        if (ar.get(i).equals(request.getAttribute("tolang"))) {
+                                            out.println("<option selected>" + ar.get(i) + "</option>");
+                                        } else {
+                                            out.println("<option>" + ar.get(i) + "</option>");
+                                        }
                                     }
                                 %>
                             </select>
@@ -133,18 +168,7 @@
                 </table>    
             </form>
         </div>
-        <div>
-        </div>
-
-        <%
-            if (request.getAttribute("final_result") == null) {
-                out.println("");
-            } else {
-                response.setCharacterEncoding("euc-jp");
-                out.println(request.getAttribute("final_result"));
-            }
-        %>
-
+                            
     </body>
 
 </html>

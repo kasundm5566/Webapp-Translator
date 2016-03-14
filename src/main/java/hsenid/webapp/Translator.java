@@ -28,10 +28,10 @@ public class Translator extends HttpServlet {
     @Override
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String translated_text = null;
+        String translated_text = null;        
         String from_lang = req.getParameter("fromlang");
         String to_lang = req.getParameter("tolang");
-        String from_text = req.getParameter("fromtext");
+        String from_text = req.getParameter("fromtext");        
         auto_detect = req.getParameter("autodetect");
 
         try {
@@ -77,16 +77,16 @@ public class Translator extends HttpServlet {
         String text = null;
         String url;
 
-        if (auto_detect == "1") {
+        if ("1".equals(auto_detect)) {
             url = "https://translate.yandex.net/api/v1.5/tr/translate?key=" + key + "&lang=" + to_lang + "&text=" + from_text;
         } else {
             url = "https://translate.yandex.net/api/v1.5/tr/translate?key=" + key + "&lang=" + from_lang + "-" + to_lang + "&text=" + from_text;
         }
-
         HttpClient client = new DefaultHttpClient();
         HttpGet request = new HttpGet(url);
         HttpResponse response = client.execute(request);
         InputStream stream = response.getEntity().getContent();
+        
 
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
