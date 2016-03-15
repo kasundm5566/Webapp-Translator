@@ -1,4 +1,5 @@
 <%@page import="java.util.ArrayList"%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>        
@@ -168,7 +169,12 @@
                 </table>    
             </form>
         </div>
-                            
+
+        <div>
+        <%
+        out.println(hsenid.webapp.Translator.s);
+        %>
+        </div>
     </body>
 
 </html>

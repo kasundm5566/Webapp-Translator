@@ -22,16 +22,17 @@ import org.w3c.dom.NodeList;
  */
 public class Translator extends HttpServlet {
 
-    String key = "trnsl.1.1.20160310T063945Z.14945888ac849b23.fc507cddeb7ec9d96e1255e0a348b1b4a076f9c3";
+    final String KEY = "trnsl.1.1.20160310T063945Z.14945888ac849b23.fc507cddeb7ec9d96e1255e0a348b1b4a076f9c3";
     String auto_detect = null;
+    public static String s;
 
     @Override
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String translated_text = null;        
+        String translated_text = null;
         String from_lang = req.getParameter("fromlang");
         String to_lang = req.getParameter("tolang");
-        String from_text = req.getParameter("fromtext");        
+        String from_text = req.getParameter("fromtext");
         auto_detect = req.getParameter("autodetect");
 
         try {
@@ -42,11 +43,12 @@ public class Translator extends HttpServlet {
             req.setAttribute("fromlang", from_lang);
             req.setAttribute("tolang", to_lang);
             req.setAttribute("fromtext", from_text);
+
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/translate.jsp");
             rd.forward(req, resp);
         } catch (Exception ex) {
+            s=ex.toString();
         }
-
     }
 
     @Override
@@ -54,9 +56,13 @@ public class Translator extends HttpServlet {
 
     }
 
+    /**
+     * @return Language list will return as an string arraylist
+     * @throws Exception
+     */
     public ArrayList<String> LoadLanguages() throws Exception {
         ArrayList<String> list = new ArrayList<String>();
-        String url = "https://translate.yandex.net/api/v1.5/tr/getLangs?key=" + key + "&ui=en";
+        String url = "https://translate.yandex.net/api/v1.5/tr/getLangs?key=" + KEY + "&ui=en";
 
         HttpClient client = new DefaultHttpClient();
         HttpGet request = new HttpGet(url);
@@ -73,27 +79,36 @@ public class Translator extends HttpServlet {
         return list;
     }
 
+    /**
+     * @param from_lang Language of the text we need to translate
+     * @param to_lang Language of the translated text
+     * @param from_text Text we need to translate
+     * @return Returns a string contains the translated text
+     * @throws Exception
+     */
     public String Translate(String from_lang, String to_lang, String from_text) throws Exception {
         String text = null;
         String url;
 
         if ("1".equals(auto_detect)) {
-            url = "https://translate.yandex.net/api/v1.5/tr/translate?key=" + key + "&lang=" + to_lang + "&text=" + from_text;
+            url = "https://translate.yandex.net/api/v1.5/tr/translate?key=" + KEY + "&lang=" + to_lang + "&text=" + from_text;
         } else {
-            url = "https://translate.yandex.net/api/v1.5/tr/translate?key=" + key + "&lang=" + from_lang + "-" + to_lang + "&text=" + from_text;
+            url = "https://translate.yandex.net/api/v1.5/tr/translate?key=" + KEY + "&lang=" + from_lang + "-" + to_lang + "&text=" + from_text;
         }
+
         HttpClient client = new DefaultHttpClient();
+
+        s=from_text;
         HttpGet request = new HttpGet(url);
         HttpResponse response = client.execute(request);
         InputStream stream = response.getEntity().getContent();
         
-
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
         Document document = db.parse(stream);
         NodeList nodeList = document.getElementsByTagName("Translation");
         text = nodeList.item(0).getTextContent();
-        return text;
 
+        return text;
     }
 }
