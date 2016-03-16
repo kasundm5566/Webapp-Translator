@@ -18,7 +18,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
 /**
- * Created by hsenid on 3/10/16.
+ * Created by hsenid.
+ * @author Kasun Dinesh
  */
 public class Translator extends HttpServlet {
 
@@ -42,10 +43,9 @@ public class Translator extends HttpServlet {
             req.setAttribute("fromlang", from_lang);
             req.setAttribute("tolang", to_lang);
             req.setAttribute("fromtext", from_text);
-
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/translate.jsp");
             rd.forward(req, resp);
-        } catch (Exception ex) {         
+        } catch (Exception ex) {            
         }
     }
 
@@ -61,15 +61,7 @@ public class Translator extends HttpServlet {
     public ArrayList<String> LoadLanguages() throws Exception {
         ArrayList<String> list = new ArrayList<String>();
         String url = "https://translate.yandex.net/api/v1.5/tr/getLangs?key=" + KEY + "&ui=en";
-
-        HttpClient client = new DefaultHttpClient();
-        HttpGet request = new HttpGet(url);
-        HttpResponse response = client.execute(request);
-        InputStream stream = response.getEntity().getContent();
-
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        DocumentBuilder db = dbf.newDocumentBuilder();
-        Document document = db.parse(stream);
+        Document document = URLProcessor(url);
         NodeList nodeList = document.getElementsByTagName("Item");
         for (int x = 0, size = nodeList.getLength(); x < size; x++) {
             list.add(nodeList.item(x).getAttributes().getNamedItem("value").getNodeValue());
@@ -87,24 +79,33 @@ public class Translator extends HttpServlet {
     public String Translate(String from_lang, String to_lang, String from_text) throws Exception {
         String text = null;
         String url;
-
         if ("1".equals(auto_detect)) {
             url = "https://translate.yandex.net/api/v1.5/tr/translate?key=" + KEY + "&lang=" + to_lang + "&text=" + from_text;
         } else {
             url = "https://translate.yandex.net/api/v1.5/tr/translate?key=" + KEY + "&lang=" + from_lang + "-" + to_lang + "&text=" + from_text;
         }
+        Document document = URLProcessor(url);
+        NodeList nodeList = document.getElementsByTagName("Translation");
+        text = nodeList.item(0).getTextContent();
+        return text;
+    }
 
+    /**
+     * @param url
+     * URL of the website taking XML data
+     * @return
+     * Returns a document contains the data extracted form the passed website
+     * @throws Exception 
+     */
+    public Document URLProcessor(String url) throws Exception {
         HttpClient client = new DefaultHttpClient();
         HttpGet request = new HttpGet(url);
         HttpResponse response = client.execute(request);
         InputStream stream = response.getEntity().getContent();
-
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
         Document document = db.parse(stream);
-        NodeList nodeList = document.getElementsByTagName("Translation");
-        text = nodeList.item(0).getTextContent();
         stream.close();
-        return text;
+        return document;
     }
 }

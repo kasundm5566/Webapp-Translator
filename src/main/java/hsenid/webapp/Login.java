@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hsenid.webapp;
 
 import java.io.IOException;
@@ -18,8 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by hsenid.
- *
- * @author hsenid
+ * @author Kasun Dinesh
  */
 public class Login extends HttpServlet {
 
@@ -57,6 +51,7 @@ public class Login extends HttpServlet {
     /**
      * @param user Passing a user to validate username and password
      * @return status Returns whether user passed the validation or not
+     * @throws java.lang.Exception
      */
     public static boolean ValidateByDB(User user) throws Exception {
         boolean status = false;
