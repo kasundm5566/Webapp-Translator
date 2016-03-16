@@ -19,6 +19,7 @@ import org.w3c.dom.NodeList;
 
 /**
  * Created by hsenid.
+ *
  * @author Kasun Dinesh
  */
 public class Translator extends HttpServlet {
@@ -45,7 +46,8 @@ public class Translator extends HttpServlet {
             req.setAttribute("fromtext", from_text);
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/translate.jsp");
             rd.forward(req, resp);
-        } catch (Exception ex) {            
+        } catch (Exception ex) {
+            throw new ServletException(ex);
         }
     }
 
@@ -91,11 +93,10 @@ public class Translator extends HttpServlet {
     }
 
     /**
-     * @param url
-     * URL of the website taking XML data
-     * @return
-     * Returns a document contains the data extracted form the passed website
-     * @throws Exception 
+     * @param url URL of the website taking XML data
+     * @return Returns a document contains the data extracted form the passed
+     * website
+     * @throws Exception
      */
     public Document URLProcessor(String url) throws Exception {
         HttpClient client = new DefaultHttpClient();
