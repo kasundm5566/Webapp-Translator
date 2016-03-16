@@ -1,10 +1,7 @@
 package hsenid.webapp;
 
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +13,6 @@ import javax.xml.parsers.DocumentBuilder;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -30,9 +26,8 @@ public class Translator extends HttpServlet {
     String auto_detect = null;
 
     @Override
-
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String translated_text = null;
+        String translated_text = "Translated text";
         req.setCharacterEncoding("UTF-8");
         String from_lang = req.getParameter("fromlang");
         String to_lang = req.getParameter("tolang");
@@ -50,7 +45,7 @@ public class Translator extends HttpServlet {
 
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/translate.jsp");
             rd.forward(req, resp);
-        } catch (Exception ex) {
+        } catch (Exception ex) {         
         }
     }
 
@@ -109,7 +104,7 @@ public class Translator extends HttpServlet {
         Document document = db.parse(stream);
         NodeList nodeList = document.getElementsByTagName("Translation");
         text = nodeList.item(0).getTextContent();
-
+        stream.close();
         return text;
     }
 }
