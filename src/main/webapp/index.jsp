@@ -16,7 +16,8 @@
             #title{
                 font-weight: 100;
                 text-align: center;
-                font-size: 1.4em;
+                font-size: 1.0em;
+                font-family: "Lucida Console", Monaco, monospace;
             }
             body{
                 background-size: cover;
@@ -38,6 +39,7 @@
                 height: 60px;
                 background-color: #111;
                 opacity: 0.5;
+                font-family: "Lucida Console", Monaco, monospace;
             }
             div#sep{
                 height: 25px;
@@ -72,13 +74,13 @@
         </style>
     <body>
         <div id="header">
-            <p class="header-text">Welcome to my webapp</p>
+            <p class="header-text">Welcome to Translator</p>
         </div>
         <div id="sep">
         </div>
         <div id="login">
             <form name="Login" method="post" action="login">
-                <h1 id="title">Enter details to login</h1>
+                <h1 id="title"><u>Enter details to login</u></h1>
                 <table>
                     <input type="text" name="uname" placeholder="Enter user name" required="true"/>
                     <input type="password" name="pass" placeholder="Enter password" required="true"/>

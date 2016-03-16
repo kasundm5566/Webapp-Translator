@@ -1,17 +1,23 @@
-<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>        
         <title>Translator</title>
         <style>
             input:not([type=checkbox]){
-                border: 2px solid #dadada;
+                /*border: 2px solid #dadada;*/
                 height: 35px;
                 width: 100%;
                 /*border-radius: 7px;*/
             }
-            input:focus:not([type=checkbox]){
+            input:focus{
+                outline: none;
+                border-color: #9ecaed;
+                box-shadow: 0 0 10px #9ecaed;
+            }
+            select:focus{
                 outline: none;
                 border-color: #9ecaed;
                 box-shadow: 0 0 10px #9ecaed;
@@ -19,7 +25,8 @@
             #title{
                 font-weight: 100;
                 text-align: center;
-                font-size: 1.4em;
+                font-size: 1.0em;
+                font-family: "Lucida Console", Monaco, monospace;
             }
             body{
                 background-size: cover;
@@ -41,6 +48,7 @@
                 height: 60px;
                 background-color: #111;
                 opacity: 0.5;
+                font-family: "Lucida Console", Monaco, monospace;                
             }
             div#sep{
                 height: 25px;
@@ -87,6 +95,12 @@
             input[type=checkbox]{
                 transform: scale(1.3);
             }
+            #yandex{
+                font-style: oblique;
+                font-family: monospace;
+                font-size: 11px;
+                font-weight: bold;
+            }
         </style>
     </head>
 
@@ -97,79 +111,83 @@
         <div id="sep">
         </div>
         <div id="translate">
-            <form name="translate_form" method="post" action="translator">
-                <table>
-                    <tr>
-                        <td>
-
-                            <%
-                                if (request.getAttribute("fromtext") == null) {
-                                    out.println("<input type=\"text\" name=\"fromtext\" placeholder=\"Enter text to translate\"/>");
-                                } else {
-                                    out.println("<input type=\"text\" name=\"fromtext\" placeholder=\"Enter text to translate\" value=" + request.getAttribute("fromtext") + ">");
-                                }
-                            %>
-
-                        </td>
-                        <td>
-                            <select name="fromlang">
+            <center>
+                <form name="translate_form" method="post" action="translator">
+                    <h1 id="title"><u>Translate text</u></h1>
+                    <table>
+                        <tr>
+                            <td>
                                 <%
-                                    ArrayList<String> ar2 = new ArrayList<String>();
-                                    ar2 = (ArrayList<String>) request.getAttribute("langs");
-                                    for (int i = 0; i < ar2.size(); i++) {
-                                        if (ar2.get(i).equals(request.getAttribute("fromlang"))) {
-                                            out.println("<option selected>" + ar2.get(i) + "</option>");
-                                        } else {
-                                            out.println("<option>" + ar2.get(i) + "</option>");
-                                        }
+                                    if (request.getAttribute("fromtext") == null) {
+                                        out.println("<input type=\"text\" name=\"fromtext\" placeholder=\"Enter text to translate\" required=\"true\"/>");
+                                    } else {
+                                        out.println("<input type=\"text\" name=\"fromtext\" placeholder=\"Enter text to translate\" value=" + request.getAttribute("fromtext") + ">");
                                     }
-                                %>
-                            </select>
-                        </td>
-                    </tr>
+                                %>                           
+                            </td>
+                            <td>
+                                <select name="fromlang">
+                                    <%
+                                        ArrayList<String> ar2 = new ArrayList<String>();
+                                        ar2 = (ArrayList<String>) request.getAttribute("langs");
+                                        for (int i = 0; i < ar2.size(); i++) {
+                                            if (ar2.get(i).equals(request.getAttribute("fromlang"))) {
+                                                out.println("<option selected>" + ar2.get(i) + "</option>");
+                                            } else {
+                                                out.println("<option>" + ar2.get(i) + "</option>");
+                                            }
+                                        }
+                                    %>
+                                </select>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td><input type="checkbox" name="autodetect" value="1"/>Auto detect language
-                        </td>
-                    </tr>
+                        <tr>
+                            <td><label><input type="checkbox" name="autodetect" checked value="1"/>Auto detect language</label>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>
-
-                            <%
-                                if (request.getAttribute("final_result") == null) {
-                                    out.println("<input type=\"text\" name=\"totext\" placeholder=\"Translated text\" disabled/>");
-                                } else {
-                                    response.setCharacterEncoding("UTF-8");
-                                    out.println("<input type=\"text\" name=\"fromtext\" placeholder=\"Translated text\" disabled value=" + request.getAttribute("final_result") + ">");
-                                }
-                            %>
-
-                        </td>
-                        <td>
-                            <select name="tolang">
+                        <tr>
+                            <td>
                                 <%
-                                    ArrayList<String> ar = new ArrayList<String>();
-                                    ar = (ArrayList<String>) request.getAttribute("langs");
-                                    for (int i = 0; i < ar.size(); i++) {
-                                        if (ar.get(i).equals(request.getAttribute("tolang"))) {
-                                            out.println("<option selected>" + ar.get(i) + "</option>");
-                                        } else {
-                                            out.println("<option>" + ar.get(i) + "</option>");
-                                        }
+                                    if (request.getAttribute("final_result") == null) {
+                                        out.println("<input type=\"text\" name=\"totext\" placeholder=\"Translated text\" disabled/>");
+                                    } else {
+                                        response.setCharacterEncoding("UTF-8");
+                                        out.println("<input type=\"text\" name=\"totext\" placeholder=\"Translated text\" disabled value=" + request.getAttribute("final_result") + ">");
                                     }
-                                %>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="reset" class="buttons" value="Reset values"/></td>
-                        <td><input type="submit" class="buttons" value="Translate"/></td>
-                    </tr>
-                </table>    
-            </form>
+                                %>                            
+                            </td>
+                            <td>
+                                <select name="tolang">
+                                    <%
+                                        ArrayList<String> ar = new ArrayList<String>();
+                                        ar = (ArrayList<String>) request.getAttribute("langs");
+                                        for (int i = 0; i < ar.size(); i++) {
+                                            if (ar.get(i).equals(request.getAttribute("tolang"))) {
+                                                out.println("<option selected>" + ar.get(i) + "</option>");
+                                            } else {
+                                                out.println("<option>" + ar.get(i) + "</option>");
+                                            }
+                                        }
+                                    %>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="reset" class="buttons" value="Reset values"/></td>
+                            <td><input type="submit" class="buttons" value="Translate"/></td>
+                        </tr>
+                    </table>                            
+                </form>
+            </center>
+
+            <center>  
+                <p id="yandex"><a href="http://translate.yandex.com/" target="_blank">Powered by Yandex.Translate</a></p>
+            </center>
+
         </div>
-        
+
     </body>
 
 </html>
