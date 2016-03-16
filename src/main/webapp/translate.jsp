@@ -169,12 +169,7 @@
                 </table>    
             </form>
         </div>
-
-        <div>
-        <%
-        out.println(hsenid.webapp.Translator.s);
-        %>
-        </div>
+        
     </body>
 
 </html>

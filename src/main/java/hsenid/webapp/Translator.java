@@ -1,7 +1,10 @@
 package hsenid.webapp;
 
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +16,7 @@ import javax.xml.parsers.DocumentBuilder;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -24,12 +28,12 @@ public class Translator extends HttpServlet {
 
     final String KEY = "trnsl.1.1.20160310T063945Z.14945888ac849b23.fc507cddeb7ec9d96e1255e0a348b1b4a076f9c3";
     String auto_detect = null;
-    public static String s;
 
     @Override
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String translated_text = null;
+        req.setCharacterEncoding("UTF-8");
         String from_lang = req.getParameter("fromlang");
         String to_lang = req.getParameter("tolang");
         String from_text = req.getParameter("fromtext");
@@ -47,7 +51,6 @@ public class Translator extends HttpServlet {
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/translate.jsp");
             rd.forward(req, resp);
         } catch (Exception ex) {
-            s=ex.toString();
         }
     }
 
@@ -97,12 +100,10 @@ public class Translator extends HttpServlet {
         }
 
         HttpClient client = new DefaultHttpClient();
-
-        s=from_text;
         HttpGet request = new HttpGet(url);
         HttpResponse response = client.execute(request);
         InputStream stream = response.getEntity().getContent();
-        
+
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
         Document document = db.parse(stream);
