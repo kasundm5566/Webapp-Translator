@@ -73,7 +73,7 @@
             #error{
                 color: red;
             }
-        </style>
+        </style>        
     <body>
         <div id="header">
             <p class="header-text">Welcome to Translator</p>

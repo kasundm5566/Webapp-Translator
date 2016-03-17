@@ -25,29 +25,29 @@ import org.w3c.dom.NodeList;
 public class Translator extends HttpServlet {
 
     final String KEY = "trnsl.1.1.20160310T063945Z.14945888ac849b23.fc507cddeb7ec9d96e1255e0a348b1b4a076f9c3";
-    String auto_detect = null;
+    String autoDetect = null;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String translated_text = "Translated text";
         req.setCharacterEncoding("UTF-8");
-        String from_lang = req.getParameter("fromlang");
-        String to_lang = req.getParameter("tolang");
-        String from_text = req.getParameter("fromtext");
-        auto_detect = req.getParameter("autodetect");
+        String fromlang = req.getParameter("fromlang");
+        String tolang = req.getParameter("tolang");
+        String fromtext = req.getParameter("fromtext");
+        autoDetect = req.getParameter("autodetect");
 
         try {
-            translated_text = Translate(from_lang, to_lang, from_text);
+            translated_text = Translate(fromlang, tolang, fromtext);
             ArrayList<String> list = LoadLanguages();
             req.setAttribute("langs", list);
             req.setAttribute("final_result", translated_text);
-            req.setAttribute("fromlang", from_lang);
-            req.setAttribute("tolang", to_lang);
-            req.setAttribute("fromtext", from_text);
+            req.setAttribute("fromlang", fromlang);
+            req.setAttribute("tolang", tolang);
+            req.setAttribute("fromtext", fromtext);
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/translate.jsp");
             rd.forward(req, resp);
         } catch (Exception ex) {
-            throw new ServletException(ex);
+            throw new ServletException("Something went wrong...");
         }
     }
 
@@ -72,19 +72,19 @@ public class Translator extends HttpServlet {
     }
 
     /**
-     * @param from_lang Language of the text we need to translate
-     * @param to_lang Language of the translated text
-     * @param from_text Text we need to translate
+     * @param fromLang Language of the text we need to translate
+     * @param toLang Language of the translated text
+     * @param fromText Text we need to translate
      * @return Returns a string contains the translated text
      * @throws Exception
      */
-    public String Translate(String from_lang, String to_lang, String from_text) throws Exception {
+    public String Translate(String fromLang, String toLang, String fromText) throws Exception {
         String text = null;
         String url;
-        if ("1".equals(auto_detect)) {
-            url = "https://translate.yandex.net/api/v1.5/tr/translate?key=" + KEY + "&lang=" + to_lang + "&text=" + from_text;
+        if ("1".equals(autoDetect)) {
+            url = "https://translate.yandex.net/api/v1.5/tr/translate?key=" + KEY + "&lang=" + toLang + "&text=" + fromText;
         } else {
-            url = "https://translate.yandex.net/api/v1.5/tr/translate?key=" + KEY + "&lang=" + from_lang + "-" + to_lang + "&text=" + from_text;
+            url = "https://translate.yandex.net/api/v1.5/tr/translate?key=" + KEY + "&lang=" + fromLang + "-" + toLang + "&text=" + fromText;
         }
         Document document = URLProcessor(url);
         NodeList nodeList = document.getElementsByTagName("Translation");
