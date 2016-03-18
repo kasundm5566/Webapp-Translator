@@ -19,7 +19,6 @@ import org.w3c.dom.NodeList;
 
 /**
  * Created by hsenid.
- *
  * @author Kasun Dinesh
  */
 public class Translator extends HttpServlet {
@@ -93,9 +92,8 @@ public class Translator extends HttpServlet {
     }
 
     /**
-     * @param url URL of the website taking XML data
-     * @return Returns a document contains the data extracted form the passed
-     * website
+     * @param url URL of the website to extract XML data
+     * @return Returns a document contains the data extracted form the passed website
      * @throws Exception
      */
     public Document URLProcessor(String url) throws Exception {

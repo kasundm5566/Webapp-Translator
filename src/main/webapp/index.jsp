@@ -3,6 +3,7 @@
 <html>
     <head>
         <title>Login Page</title>
+        <link rel='stylesheet' href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
         <style>
             input{
                 border: 2px solid #dadada;
@@ -18,7 +19,7 @@
             #title{
                 font-weight: 100;
                 text-align: center;
-                font-size: 1.0em;
+                font-size: 1.3em;
                 font-family: "Lucida Console", Monaco, monospace;
             }
             body{
@@ -29,7 +30,7 @@
                 background-size: cover;
             }
             #login{
-                padding: 40px;
+                padding: 25px;
                 width: 374px;
                 background-color: #F7F7F7;
                 margin: 0 auto 10px;
@@ -52,7 +53,7 @@
                 padding-top: 10px;
                 color: #fff;
             }
-            .buttons{
+            #buttons{
                 border: 0px;
                 color: #fff;
                 text-shadow: 0 1px rgba(0,0,0,0.1);
@@ -70,8 +71,8 @@
                 padding: 0 8px;
                 box-sizing: border-box;
             }
-            #error{
-                color: red;
+            .progress{
+                height: 5px;
             }
         </style>        
     <body>
@@ -80,24 +81,33 @@
         </div>
         <div id="sep">
         </div>
+
         <div id="login">
             <form name="Login" method="post" action="login">
                 <h1 id="title"><u>Enter details to login</u></h1>
+                
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                         aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                        <span class="sr-only">70% Complete</span>
+                    </div>
+                </div>
+
                 <table>
-                    <input type="text" name="uname" placeholder="Enter user name" required="true"/>
-                    <input type="password" name="pass" placeholder="Enter password" required="true"/>
-                    <input type="submit" value="Login" class="buttons"/>
+                    <input type="text" class="form-control" name="uname" placeholder="Enter user name" required="true"/>
+                    <input type="password" class="form-control" name="pass" placeholder="Enter password" required="true"/>
+                    <input type="submit" class="btn btn-default" value="Login" id="buttons"/>
                 </table>
             </form>
-            <div id="error">
-                <%
-                    if (request.getAttribute("error_msg") == null) {
-                        out.println("");
-                    } else {
-                        out.println(request.getAttribute("error_msg"));
-                    }
-                %>
-            </div>
+
+            <%
+                if (request.getAttribute("error_msg") != null) {
+                    out.println("<div id=\"error\" class=\"alert alert-danger\">");
+                    out.println(request.getAttribute("error_msg"));
+                    out.println("</div>");
+                }
+            %>
         </div>
+
     </body>
 </html>

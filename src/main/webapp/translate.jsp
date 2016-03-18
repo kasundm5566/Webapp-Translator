@@ -6,6 +6,8 @@
 <html lang="en">
     <head>        
         <title>Translator</title>
+        <link rel='stylesheet' href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
+
         <style>
             input:not([type=checkbox]){
                 /*border: 2px solid #dadada;*/
@@ -26,7 +28,7 @@
             #title{
                 font-weight: 100;
                 text-align: center;
-                font-size: 1.0em;
+                font-size: 1.3em;
                 font-family: "Lucida Console", Monaco, monospace;
             }
             body{
@@ -37,7 +39,7 @@
                 background-size: cover;
             }
             #translate{
-                padding: 40px;
+                padding: 25px;
                 width: 374px;
                 background-color: #F7F7F7;
                 margin: 0 auto 10px;
@@ -60,7 +62,7 @@
                 padding-top: 10px;
                 color: #fff;
             }
-            .buttons{
+            #buttons{
                 border: 0px;
                 color: #fff;
                 text-shadow: 0 1px rgba(0,0,0,0.1);
@@ -77,6 +79,7 @@
                 border-top: 1px solid #c0c0c0;
                 padding: 0 8px;
                 box-sizing: border-box;
+                height: 35px;
             }
             select{
                 border: 2px solid #dadada;
@@ -101,8 +104,16 @@
                 font-family: monospace;
                 font-size: 11px;
                 font-weight: bold;
+                color: blueviolet;
             }
-        </style>
+            table{
+                border-collapse: separate;
+                border-spacing: 5px;
+            }
+            .progress{
+                height: 5px;
+            }
+        </style>        
     </head>
 
     <body>
@@ -115,19 +126,27 @@
             <center>
                 <form name="translate_form" method="post" action="translator">
                     <h1 id="title"><u>Translate text</u></h1>
+
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                             aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                            <span class="sr-only">70% Complete</span>
+                        </div>
+                    </div>
+
                     <table>
                         <tr>
                             <td>
                                 <%
                                     if (request.getAttribute("fromtext") == null) {
-                                        out.println("<input type=\"text\" name=\"fromtext\" placeholder=\"Enter text to translate\" required=\"true\"/>");
+                                        out.println("<input type=\"text\" class=\"form-control\" name=\"fromtext\" placeholder=\"Enter text to translate\" required=\"true\"/>");
                                     } else {
-                                        out.println("<input type=\"text\" name=\"fromtext\" placeholder=\"Enter text to translate\" value=" + request.getAttribute("fromtext") + ">");
+                                        out.println("<input type=\"text\" class=\"form-control\" name=\"fromtext\" placeholder=\"Enter text to translate\" value=" + request.getAttribute("fromtext") + ">");
                                     }
                                 %>                           
                             </td>
                             <td>
-                                <select name="fromlang">
+                                <select name="fromlang" class="form-control" data-toggle="tooltip" title="Select language of your text">
                                     <%
                                         ArrayList<String> ar2 = new ArrayList<String>();
                                         ar2 = (ArrayList<String>) request.getAttribute("langs");
@@ -144,7 +163,7 @@
                         </tr>
 
                         <tr>
-                            <td><label><input type="checkbox" name="autodetect" checked value="1"/>Auto detect language</label>
+                            <td><label class="checkbox-inline"><input type="checkbox" name="autodetect" checked value="1"/>Auto detect language</label>
                             </td>
                         </tr>
 
@@ -152,15 +171,15 @@
                             <td>
                                 <%
                                     if (request.getAttribute("final_result") == null) {
-                                        out.println("<input type=\"text\" name=\"totext\" placeholder=\"Translated text\" disabled/>");
+                                        out.println("<input type=\"text\" class=\"form-control\" name=\"totext\" placeholder=\"Translated text\" disabled/>");
                                     } else {
                                         response.setCharacterEncoding("UTF-8");
-                                        out.println("<input type=\"text\" name=\"totext\" placeholder=\"Translated text\" disabled value=" + request.getAttribute("final_result") + ">");
+                                        out.println("<input type=\"text\" class=\"form-control\" name=\"totext\" placeholder=\"Translated text\" disabled value=" + request.getAttribute("final_result") + ">");
                                     }
                                 %>                            
                             </td>
                             <td>
-                                <select name="tolang">
+                                <select name="tolang" class="form-control" data-toggle="tooltip" title="Select language to translate">
                                     <%
                                         ArrayList<String> ar = new ArrayList<String>();
                                         ar = (ArrayList<String>) request.getAttribute("langs");
@@ -174,12 +193,13 @@
                                     %>
                                 </select>
                             </td>
-                        </tr>
+                        </tr>                        
+                    </table>  
+                    <table>
                         <tr>
-                            <td><input type="reset" class="buttons" value="Reset values"/></td>
-                            <td><input type="submit" class="buttons" value="Translate"/></td>
+                        <input type="submit" class="btn btn-default" id="buttons" value="Translate"/>
                         </tr>
-                    </table>                            
+                    </table>
                 </form>
             </center>
 
