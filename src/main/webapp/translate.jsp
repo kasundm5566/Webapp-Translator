@@ -125,7 +125,7 @@
         <div id="translate">
             <center>
                 <form name="translate_form" method="post" action="translator">
-                    <h1 id="title"><u>Translate text</u></h1>
+                    <h1 id="title">Translate text</h1>
 
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" aria-valuenow="70"

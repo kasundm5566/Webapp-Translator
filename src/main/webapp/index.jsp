@@ -84,7 +84,7 @@
 
         <div id="login">
             <form name="Login" method="post" action="login">
-                <h1 id="title"><u>Enter details to login</u></h1>
+                <h1 id="title">Enter details to login</h1>
                 
                 <div class="progress">
                     <div class="progress-bar" role="progressbar" aria-valuenow="70"
