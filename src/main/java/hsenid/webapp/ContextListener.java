@@ -15,6 +15,17 @@ import java.sql.SQLException;
  * @author hsenid
  */
 public class ContextListener implements ServletContextListener {
+
+    private static String dbUrl;
+
+    public String getDbUrl() {
+        return dbUrl;
+    }
+
+    public void setDbUrl(String dbUrl) {
+        this.dbUrl = dbUrl;
+    }
+
     public void contextInitialized(ServletContextEvent sce) {
         //Get parameters and create a connection using the DBCon class.
         ServletContext context = sce.getServletContext();
@@ -29,6 +40,7 @@ public class ContextListener implements ServletContextListener {
         try {
             DBCon.getConnection().close();
         } catch (SQLException e) {
+            System.out.println("Unexpected error while closing the connection" + e.getMessage());
         }
     }
 }

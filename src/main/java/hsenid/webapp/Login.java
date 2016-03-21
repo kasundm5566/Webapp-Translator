@@ -1,7 +1,9 @@
 package hsenid.webapp;
 
 import java.io.IOException;
+import java.rmi.ServerException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -10,16 +12,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by hsenid.
+ *
  * @author Kasun Dinesh
  */
 public class Login extends HttpServlet {
 
     User user;
     static String error = "Error in username or password!";
-    Translator translator=new Translator();
+    Translator translator = new Translator();
 
     @Override
     /**
@@ -30,11 +34,12 @@ public class Login extends HttpServlet {
         user = new User(req.getParameter("uname"), req.getParameter("pass"));
 
         try {
-            
             boolean status = ValidateByDB(user);
             if (status) {
-                ArrayList<String> list=translator.LoadLanguages();
+                ArrayList<String> list = translator.LoadLanguages();
                 req.setAttribute("langs", list);
+                HttpSession httpSession = req.getSession(false);
+                httpSession.setAttribute("username", user.getUserName());
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/translate.jsp");
                 rd.forward(req, resp);
             } else {
@@ -55,16 +60,18 @@ public class Login extends HttpServlet {
      */
     public static boolean ValidateByDB(User user) throws Exception {
         boolean status = false;
-        Statement statement = null;
+//        Statement statement = null;
+        PreparedStatement statement=null;
         ResultSet result = null;
         try {
             Connection connection = DBCon.getConnection();
-            statement = connection.createStatement();
-            String query = "SELECT Name FROM user_cred WHERE Name=\"" + user.getUsername() + "\" && pass=md5(\"" + user.getPassword() + "\");";
-            result = statement.executeQuery(query);
+//            statement = connection.createStatement();
+            String query = "SELECT Name FROM user_cred WHERE Name=\"" + user.getUserName() + "\" && pass=md5(\"" + user.getPassword() + "\");";
+            PreparedStatement statement1 = connection.prepareStatement(query);
+            result = statement1.executeQuery();
             status = result.first();
         } catch (Exception e) {
-            error = "Something bad happened. Try again later.";
+            throw new ServletException();
         } finally {
             if (statement != null) {
                 statement.close();

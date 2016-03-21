@@ -5,30 +5,30 @@ package hsenid.webapp;
  * @author Kasun Dinesh
  */
 public class User {
-    private String username;
+    private String userName;
     private String password;
 
     /**
-     * @param username username for the new user object
+     * @param username userName for the new user object
      * @param password password for the new user object
      */
     public User(String username, String password) {
-        this.username = username;
+        this.userName = username;
         this.password = password;
     }
 
     /**
-     * @return the username
+     * @return the userName
      */
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
     /**
-     * @param username the username to set
+     * @param userName the userName to set
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     /**

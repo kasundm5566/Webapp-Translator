@@ -44,6 +44,15 @@
         <url-pattern>/translator</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>hsenid.webapp.Logout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    
     <error-page>
         <location>/error.jsp</location>
     </error-page>

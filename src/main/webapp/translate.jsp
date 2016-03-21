@@ -8,6 +8,15 @@
         <title>Translator</title>
         <link rel='stylesheet' href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
 
+        <script>
+            function swap(){
+                var from=document.getElementById("fromtext").value;
+                var to=document.getElementById("totext").value;
+                document.getElementById("totext").value=from;
+                document.getElementById("fromtext").value=to;
+            }
+        </script>
+        
         <style>
             input:not([type=checkbox]){
                 /*border: 2px solid #dadada;*/
@@ -19,6 +28,12 @@
                 outline: none;
                 border-color: #9ecaed;
                 box-shadow: 0 0 10px #9ecaed;
+            }
+            textarea{
+                outline: none;
+                border-color: #9ecaed;
+                box-shadow: 0 0 10px #9ecaed;
+                resize: none;
             }
             select:focus{
                 outline: none;
@@ -40,7 +55,7 @@
             }
             #translate{
                 padding: 25px;
-                width: 374px;
+                width: 420px;
                 background-color: #F7F7F7;
                 margin: 0 auto 10px;
                 border-radius: 2px;
@@ -55,6 +70,9 @@
             }
             div#sep{
                 height: 25px;
+            }
+            div#sep2{
+                height: 5px;
             }
             .header-text{
                 text-align: center;
@@ -83,12 +101,12 @@
             }
             select{
                 border: 2px solid #dadada;
-                height: 35px;
+                /*height: 35px;
                 width: 100%;
-                height: 44px;
+                height: 44px;*/
                 font-size: 16px;
                 width: 100%;
-                margin-bottom: 10px;
+                margin-bottom: 60px;
                 background: #fff;
                 border: 1px solid #d9d9d9;
                 border-top: 1px solid #c0c0c0;
@@ -113,13 +131,40 @@
             .progress{
                 height: 5px;
             }
+            #session{
+                float: right;
+            }
+            #logout{
+                height: 30px;
+                width: 50px;
+            }
+            #btnswap{
+                border: 0px;
+                color: #fff;
+                text-shadow: 0 1px rgba(0,0,0,0.1);
+                background-color: #4d90fe;
+                font-size: 20px;
+                height: 30px;
+                width: 40px;
+                font-size: 12px;
+            }
         </style>        
     </head>
 
     <body>
+
         <div id="header">
             <p class="header-text">Translator</p>
         </div>
+
+
+        <%
+            out.println("<div id=\"session\" class=\"alert alert-info\" role=\"alert\">");
+            out.println("Logged in as <strong><u>" + session.getAttribute("username") + "</u></strong>");
+            out.println("<br><form action=\"logout\" method=\"post\"><table><tr><input type=\"submit\" id=\"logout\" class=\"btn btn-info btn-xs\" value=\"Logout\"></tr></table></form></div>");
+        %>
+
+
         <div id="sep">
         </div>
         <div id="translate">
@@ -139,9 +184,9 @@
                             <td>
                                 <%
                                     if (request.getAttribute("fromtext") == null) {
-                                        out.println("<input type=\"text\" class=\"form-control\" name=\"fromtext\" placeholder=\"Enter text to translate\" required=\"true\"/>");
+                                        out.println("<textarea name=fromtext id=\"fromtext\" class=\"form-control\" rows=\"4\" cols=\"22\" placeholder=\"Enter text to translate\" required=\"true\"></textarea>");
                                     } else {
-                                        out.println("<input type=\"text\" class=\"form-control\" name=\"fromtext\" placeholder=\"Enter text to translate\" value=" + request.getAttribute("fromtext") + ">");
+                                        out.println("<textarea name=fromtext id=\"fromtext\" class=\"form-control\" rows=\"4\" cols=\"22\">" + request.getAttribute("fromtext") + "</textarea>");
                                     }
                                 %>                           
                             </td>
@@ -165,16 +210,17 @@
                         <tr>
                             <td><label class="checkbox-inline"><input type="checkbox" name="autodetect" checked value="1"/>Auto detect language</label>
                             </td>
+                            <td><input type="button" id="btnswap" class="btn btn-default btn-xs" onclick="swap();" value="Swap"</td>
                         </tr>
 
                         <tr>
                             <td>
                                 <%
                                     if (request.getAttribute("final_result") == null) {
-                                        out.println("<input type=\"text\" class=\"form-control\" name=\"totext\" placeholder=\"Translated text\" disabled/>");
+                                        out.println("<textarea name=totext id=\"totext\" class=\"form-control\" rows=\"4\" cols=\"22\" placeholder=\"Translated text\" disabled></textarea>");
                                     } else {
                                         response.setCharacterEncoding("UTF-8");
-                                        out.println("<input type=\"text\" class=\"form-control\" name=\"totext\" placeholder=\"Translated text\" disabled value=" + request.getAttribute("final_result") + ">");
+                                        out.println("<textarea name=totext id=\"totext\" class=\"form-control\" rows=\"4\" cols=\"22\" disabled>" + request.getAttribute("final_result") + "</textarea>");
                                     }
                                 %>                            
                             </td>
@@ -194,7 +240,9 @@
                                 </select>
                             </td>
                         </tr>                        
-                    </table>  
+                    </table>
+                    <div id="sep2">
+                    </div>
                     <table>
                         <tr>
                         <input type="submit" class="btn btn-default" id="buttons" value="Translate"/>
