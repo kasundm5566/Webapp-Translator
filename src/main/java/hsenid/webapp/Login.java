@@ -36,15 +36,15 @@ public class Login extends HttpServlet {
         try {
             boolean status = ValidateByDB(user);
             if (status) {
-                ArrayList<String> list = translator.LoadLanguages();
-                req.setAttribute("langs", list);
                 HttpSession httpSession = req.getSession(false);
                 httpSession.setAttribute("username", user.getUserName());
+                ArrayList<String> list = translator.LoadLanguages();
+                httpSession.setAttribute("langs", list);
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/translate.jsp");
                 rd.forward(req, resp);
             } else {
                 error = "User name and password does not match!";
-                req.setAttribute("error_msg", error);
+                req.getSession().setAttribute("error_msg", error);
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
                 rd.forward(req, resp);
             }
@@ -61,7 +61,7 @@ public class Login extends HttpServlet {
     public static boolean ValidateByDB(User user) throws Exception {
         boolean status = false;
 //        Statement statement = null;
-        PreparedStatement statement=null;
+        PreparedStatement statement = null;
         ResultSet result = null;
         try {
             Connection connection = DBCon.getConnection();

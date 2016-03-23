@@ -2,6 +2,7 @@ package hsenid.webapp;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.rmi.ServerException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,15 +44,15 @@ public class Translator extends HttpServlet {
         try {
             translated_text = Translate(fromlang, tolang, fromtext);
             ArrayList<String> list = LoadLanguages();
-            req.setAttribute("langs", list);
-            req.setAttribute("final_result", translated_text);
-            req.setAttribute("fromlang", fromlang);
-            req.setAttribute("tolang", tolang);
-            req.setAttribute("fromtext", fromtext);
+            req.getSession().setAttribute("langs", list);
+            req.getSession().setAttribute("final_result", translated_text);
+            req.getSession().setAttribute("fromlang", fromlang);
+            req.getSession().setAttribute("tolang", tolang);
+            req.getSession().setAttribute("fromtext", fromtext);
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/translate.jsp");
             rd.forward(req, resp);
         } catch (Exception ex) {
-            throw new ServletException("Something went wrong...");
+            throw new ServletException(ex);
         }
     }
 
@@ -115,7 +116,7 @@ public class Translator extends HttpServlet {
             DocumentBuilder db = dbf.newDocumentBuilder();
             document = db.parse(stream);
         } catch (IOException | ParserConfigurationException | SAXException e) {
-            throw e;
+            throw new ServerException(e.toString());
         } finally {
             try {
                 stream.close();
