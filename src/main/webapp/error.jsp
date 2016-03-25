@@ -31,7 +31,7 @@
             <div class="container">
                 <button type="button" class="btn btn-danger input-sm" data-toggle="collapse" data-target="#explanation">Click here to see possible causes</button>
                 <div id="explanation" class="collapse">
-                    <%= exception %>
+                    <% out.println ("<p>exception.getMessage()<) %>
                     <ul>                        
                         <li>Remove if there are any illegal characters.(%, ^, &AMP;, {}, etc)</li>
                         <li>If none of them worked. Please try again later. Sorry for the inconvenience.</li>

@@ -5,42 +5,32 @@
  */
 package hsenid.webapp;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletException;
 
 /**
  * Created by hsenid.
+ *
  * @author hsenid
  */
 public class ContextListener implements ServletContextListener {
 
-    private static String dbUrl;
-
-    public String getDbUrl() {
-        return dbUrl;
-    }
-
-    public void setDbUrl(String dbUrl) {
-        this.dbUrl = dbUrl;
-    }
-
+    @Override
     public void contextInitialized(ServletContextEvent sce) {
-        //Get parameters and create a connection using the DBCon class.
-        ServletContext context = sce.getServletContext();
-        String host = context.getInitParameter("host");
-        String database = context.getInitParameter("database");
-        String user = context.getInitParameter("user");
-        String password = context.getInitParameter("password");
-        DBCon.CreateConnection(host, database, user, password);
+        PropertyReader propReader = new PropertyReader();
+        DBCon.CreateConnection(propReader.getHost(), propReader.getDB(), propReader.getUser(), propReader.getPassword());
     }
 
+    @Override
     public void contextDestroyed(ServletContextEvent sce) {
         try {
             DBCon.getConnection().close();
-        } catch (SQLException e) {
-            System.out.println("Unexpected error while closing the connection" + e.getMessage());
+        } catch (SQLException ex) {
+
         }
     }
 }

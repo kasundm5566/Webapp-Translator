@@ -28,9 +28,14 @@
                 <div>
                     <input type="text" class="form-control" name="uname" placeholder="Enter user name" required="true"/>
                     <input type="password" class="form-control" name="pass" placeholder="Enter password" required="true"/>
-                    
+
                     <button type="submit" class="btn btn-default" id="buttons">
-                        <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;Login
+                        <span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;&nbsp;Login
+                    </button>
+                </div>
+                <div style="margin-top: 0.5em;">   
+                    <button type="button" class="btn btn-default" id="buttons" onclick="window.location='register.jsp';">
+                        <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Register
                     </button>
                 </div>
 
@@ -39,7 +44,7 @@
             <%
                 if (request.getAttribute("error_msg") != null) {
                     out.println("<div id=\"error\" class=\"alert alert-danger\">");
-                    out.println(request.getSession().getAttribute("error_msg"));
+                    out.println(request.getAttribute("error_msg"));
                     out.println("</div>");
                 }
             %>

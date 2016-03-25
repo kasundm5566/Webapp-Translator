@@ -5,7 +5,7 @@ import java.rmi.ServerException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -40,16 +40,16 @@ public class Login extends HttpServlet {
                 httpSession.setAttribute("username", user.getUserName());
                 ArrayList<String> list = translator.LoadLanguages();
                 httpSession.setAttribute("langs", list);
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/translate.jsp");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/traslate.jsp");
                 rd.forward(req, resp);
             } else {
                 error = "User name and password does not match!";
-                req.getSession().setAttribute("error_msg", error);
+                req.setAttribute("error_msg", error);
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
                 rd.forward(req, resp);
             }
         } catch (Exception e) {
-            error = "Something bad happened. Try again later.";
+            throw new ServerException(e.getMessage());
         }
     }
 
@@ -60,18 +60,16 @@ public class Login extends HttpServlet {
      */
     public static boolean ValidateByDB(User user) throws Exception {
         boolean status = false;
-//        Statement statement = null;
         PreparedStatement statement = null;
         ResultSet result = null;
         try {
             Connection connection = DBCon.getConnection();
-//            statement = connection.createStatement();
             String query = "SELECT Name FROM user_cred WHERE Name=\"" + user.getUserName() + "\" && pass=md5(\"" + user.getPassword() + "\");";
             PreparedStatement statement1 = connection.prepareStatement(query);
             result = statement1.executeQuery();
             status = result.first();
-        } catch (Exception e) {
-            throw new ServletException();
+        } catch (SQLException e) {
+            throw new ServletException(e);
         } finally {
             if (statement != null) {
                 statement.close();

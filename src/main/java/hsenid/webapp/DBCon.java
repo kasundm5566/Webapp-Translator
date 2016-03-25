@@ -1,7 +1,12 @@
 package hsenid.webapp;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletException;
 
 /**
  * Created by hsenid.
@@ -18,12 +23,12 @@ public class DBCon {
      * @param dbuser   Database user name
      * @param dbpass   Password of the database
      */
-    public static void CreateConnection(String host, String database, String dbuser, String dbpass) {
+    public static void CreateConnection(String host, String database, String dbuser, String dbpass){
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             connection = (Connection) DriverManager.getConnection(host + database, dbuser, dbpass);
-        } catch (Exception ex) {
-            Login.error = "Something bad happened. Try again later.";
+        }catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            
         }
     }
 

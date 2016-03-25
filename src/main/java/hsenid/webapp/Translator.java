@@ -8,11 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -28,12 +29,16 @@ import org.xml.sax.SAXException;
  */
 public class Translator extends HttpServlet {
 
+    PropertyReader propReader = new PropertyReader();
     ContextListener cl = new ContextListener();
-    final String KEY = "trnsl.1.1.20160310T063945Z.14945888ac849b23.fc507cddeb7ec9d96e1255e0a348b1b4a076f9c3";
+    final String KEY = propReader.getYandexKey();
+    String getLangsUrl = propReader.getYandexLangsUrl();
+    String translateUrl = propReader.getYandexTranslateUrl();
     String autoDetect = null;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String translated_text = "Translated text";
         req.setCharacterEncoding("UTF-8");
         String fromlang = req.getParameter("fromlang");
@@ -41,19 +46,15 @@ public class Translator extends HttpServlet {
         String fromtext = req.getParameter("fromtext");
         autoDetect = req.getParameter("autodetect");
 
-        try {
-            translated_text = Translate(fromlang, tolang, fromtext);
-            ArrayList<String> list = LoadLanguages();
-            req.getSession().setAttribute("langs", list);
-            req.getSession().setAttribute("final_result", translated_text);
-            req.getSession().setAttribute("fromlang", fromlang);
-            req.getSession().setAttribute("tolang", tolang);
-            req.getSession().setAttribute("fromtext", fromtext);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/translate.jsp");
-            rd.forward(req, resp);
-        } catch (Exception ex) {
-            throw new ServletException(ex);
-        }
+        translated_text = Translate(fromlang, tolang, fromtext);
+        ArrayList<String> list = LoadLanguages();
+        req.getSession().setAttribute("langs", list);
+        req.getSession().setAttribute("final_result", translated_text);
+        req.getSession().setAttribute("fromlang", fromlang);
+        req.getSession().setAttribute("tolang", tolang);
+        req.getSession().setAttribute("fromtext", fromtext);
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/translate.jsp");
+        rd.forward(req, resp);
     }
 
     @Override
@@ -63,46 +64,56 @@ public class Translator extends HttpServlet {
 
     /**
      * @return Language list will return as an string arraylist
-     * @throws Exception
      */
-    public ArrayList<String> LoadLanguages() throws Exception {
+    public ArrayList<String> LoadLanguages() {
         ArrayList<String> list = new ArrayList<String>();
-        String url = "https://translate.yandex.net/api/v1.5/tr/getLangs?key=" + KEY + "&ui=en";
-//        url = cl.getDbUrl() +
-        Document document = URLProcessor(url);
-        NodeList nodeList = document.getElementsByTagName("Item");
-        for (int x = 0, size = nodeList.getLength(); x < size; x++) {
-            list.add(nodeList.item(x).getAttributes().getNamedItem("value").getNodeValue());
+        String url = getLangsUrl + KEY + "&ui=en";
+        try {
+            Document document = URLProcessor(url);
+            NodeList nodeList = document.getElementsByTagName("Item");
+            for (int x = 0, size = nodeList.getLength(); x < size; x++) {
+                list.add(nodeList.item(x).getAttributes().getNamedItem("value").getNodeValue());
+            }
+        } catch (ParserConfigurationException | SAXException | IOException ex) {
+
         }
         return list;
     }
 
     /**
      * @param fromLang Language of the text we need to translate
-     * @param toLang   Language of the translated text
+     * @param toLang Language of the translated text
      * @param fromText Text we need to translate
      * @return Returns a string contains the translated text
-     * @throws Exception
      */
-    public String Translate(String fromLang, String toLang, String fromText) throws Exception {
+    public String Translate(String fromLang, String toLang, String fromText) {
+
         String text = null;
         String url;
         if ("1".equals(autoDetect)) {
-            url = "https://translate.yandex.net/api/v1.5/tr/translate?key=" + KEY + "&lang=" + toLang + "&text=" + fromText;
+            url = translateUrl + KEY + "&lang=" + toLang + "&text=" + fromText;
         } else {
-            url = "https://translate.yandex.net/api/v1.5/tr/translate?key=" + KEY + "&lang=" + fromLang + "-" + toLang + "&text=" + fromText;
+            url = translateUrl + KEY + "&lang=" + fromLang + "-" + toLang + "&text=" + fromText;
         }
-        url=url.replaceAll(" ", "%20");
-        Document document = URLProcessor(url);
-        NodeList nodeList = document.getElementsByTagName("Translation");
-        text = nodeList.item(0).getTextContent();
+        url = url.replaceAll(" ", "%20");
+        try {
+            Document document = URLProcessor(url);
+            NodeList nodeList = document.getElementsByTagName("Translation");
+            text = nodeList.item(0).getTextContent();
+            
+        } catch (ParserConfigurationException | SAXException | IOException ex) {
+
+        }
         return text;
     }
 
     /**
      * @param url URL of the website to extract XML data
-     * @return Returns a document contains the data extracted form the passed website
-     * @throws Exception
+     * @return Returns a document contains the data extracted form the passed
+     * website
+     * @throws javax.xml.parsers.ParserConfigurationException
+     * @throws org.xml.sax.SAXException
+     * @throws java.io.IOException
      */
     public Document URLProcessor(String url) throws ParserConfigurationException, SAXException, IOException {
         InputStream stream = null;

@@ -17,16 +17,16 @@ import javax.servlet.http.HttpSession;
  *
  * @author hsenid
  */
-public class Logout extends HttpServlet{
-
+public class Logout extends HttpServlet {
+    
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session=req.getSession(false);
-        if(session!=null){
+        HttpSession session = req.getSession(false);
+        if (session != null) {
             session.invalidate();
-            RequestDispatcher rd=req.getRequestDispatcher("/index.jsp");
+            RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
             rd.forward(req, resp);
         }
     }
- 
+    
 }

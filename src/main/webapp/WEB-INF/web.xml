@@ -4,24 +4,7 @@
 
 <web-app>
     <display-name>Archetype Created Web Application</display-name>
-
-    <context-param>
-        <param-name>host</param-name>
-        <param-value>jdbc:mysql://localhost:3306/</param-value>
-    </context-param>
-    <context-param>
-        <param-name>database</param-name>
-        <param-value>userdata</param-value>
-    </context-param>
-    <context-param>
-        <param-name>user</param-name>
-        <param-value>root</param-value>
-    </context-param>
-    <context-param>
-        <param-name>password</param-name>
-        <param-value>test123</param-value>
-    </context-param>
-
+    
     <listener>
         <listener-class>hsenid.webapp.ContextListener</listener-class>
     </listener>
@@ -56,4 +39,5 @@
     <error-page>
         <location>/error.jsp</location>
     </error-page>
+    
 </web-app>
