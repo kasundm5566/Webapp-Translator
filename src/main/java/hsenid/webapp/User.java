@@ -2,6 +2,7 @@ package hsenid.webapp;
 
 /**
  * Created by hsenid.
+ *
  * @author Kasun Dinesh
  */
 public class User {

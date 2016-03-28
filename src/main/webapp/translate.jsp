@@ -9,7 +9,7 @@
         <link rel='shortcut icon' type='image/x-icon' href='images/bi.png' />
         <link rel='stylesheet' href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
         <link rel="stylesheet" href="css/translate.css">  
-        <script type="text/javascript" src="js/swap.js"></script>    
+        <script type="text/javascript" src="js/operations.js"></script>    
     </head>
 
     <body>

@@ -10,3 +10,8 @@ function swap() {
     document.getElementById("fromtext").value = to;
 }
 
+function goBack() {
+    window.history.back();
+}
+
+

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hsenid.webapp;
 
 import java.io.IOException;
@@ -16,92 +11,43 @@ import java.util.Properties;
  */
 public class PropertyReader {
 
-    private Properties properties = new Properties();
+    private final String fileName;
 
+    public PropertyReader(String fileName) {
+        this.fileName = fileName;
+    }
+    
     /**
      * This method will be used to read the system.properties file
-     * @return
-     * Properties object with the values from system.properties file
+     * @param fileName Name of the settings file
+     * @return Properties object with the values from the given settings file
      */
-    private Properties getProperty() {
+    private Properties loadProperties() {
+        Properties properties = new Properties();
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream input;
-        input = classLoader.getResourceAsStream("system.properties");        
+        input = classLoader.getResourceAsStream(fileName);
         try {
             properties.load(input);
         } catch (IOException ex) {
 
+        }finally{
+            try {
+                input.close();
+            } catch (IOException ex) {
+                
+            }
         }
         return properties;
     }
 
     /**
-     * Method to get the database URL
-     * @return
-     * Database URL
+     * @param property Setting name need to be read from the properties file
+     * @return Value of the given property(setting)
      */
-    public String getHost() {
-        properties = getProperty();
-        return properties.getProperty("db.host");
-    }
-
-    /**
-     * Method to get the database name
-     * @return
-     * Database
-     */
-    public String getDB() {
-        properties = getProperty();
-        return properties.getProperty("db.database");
-    }
-
-    /**
-     * Method to get the database username
-     * @return
-     * Database user
-     */
-    public String getUser() {
-        properties = getProperty();
-        return properties.getProperty("db.user");
-    }
-
-    /**
-     * Method to get the database password
-     * @return
-     * Database password
-     */
-    public String getPassword() {
-        properties = getProperty();
-        return properties.getProperty("db.password");
-    }
-
-    /**
-     * Method to get the Yandex key
-     * @return
-     * yandex key
-     */
-    public String getYandexKey() {
-        properties = getProperty();
-        return properties.getProperty("yandex.key");
-    }
-
-    /**
-     * Method to get the URL need to load the languages
-     * @return
-     * Yandex getlangs URL
-     */
-    public String getYandexLangsUrl() {
-        properties = getProperty();
-        return properties.getProperty("yandex.getlangsurl");
-    }
-
-    /**
-     * Method to get the URL need to translate texts
-     * @return
-     * Yandex translation URL
-     */
-    public String getYandexTranslateUrl() {
-        properties = getProperty();
-        return properties.getProperty("yandex.translateurl");
+    public String readProperty(String property) {
+        Properties prop;
+        prop=loadProperties();
+        return prop.getProperty(property);
     }
 }

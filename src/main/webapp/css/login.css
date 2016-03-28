@@ -41,7 +41,7 @@ body{
     overflow: hidden;
 }
 #register{
-    padding: 5px;
+    padding: 10px;
     width: 374px;
     background-color: #F7F7F7;
     margin: 0 auto 10px;
@@ -71,6 +71,7 @@ div#sep{
     background-color: #4d90fe;
     font-size: 20px;
     width: 100%;
+    font-family: "Lucida Console", Monaco, monospace;
 }
 input[type=text], input[type=password]{
     height: 44px;
@@ -85,4 +86,7 @@ input[type=text], input[type=password]{
 }
 .progress{
     height: 5px;
+}
+label{
+    font-family: "Lucida Console", Monaco, monospace;
 }

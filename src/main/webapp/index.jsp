@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp" %>
+
 <html>
     <head>
         <title>Login Page</title>
@@ -30,12 +31,12 @@
                     <input type="password" class="form-control" name="pass" placeholder="Enter password" required="true"/>
 
                     <button type="submit" class="btn btn-default" id="buttons">
-                        <span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;&nbsp;Login
+                        <span class="glyphicon glyphicon-send"></span>&nbsp;Login
                     </button>
                 </div>
                 <div style="margin-top: 0.5em;">   
                     <button type="button" class="btn btn-default" id="buttons" onclick="window.location='register.jsp';">
-                        <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Register
+                        <span class="glyphicon glyphicon-user"></span>&nbsp;Register
                     </button>
                 </div>
 

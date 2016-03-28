@@ -1,7 +1,6 @@
 package hsenid.webapp;
 
 import java.io.IOException;
-import java.rmi.ServerException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,7 +39,7 @@ public class Login extends HttpServlet {
                 httpSession.setAttribute("username", user.getUserName());
                 ArrayList<String> list = translator.LoadLanguages();
                 httpSession.setAttribute("langs", list);
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/traslate.jsp");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/ranslate.jsp");
                 rd.forward(req, resp);
             } else {
                 error = "User name and password does not match!";
@@ -49,7 +48,7 @@ public class Login extends HttpServlet {
                 rd.forward(req, resp);
             }
         } catch (Exception e) {
-            throw new ServerException(e.getMessage());
+            throw new ServletException(e);
         }
     }
 

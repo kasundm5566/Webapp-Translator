@@ -2,7 +2,6 @@ package hsenid.webapp;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.rmi.ServerException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,11 +26,11 @@ import org.xml.sax.SAXException;
  */
 public class Translator extends HttpServlet {
 
-    PropertyReader propReader = new PropertyReader();
+    PropertyReader propReader = new PropertyReader("system.properties");
     ContextListener cl = new ContextListener();
-    final String KEY = propReader.getYandexKey();
-    String getLangsUrl = propReader.getYandexLangsUrl();
-    String translateUrl = propReader.getYandexTranslateUrl();
+    final String KEY = propReader.readProperty("yandex.key");
+    String getLangsUrl = propReader.readProperty("yandex.getlangsurl");
+    String translateUrl = propReader.readProperty("yandex.translateurl");
     String autoDetect = null;
 
     @Override
@@ -61,8 +60,9 @@ public class Translator extends HttpServlet {
 
     /**
      * @return Language list will return as an string arraylist
+     * @throws javax.servlet.ServletException
      */
-    public ArrayList<String> LoadLanguages() {
+    public ArrayList<String> LoadLanguages() throws ServletException {
         ArrayList<String> list = new ArrayList<String>();
         String url = getLangsUrl + KEY + "&ui=en";
         try {
@@ -72,7 +72,7 @@ public class Translator extends HttpServlet {
                 list.add(nodeList.item(x).getAttributes().getNamedItem("value").getNodeValue());
             }
         } catch (ParserConfigurationException | SAXException | IOException ex) {
-
+            throw new ServletException(ex);
         }
         return list;
     }
@@ -82,8 +82,9 @@ public class Translator extends HttpServlet {
      * @param toLang Language of the translated text
      * @param fromText Text we need to translate
      * @return Returns a string contains the translated text
+     * @throws javax.servlet.ServletException
      */
-    public String Translate(String fromLang, String toLang, String fromText) {
+    public String Translate(String fromLang, String toLang, String fromText) throws ServletException {
 
         String text = null;
         String url;
@@ -99,20 +100,20 @@ public class Translator extends HttpServlet {
             text = nodeList.item(0).getTextContent();
             
         } catch (ParserConfigurationException | SAXException | IOException ex) {
-
+            throw new  ServletException(ex);
         }
         return text;
     }
 
     /**
      * @param url URL of the website to extract XML data
-     * @return Returns a document contains the data extracted form the passed
-     * website
+     * @return Returns a document contains the data extracted form the passed website
      * @throws javax.xml.parsers.ParserConfigurationException
      * @throws org.xml.sax.SAXException
      * @throws java.io.IOException
+     * @throws javax.servlet.ServletException
      */
-    public Document URLProcessor(String url) throws ParserConfigurationException, SAXException, IOException {
+    public Document URLProcessor(String url) throws ParserConfigurationException, SAXException, IOException, ServletException {
         InputStream stream = null;
         Document document = null;
         try {
@@ -124,12 +125,12 @@ public class Translator extends HttpServlet {
             DocumentBuilder db = dbf.newDocumentBuilder();
             document = db.parse(stream);
         } catch (IOException | ParserConfigurationException | SAXException e) {
-            throw new ServerException(e.toString());
+            throw new ServletException(e);
         } finally {
             try {
                 stream.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new ServletException(e);
             }
         }
         return document;
