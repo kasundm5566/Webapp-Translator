@@ -6,19 +6,26 @@
 package hsenid.webapp;
 
 import javax.servlet.ServletException;
+
 import junit.framework.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 /**
- *
  * @author hsenid
  */
 public class TranslatorTest {
 
-    @Test()
-    public void testTranslate() throws ServletException {
+    @Test(parameters = {"toLang", "fromLang", "text", "expected"})
+    public void testTranslate(String toLang, String fromLang, String text, String expected) throws ServletException {
         Translator tr = new Translator();
-        String val = tr.Translate("en", "fr", "child");
-        Assert.assertEquals("enfant", val);
+        String translatedVal = tr.Translate(toLang, fromLang, text);
+        Assert.assertEquals(expected, translatedVal);
+    }
+
+    @Test(enabled = false)
+    @Parameters({"toLang", "fromLang", "text", "expected"})
+    public void TestMethod(String toLang, String fromLang, String text, String expected) throws ServletException {
+        System.out.print("This is test method.");
     }
 }

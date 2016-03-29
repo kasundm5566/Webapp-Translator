@@ -39,7 +39,7 @@ public class Login extends HttpServlet {
                 httpSession.setAttribute("username", user.getUserName());
                 ArrayList<String> list = translator.LoadLanguages();
                 httpSession.setAttribute("langs", list);
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/ranslate.jsp");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/translate.jsp");
                 rd.forward(req, resp);
             } else {
                 error = "User name and password does not match!";
