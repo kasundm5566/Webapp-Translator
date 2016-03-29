@@ -12,7 +12,9 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 /**
- * @author hsenid
+ * Created by hsenid.
+ *
+ * @author Kasun Dinesh
  */
 public class TranslatorTest {
 
@@ -23,7 +25,8 @@ public class TranslatorTest {
         Assert.assertEquals(expected, translatedVal);
     }
 
-    @Test(enabled = false)
+    //This test method is created to practice include, exclude and other commands.
+    @Test
     @Parameters({"toLang", "fromLang", "text", "expected"})
     public void TestMethod(String toLang, String fromLang, String text, String expected) throws ServletException {
         System.out.print("This is test method.");

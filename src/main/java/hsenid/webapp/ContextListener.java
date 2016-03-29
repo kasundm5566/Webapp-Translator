@@ -22,7 +22,6 @@ public class ContextListener implements ServletContextListener {
         try {
             DBCon.getConnection().close();
         } catch (SQLException ex) {
-            
         }
     }
 }

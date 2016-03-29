@@ -53,11 +53,6 @@ public class Translator extends HttpServlet {
         rd.forward(req, resp);
     }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-    }
-
     /**
      * @return Language list will return as an string arraylist
      * @throws javax.servlet.ServletException
@@ -98,7 +93,6 @@ public class Translator extends HttpServlet {
             Document document = URLProcessor(url);
             NodeList nodeList = document.getElementsByTagName("Translation");
             text = nodeList.item(0).getTextContent();
-            
         } catch (ParserConfigurationException | SAXException | IOException ex) {
             throw new  ServletException(ex);
         }

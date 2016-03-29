@@ -13,6 +13,10 @@
         <parameter name="expected" value="enfant"/>
         <classes>
             <class name="hsenid.webapp.TranslatorTest">
+                <methods>
+                    <include name="testTranslate"/>
+                    <exclude name="testMethod"/>
+                </methods>
             </class>
         </classes>
     </test>

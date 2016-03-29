@@ -24,7 +24,6 @@ public class DBCon {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             connection = (Connection) DriverManager.getConnection(host + database, dbuser, dbpass);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-
         }
     }
 

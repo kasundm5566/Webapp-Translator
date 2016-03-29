@@ -16,7 +16,9 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 /**
- * @author hsenid
+ * Created by hsenid.
+ *
+ * @author Kasun Dinesh
  */
 public class LoginTest {
 

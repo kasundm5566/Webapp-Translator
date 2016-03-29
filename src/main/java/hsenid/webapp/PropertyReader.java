@@ -13,13 +13,16 @@ public class PropertyReader {
 
     private final String fileName;
 
+    /**
+     * Default constructor of PropertyReader class
+     * @param fileName Name of the file where settings saved
+     */
     public PropertyReader(String fileName) {
         this.fileName = fileName;
     }
     
     /**
      * This method will be used to read the system.properties file
-     * @param fileName Name of the settings file
      * @return Properties object with the values from the given settings file
      */
     private Properties loadProperties() {
@@ -30,7 +33,6 @@ public class PropertyReader {
         try {
             properties.load(input);
         } catch (IOException ex) {
-
         }finally{
             try {
                 input.close();
