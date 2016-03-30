@@ -18,8 +18,7 @@ public class TranslatorTest {
         return new Object[][]{
                 {"en","fr","child","enfant"},
                 {"en","fr","",""},
-                {"en","fr"," ",""},
-                {"en","fr","",""}
+                {"en","fr"," ",""}
         };
     }
 
