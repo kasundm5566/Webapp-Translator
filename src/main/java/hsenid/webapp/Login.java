@@ -63,7 +63,7 @@ public class Login extends HttpServlet {
         ResultSet result = null;
         try {
             Connection connection = DBCon.getConnection();
-            String query = "SELECT Name FROM user_cred WHERE Name=\"" + user.getUserName() + "\" && pass=md5(\"" + user.getPassword() + "\");";
+            String query = "SELECT Name FROM user_cred WHERE Name=BINARY\"" + user.getUserName() + "\" && pass=md5(\"" + user.getPassword() + "\");";
             PreparedStatement statement1 = connection.prepareStatement(query);
             result = statement1.executeQuery();
             status = result.first();

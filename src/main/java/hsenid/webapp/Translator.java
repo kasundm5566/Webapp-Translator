@@ -37,18 +37,18 @@ public class Translator extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String translated_text = "Translated text";
         req.setCharacterEncoding("UTF-8");
-        String fromlang = req.getParameter("fromlang");
-        String tolang = req.getParameter("tolang");
-        String fromtext = req.getParameter("fromtext");
+        String fromLang = req.getParameter("fromlang");
+        String toLang = req.getParameter("tolang");
+        String fromText = req.getParameter("fromtext");
         autoDetect = req.getParameter("autodetect");
 
-        translated_text = Translate(fromlang, tolang, fromtext);
+        translated_text = Translate(fromLang, toLang, fromText);
         ArrayList<String> list = LoadLanguages();
         req.getSession().setAttribute("langs", list);
         req.getSession().setAttribute("final_result", translated_text);
-        req.getSession().setAttribute("fromlang", fromlang);
-        req.getSession().setAttribute("tolang", tolang);
-        req.getSession().setAttribute("fromtext", fromtext);
+        req.getSession().setAttribute("fromlang", fromLang);
+        req.getSession().setAttribute("tolang", toLang);
+        req.getSession().setAttribute("fromtext", fromText);
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/translate.jsp");
         rd.forward(req, resp);
     }

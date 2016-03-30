@@ -1,22 +1,20 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Suite1" verbose="1">
+<suite name="TestSuite" verbose="1">
     <test name="login_test">
         <classes>
             <class name="hsenid.webapp.LoginTest"/>
         </classes>
     </test>
     <test name="translate_test">
+        <!--
         <parameter name="toLang" value="en"/>
         <parameter name="fromLang" value="fr"/>
         <parameter name="text" value="child"/>
         <parameter name="expected" value="enfant"/>
+        -->
         <classes>
             <class name="hsenid.webapp.TranslatorTest">
-                <methods>
-                    <include name="testTranslate"/>
-                    <exclude name="testMethod"/>
-                </methods>
             </class>
         </classes>
     </test>

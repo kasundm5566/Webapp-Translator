@@ -3,7 +3,7 @@ package hsenid.webapp;
 import javax.servlet.ServletException;
 
 import junit.framework.Assert;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 /**
@@ -13,17 +13,21 @@ import org.testng.annotations.Test;
  */
 public class TranslatorTest {
 
-    @Test(parameters = {"toLang", "fromLang", "text", "expected"})
-    public void testTranslate(String toLang, String fromLang, String text, String expected) throws ServletException {
-        Translator tr = new Translator();
-        String translatedVal = tr.Translate(toLang, fromLang, text);
-        Assert.assertEquals(expected, translatedVal);
+    @DataProvider(name = "trans_test")
+    public Object[][] transData(){
+        return new Object[][]{
+                {"en","fr","child","enfant"},
+                {"en","fr","",""},
+                {"en","fr"," ",""},
+                {"en","fr","",""}
+        };
     }
 
-    //This test method is created to practice include, exclude and other commands.
-    @Test
-    @Parameters({"toLang", "fromLang", "text", "expected"})
-    public void TestMethod(String toLang, String fromLang, String text, String expected) throws ServletException {
-        System.out.print("This is test method.");
+    @Test(dataProvider = "trans_test")
+    public void testTranslate(String fromLang, String toLang, String text, String expected) throws ServletException {
+        Translator tr = new Translator();
+        String translatedVal = tr.Translate(fromLang, toLang, text);
+        Assert.assertEquals(expected, translatedVal);
+        System.out.println("Translate Testing: from:"+fromLang+" to:"+toLang+"\tExpected:"+expected+"\tActual:\t"+translatedVal);
     }
 }

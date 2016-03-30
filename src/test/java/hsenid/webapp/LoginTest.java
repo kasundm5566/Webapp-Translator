@@ -3,7 +3,6 @@ package hsenid.webapp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -15,11 +14,27 @@ import org.testng.annotations.Test;
  *
  * @author Kasun Dinesh
  */
-public class LoginTest {
+public class LoginTest{
 
     @DataProvider(name = "test1")
     public Object[][] users() {
-        return new Object[][]{{"abc", "456", false}, {"kdm", "abc", true}, {"test", "123", true}};
+        return new Object[][]{
+                {"", "", false},
+                {"", "123", false},
+                {"test", "", false},
+                {" ", "abc", false},
+                {"test", " ", false},
+                {" ", " ", false},
+                {"test", "123", true},
+                {"tESt", "123", false},
+                {"kdm", "abc", true},
+                {"Kdm", "abc", false},
+                {"kdm", "Abc", false},
+                {"KDM", "ABC", false},
+                {"kdm", "ABC", false},
+                {"KDM", "abc", false},
+                {"123", "test", false}
+        };
     }
 
     @BeforeTest
@@ -47,5 +62,6 @@ public class LoginTest {
     public void testValidateByDB(String uname, String pass, boolean expected) throws Exception {
         boolean b = Login.ValidateByDB(new User(uname, pass));
         Assert.assertEquals(b, expected);
+        System.out.println("Login Testing: UName:"+uname+" PWD:"+pass+"\tExpected:"+expected+"\tActual:\t"+b);
     }
 }
