@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="19" passed="19">
+  <reporter-output>
+  </reporter-output>
+  <suite name="TestSuit" duration-ms="5213" started-at="2016-03-30T11:04:01Z" finished-at="2016-03-30T11:04:06Z">
+    <groups>
+    </groups>
+    <test name="login_test" duration-ms="515" started-at="2016-03-30T11:04:01Z" finished-at="2016-03-30T11:04:01Z">
+      <class name="hsenid.webapp.LoginTest">
+        <test-method status="PASS" signature="createCon()[pri:0, instance:hsenid.webapp.LoginTest@6fb554cc]" name="createCon" is-config="true" duration-ms="454" started-at="2016-03-30T16:34:01Z" finished-at="2016-03-30T16:34:01Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createCon -->
+        <test-method status="PASS" signature="testValidateByDB(java.lang.String, java.lang.String, boolean)[pri:0, instance:hsenid.webapp.LoginTest@6fb554cc]" name="testValidateByDB" duration-ms="9" started-at="2016-03-30T16:34:01Z" data-provider="test1" finished-at="2016-03-30T16:34:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testValidateByDB -->
+        <test-method status="PASS" signature="testValidateByDB(java.lang.String, java.lang.String, boolean)[pri:0, instance:hsenid.webapp.LoginTest@6fb554cc]" name="testValidateByDB" duration-ms="1" started-at="2016-03-30T16:34:01Z" data-provider="test1" finished-at="2016-03-30T16:34:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[123]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testValidateByDB -->
+        <test-method status="PASS" signature="testValidateByDB(java.lang.String, java.lang.String, boolean)[pri:0, instance:hsenid.webapp.LoginTest@6fb554cc]" name="testValidateByDB" duration-ms="1" started-at="2016-03-30T16:34:01Z" data-provider="test1" finished-at="2016-03-30T16:34:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[test]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testValidateByDB -->
+        <test-method status="PASS" signature="testValidateByDB(java.lang.String, java.lang.String, boolean)[pri:0, instance:hsenid.webapp.LoginTest@6fb554cc]" name="testValidateByDB" duration-ms="0" started-at="2016-03-30T16:34:01Z" data-provider="test1" finished-at="2016-03-30T16:34:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ ]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[abc]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testValidateByDB -->
+        <test-method status="PASS" signature="testValidateByDB(java.lang.String, java.lang.String, boolean)[pri:0, instance:hsenid.webapp.LoginTest@6fb554cc]" name="testValidateByDB" duration-ms="1" started-at="2016-03-30T16:34:01Z" data-provider="test1" finished-at="2016-03-30T16:34:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[test]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[ ]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testValidateByDB -->
+        <test-method status="PASS" signature="testValidateByDB(java.lang.String, java.lang.String, boolean)[pri:0, instance:hsenid.webapp.LoginTest@6fb554cc]" name="testValidateByDB" duration-ms="1" started-at="2016-03-30T16:34:01Z" data-provider="test1" finished-at="2016-03-30T16:34:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ ]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[ ]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testValidateByDB -->
+        <test-method status="PASS" signature="testValidateByDB(java.lang.String, java.lang.String, boolean)[pri:0, instance:hsenid.webapp.LoginTest@6fb554cc]" name="testValidateByDB" duration-ms="1" started-at="2016-03-30T16:34:01Z" data-provider="test1" finished-at="2016-03-30T16:34:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[test]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[123]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testValidateByDB -->
+        <test-method status="PASS" signature="testValidateByDB(java.lang.String, java.lang.String, boolean)[pri:0, instance:hsenid.webapp.LoginTest@6fb554cc]" name="testValidateByDB" duration-ms="4" started-at="2016-03-30T16:34:01Z" data-provider="test1" finished-at="2016-03-30T16:34:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[tESt]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[123]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testValidateByDB -->
+        <test-method status="PASS" signature="testValidateByDB(java.lang.String, java.lang.String, boolean)[pri:0, instance:hsenid.webapp.LoginTest@6fb554cc]" name="testValidateByDB" duration-ms="1" started-at="2016-03-30T16:34:01Z" data-provider="test1" finished-at="2016-03-30T16:34:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[kdm]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[abc]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testValidateByDB -->
+        <test-method status="PASS" signature="testValidateByDB(java.lang.String, java.lang.String, boolean)[pri:0, instance:hsenid.webapp.LoginTest@6fb554cc]" name="testValidateByDB" duration-ms="1" started-at="2016-03-30T16:34:01Z" data-provider="test1" finished-at="2016-03-30T16:34:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Kdm]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[abc]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testValidateByDB -->
+        <test-method status="PASS" signature="testValidateByDB(java.lang.String, java.lang.String, boolean)[pri:0, instance:hsenid.webapp.LoginTest@6fb554cc]" name="testValidateByDB" duration-ms="1" started-at="2016-03-30T16:34:01Z" data-provider="test1" finished-at="2016-03-30T16:34:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[kdm]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Abc]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testValidateByDB -->
+        <test-method status="PASS" signature="testValidateByDB(java.lang.String, java.lang.String, boolean)[pri:0, instance:hsenid.webapp.LoginTest@6fb554cc]" name="testValidateByDB" duration-ms="0" started-at="2016-03-30T16:34:01Z" data-provider="test1" finished-at="2016-03-30T16:34:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[KDM]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[ABC]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testValidateByDB -->
+        <test-method status="PASS" signature="testValidateByDB(java.lang.String, java.lang.String, boolean)[pri:0, instance:hsenid.webapp.LoginTest@6fb554cc]" name="testValidateByDB" duration-ms="1" started-at="2016-03-30T16:34:01Z" data-provider="test1" finished-at="2016-03-30T16:34:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[KDM]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[abc]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testValidateByDB -->
+        <test-method status="PASS" signature="testValidateByDB(java.lang.String, java.lang.String, boolean)[pri:0, instance:hsenid.webapp.LoginTest@6fb554cc]" name="testValidateByDB" duration-ms="0" started-at="2016-03-30T16:34:01Z" data-provider="test1" finished-at="2016-03-30T16:34:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[kdm]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[ABC]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testValidateByDB -->
+        <test-method status="PASS" signature="testValidateByDB(java.lang.String, java.lang.String, boolean)[pri:0, instance:hsenid.webapp.LoginTest@6fb554cc]" name="testValidateByDB" duration-ms="2" started-at="2016-03-30T16:34:01Z" data-provider="test1" finished-at="2016-03-30T16:34:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[123]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[test]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testValidateByDB -->
+        <test-method status="PASS" signature="closeCon()[pri:0, instance:hsenid.webapp.LoginTest@6fb554cc]" name="closeCon" is-config="true" duration-ms="28" started-at="2016-03-30T16:34:01Z" finished-at="2016-03-30T16:34:01Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeCon -->
+      </class> <!-- hsenid.webapp.LoginTest -->
+    </test> <!-- login_test -->
+    <test name="translate_test" duration-ms="4692" started-at="2016-03-30T11:04:01Z" finished-at="2016-03-30T11:04:06Z">
+      <class name="hsenid.webapp.TranslatorTest">
+        <test-method status="PASS" signature="testTranslate(java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:hsenid.webapp.TranslatorTest@735b478]" name="testTranslate" duration-ms="1380" started-at="2016-03-30T16:34:01Z" data-provider="trans_test" finished-at="2016-03-30T16:34:03Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[en]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[fr]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[child]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[enfant]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testTranslate -->
+        <test-method status="PASS" signature="testTranslate(java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:hsenid.webapp.TranslatorTest@735b478]" name="testTranslate" duration-ms="1098" started-at="2016-03-30T16:34:03Z" data-provider="trans_test" finished-at="2016-03-30T16:34:04Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[en]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[fr]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testTranslate -->
+        <test-method status="PASS" signature="testTranslate(java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:hsenid.webapp.TranslatorTest@735b478]" name="testTranslate" duration-ms="1128" started-at="2016-03-30T16:34:04Z" data-provider="trans_test" finished-at="2016-03-30T16:34:05Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[en]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[fr]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[ ]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testTranslate -->
+        <test-method status="PASS" signature="testTranslate(java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:hsenid.webapp.TranslatorTest@735b478]" name="testTranslate" duration-ms="1084" started-at="2016-03-30T16:34:05Z" data-provider="trans_test" finished-at="2016-03-30T16:34:06Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[en]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[fr]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testTranslate -->
+      </class> <!-- hsenid.webapp.TranslatorTest -->
+    </test> <!-- translate_test -->
+  </suite> <!-- TestSuit -->
+</testng-results>
