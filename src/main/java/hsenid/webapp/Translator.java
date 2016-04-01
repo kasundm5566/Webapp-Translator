@@ -54,7 +54,7 @@ public class Translator extends HttpServlet {
     }
 
     /**
-     * @return Language list will return as an string arraylist
+     * @return Language list will return as an string vector
      * @throws javax.servlet.ServletException
      */
     public Vector<String> LoadLanguages() throws ServletException {
