@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.Vector;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -37,7 +37,7 @@ public class Login extends HttpServlet {
             if (status) {
                 HttpSession httpSession = req.getSession(false);
                 httpSession.setAttribute("username", user.getUserName());
-                ArrayList<String> list = translator.LoadLanguages();
+                Vector<String> list = translator.LoadLanguages();
                 httpSession.setAttribute("langs", list);
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/translate.jsp");
                 rd.forward(req, resp);

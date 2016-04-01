@@ -1,0 +1,20 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 29, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 8.666 sec <<< FAILURE! - in TestSuite
+testTranslate(hsenid.webapp.TranslatorTest)  Time elapsed: 1.121 sec  <<< FAILURE!
+java.lang.AssertionError: expected object to not be null
+	at hsenid.webapp.TranslatorTest.testTranslate(TranslatorTest.java:50)
+
+testTranslate(hsenid.webapp.TranslatorTest)  Time elapsed: 1.092 sec  <<< FAILURE!
+java.lang.AssertionError: expected object to not be null
+	at hsenid.webapp.TranslatorTest.testTranslate(TranslatorTest.java:50)
+
+testTranslate(hsenid.webapp.TranslatorTest)  Time elapsed: 1.075 sec  <<< FAILURE!
+java.lang.AssertionError: expected object to not be null
+	at hsenid.webapp.TranslatorTest.testTranslate(TranslatorTest.java:50)
+
+testTranslate(hsenid.webapp.TranslatorTest)  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.AssertionError: expected object to not be null
+	at hsenid.webapp.TranslatorTest.testTranslate(TranslatorTest.java:50)
+

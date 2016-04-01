@@ -26,6 +26,11 @@ public class LoginTest{
                 {"test", " ", false},
                 {" ", " ", false},
                 {"test", "123", true},
+                {"test ", "123", false},
+                {"test ", " 123", false},
+                {" test", "123", false},
+                {" test", " 123", false},
+                {" test ", " 123 ", false},
                 {"tESt", "123", false},
                 {"kdm", "abc", true},
                 {"Kdm", "abc", false},
@@ -33,12 +38,14 @@ public class LoginTest{
                 {"KDM", "ABC", false},
                 {"kdm", "ABC", false},
                 {"KDM", "abc", false},
-                {"123", "test", false}
+                {"123", "test", false},
+                {"KDM", "abc", false},
         };
     }
 
     @BeforeTest
     public void createCon() throws SQLException {
+        System.out.println("Started Login Test.");
         PropertyReader propReader = new PropertyReader("system.properties");
         Connection con;
         DBCon.CreateConnection(propReader.readProperty("db.host"), propReader.readProperty("db.database"), propReader.readProperty("db.user"), propReader.readProperty("db.password"));
@@ -56,12 +63,14 @@ public class LoginTest{
         PreparedStatement st = con.prepareStatement(query);
         st.executeUpdate(query);
         DBCon.getConnection().close();
+        System.out.println("\nFinished Login Test.");
     }
 
     @Test(dataProvider = "test1")
     public void testValidateByDB(String uname, String pass, boolean expected) throws Exception {
-        boolean b = Login.ValidateByDB(new User(uname, pass));
-        Assert.assertEquals(b, expected);
-        System.out.println("Login Testing: UName:"+uname+" PWD:"+pass+"\tExpected:"+expected+"\tActual:\t"+b);
+        boolean actual = Login.ValidateByDB(new User(uname, pass));
+        Assert.assertEquals(actual, expected, "Evaluate user validation results.");
+        //System.out.println("Login Testing: UName:"+uname+" PWD:"+pass+"\tExpected:"+expected+"\tActual:\t"+b);
+        System.out.print(".");
     }
 }

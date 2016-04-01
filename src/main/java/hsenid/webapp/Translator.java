@@ -6,7 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
+import java.util.Vector;
 import javax.servlet.RequestDispatcher;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
@@ -43,7 +43,7 @@ public class Translator extends HttpServlet {
         autoDetect = req.getParameter("autodetect");
 
         translated_text = Translate(fromLang, toLang, fromText);
-        ArrayList<String> list = LoadLanguages();
+        Vector<String> list = LoadLanguages();
         req.getSession().setAttribute("langs", list);
         req.getSession().setAttribute("final_result", translated_text);
         req.getSession().setAttribute("fromlang", fromLang);
@@ -57,8 +57,8 @@ public class Translator extends HttpServlet {
      * @return Language list will return as an string arraylist
      * @throws javax.servlet.ServletException
      */
-    public ArrayList<String> LoadLanguages() throws ServletException {
-        ArrayList<String> list = new ArrayList<String>();
+    public Vector<String> LoadLanguages() throws ServletException {
+        Vector<String> list = new Vector<String>();
         String url = getLangsUrl + KEY + "&ui=en";
         try {
             Document document = URLProcessor(url);
