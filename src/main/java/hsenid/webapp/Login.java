@@ -1,5 +1,8 @@
 package hsenid.webapp;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,6 +26,7 @@ public class Login extends HttpServlet {
     User user;
     static String error = "Error in username or password!";
     Translator translator = new Translator();
+    private static final Logger log = LogManager.getLogger(Login.class);
 
     @Override
     /**
@@ -35,19 +39,23 @@ public class Login extends HttpServlet {
         try {
             boolean status = ValidateByDB(user);
             if (status) {
+                log.info("User validated.");
                 HttpSession httpSession = req.getSession(false);
                 httpSession.setAttribute("username", user.getUserName());
                 Vector<String> list = translator.LoadLanguages();
                 httpSession.setAttribute("langs", list);
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/translate.jsp");
                 rd.forward(req, resp);
+                log.info("New session initialized.");
             } else {
+                log.warn("Wrong username, password combination.");
                 error = "User name and password does not match!";
                 req.setAttribute("error_msg", error);
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
                 rd.forward(req, resp);
             }
-        } catch (Exception e) {
+        } catch (ServletException | SQLException e) {
+            log.error("Error while validating user. "+e);
             throw new ServletException(e);
         }
     }
@@ -57,7 +65,7 @@ public class Login extends HttpServlet {
      * @return status Returns whether user passed the validation or not
      * @throws java.lang.Exception
      */
-    public static boolean ValidateByDB(User user) throws Exception {
+    public static boolean ValidateByDB(User user) throws ServletException, SQLException {
         boolean status = false;
         PreparedStatement statement = null;
         ResultSet result = null;
@@ -68,6 +76,7 @@ public class Login extends HttpServlet {
             result = statement1.executeQuery();
             status = result.first();
         } catch (SQLException e) {
+            log.error("Error while validating user. "+e);
             throw new ServletException(e);
         } finally {
             if (statement != null) {

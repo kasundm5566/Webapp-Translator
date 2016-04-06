@@ -11,10 +11,13 @@ import javax.servlet.RequestDispatcher;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -26,7 +29,8 @@ import org.xml.sax.SAXException;
  */
 public class Translator extends HttpServlet {
 
-    PropertyReader propReader = new PropertyReader("system.properties");
+    private static final Logger log = LogManager.getLogger(Translator.class);
+    final PropertyReader propReader = new PropertyReader("system.properties");
     ContextListener cl = new ContextListener();
     final String KEY = propReader.readProperty("yandex.key");
     String getLangsUrl = propReader.readProperty("yandex.getlangsurl");
@@ -67,6 +71,7 @@ public class Translator extends HttpServlet {
                 list.add(nodeList.item(x).getAttributes().getNamedItem("value").getNodeValue());
             }
         } catch (ParserConfigurationException | SAXException | IOException ex) {
+            log.error("Error while loading the languages list. " + ex);
             throw new ServletException(ex);
         }
         return list;
@@ -74,7 +79,7 @@ public class Translator extends HttpServlet {
 
     /**
      * @param fromLang Language of the text we need to translate
-     * @param toLang Language of the translated text
+     * @param toLang   Language of the translated text
      * @param fromText Text we need to translate
      * @return Returns a string contains the translated text
      * @throws javax.servlet.ServletException
@@ -83,18 +88,20 @@ public class Translator extends HttpServlet {
 
         String text = null;
         String url;
-        if ("1".equals(autoDetect)) {
-            url = translateUrl + KEY + "&lang=" + toLang + "&text=" + fromText;
-        } else {
-            url = translateUrl + KEY + "&lang=" + fromLang + "-" + toLang + "&text=" + fromText;
-        }
-        url = url.replaceAll(" ", "%20");
         try {
+            if ("1".equals(autoDetect)) {
+                url = translateUrl + KEY + "&lang=" + toLang + "&text=" + fromText;
+            } else {
+                url = translateUrl + KEY + "&lang=" + fromLang + "-" + toLang + "&text=" + fromText;
+            }
+            //url = url.replaceAll(" ", "%20");
+
             Document document = URLProcessor(url);
             NodeList nodeList = document.getElementsByTagName("Translation");
             text = nodeList.item(0).getTextContent();
         } catch (ParserConfigurationException | SAXException | IOException ex) {
-            throw new  ServletException(ex);
+            log.error("Error while performing the translation. " + ex);
+            throw new ServletException(ex);
         }
         return text;
     }
@@ -107,7 +114,7 @@ public class Translator extends HttpServlet {
      * @throws java.io.IOException
      * @throws javax.servlet.ServletException
      */
-    public Document URLProcessor(String url) throws ParserConfigurationException, SAXException, IOException, ServletException {
+    private Document URLProcessor(String url) throws ParserConfigurationException, SAXException, IOException, ServletException {
         InputStream stream = null;
         Document document = null;
         try {
@@ -118,12 +125,14 @@ public class Translator extends HttpServlet {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             document = db.parse(stream);
-        } catch (IOException | ParserConfigurationException | SAXException e) {
+        } catch (IOException | ParserConfigurationException | SAXException | IllegalArgumentException e) {
+            log.error("Error while processing the url. " + e);
             throw new ServletException(e);
         } finally {
             try {
                 stream.close();
             } catch (IOException e) {
+                log.error("Error while closing the url stream. " + e);
                 throw new ServletException(e);
             }
         }

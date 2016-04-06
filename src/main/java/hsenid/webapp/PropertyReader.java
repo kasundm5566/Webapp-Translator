@@ -1,5 +1,8 @@
 package hsenid.webapp;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -12,6 +15,7 @@ import java.util.Properties;
 public class PropertyReader {
 
     private final String fileName;
+    private static final Logger log = LogManager.getLogger(PropertyReader.class);
 
     /**
      * Default constructor of PropertyReader class
@@ -33,11 +37,12 @@ public class PropertyReader {
         try {
             properties.load(input);
         } catch (IOException ex) {
+            log.error("Error while loading properties. "+ex);
         }finally{
             try {
                 input.close();
             } catch (IOException ex) {
-                
+                log.error("Error while closing the property stream. "+ex);
             }
         }
         return properties;

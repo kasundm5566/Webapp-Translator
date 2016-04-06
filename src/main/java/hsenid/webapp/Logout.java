@@ -1,5 +1,8 @@
 package hsenid.webapp;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +17,8 @@ import javax.servlet.http.HttpSession;
  * @author Kasun Dinesh
  */
 public class Logout extends HttpServlet {
-    
+
+    private static final Logger log = LogManager.getLogger(Logout.class);
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
@@ -22,6 +26,7 @@ public class Logout extends HttpServlet {
             session.invalidate();
             RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
             rd.forward(req, resp);
+            log.info("Session invalidated.");
         }
     }
 }
