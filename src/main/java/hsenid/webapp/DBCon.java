@@ -23,10 +23,10 @@ public class DBCon {
      * @param dbuser   Database user name
      * @param dbpass   Password of the database
      */
-    public static void CreateConnection(String host, String database, String dbuser, String dbpass) {
+    public static void createConnection(String driver, String host, String database, String dbuser, String dbpass) {
         try {
             log.info("Initializing the database connection.");
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            Class.forName(driver).newInstance();
             connection = (Connection) DriverManager.getConnection(host + database, dbuser, dbpass);
             log.info("Database connection initialized successfully.");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {

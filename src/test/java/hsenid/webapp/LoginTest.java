@@ -48,7 +48,7 @@ public class LoginTest{
         System.out.println("Started Login Test.");
         PropertyReader propReader = new PropertyReader("system.properties");
         Connection con;
-        DBCon.CreateConnection(propReader.readProperty("db.host"), propReader.readProperty("db.database"), propReader.readProperty("db.user"), propReader.readProperty("db.password"));
+        DBCon.createConnection(propReader.readProperty("db.driver"), propReader.readProperty("db.host"), propReader.readProperty("db.database"), propReader.readProperty("db.user"), propReader.readProperty("db.password"));
         con = DBCon.getConnection();
         String query = "INSERT INTO user_cred (Name,Pass) VALUES ('test',md5('123'));";
         PreparedStatement st = con.prepareStatement(query);
@@ -68,7 +68,7 @@ public class LoginTest{
 
     @Test(dataProvider = "test1")
     public void testValidateByDB(String uname, String pass, boolean expected) throws Exception {
-        boolean actual = Login.ValidateByDB(new User(uname, pass));
+        boolean actual = Login.validateByDb(new User(uname, pass));
         Assert.assertEquals(actual, expected, "Evaluate user validation results.");
         //System.out.println("Login Testing: UName:"+uname+" PWD:"+pass+"\tExpected:"+expected+"\tActual:\t"+b);
         System.out.print(".");

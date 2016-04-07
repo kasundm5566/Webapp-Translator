@@ -37,12 +37,12 @@ public class Login extends HttpServlet {
         user = new User(req.getParameter("uname"), req.getParameter("pass"));
 
         try {
-            boolean status = ValidateByDB(user);
+            boolean status = validateByDb(user);
             if (status) {
                 log.info("User validated.");
                 HttpSession httpSession = req.getSession(false);
                 httpSession.setAttribute("username", user.getUserName());
-                Vector<String> list = translator.LoadLanguages();
+                Vector<String> list = translator.loadLanguages();
                 httpSession.setAttribute("langs", list);
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/translate.jsp");
                 rd.forward(req, resp);
@@ -65,7 +65,7 @@ public class Login extends HttpServlet {
      * @return status Returns whether user passed the validation or not
      * @throws java.lang.Exception
      */
-    public static boolean ValidateByDB(User user) throws ServletException, SQLException {
+    public static boolean validateByDb(User user) throws ServletException, SQLException {
         boolean status = false;
         PreparedStatement statement = null;
         ResultSet result = null;

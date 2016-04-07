@@ -45,8 +45,8 @@ public class Translator extends HttpServlet {
         String fromText = req.getParameter("fromtext");
         autoDetect = req.getParameter("autodetect");
 
-        translated_text = Translate(fromLang, toLang, fromText);
-        Vector<String> list = LoadLanguages();
+        translated_text = translate(fromLang, toLang, fromText);
+        Vector<String> list = loadLanguages();
         req.getSession().setAttribute("langs", list);
         req.getSession().setAttribute("final_result", translated_text);
         req.getSession().setAttribute("fromlang", fromLang);
@@ -60,11 +60,11 @@ public class Translator extends HttpServlet {
      * @return Language list will return as an string vector
      * @throws javax.servlet.ServletException
      */
-    public Vector<String> LoadLanguages() throws ServletException {
+    public Vector<String> loadLanguages() throws ServletException {
         Vector<String> list = new Vector<String>();
         String url = getLangsUrl + KEY + "&ui=en";
         try {
-            Document document = URLProcessor(url);
+            Document document = urlProcessor(url);
             NodeList nodeList = document.getElementsByTagName("Item");
             for (int x = 0, size = nodeList.getLength(); x < size; x++) {
                 list.add(nodeList.item(x).getAttributes().getNamedItem("value").getNodeValue());
@@ -83,7 +83,7 @@ public class Translator extends HttpServlet {
      * @return Returns a string contains the translated text
      * @throws javax.servlet.ServletException
      */
-    public String Translate(String fromLang, String toLang, String fromText) throws ServletException {
+    public String translate(String fromLang, String toLang, String fromText) throws ServletException {
 
         String text = null;
         String url;
@@ -94,7 +94,7 @@ public class Translator extends HttpServlet {
                 url = translateUrl + KEY + "&lang=" + fromLang + "-" + toLang + "&text=" + fromText;
             }
             url = url.replaceAll(" ", "%20");
-            Document document = URLProcessor(url);
+            Document document = urlProcessor(url);
             NodeList nodeList = document.getElementsByTagName("Translation");
             text = nodeList.item(0).getTextContent();
         } catch (ParserConfigurationException | SAXException | IOException ex) {
@@ -112,7 +112,7 @@ public class Translator extends HttpServlet {
      * @throws java.io.IOException
      * @throws javax.servlet.ServletException
      */
-    private Document URLProcessor(String url) throws ParserConfigurationException, SAXException, IOException, ServletException {
+    private Document urlProcessor(String url) throws ParserConfigurationException, SAXException, IOException, ServletException {
         InputStream stream = null;
         Document document = null;
         try {

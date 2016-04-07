@@ -15,12 +15,12 @@ public class TranslatorTest {
 
     @BeforeTest
     public void start(){
-        System.out.println("Started Translate Test.");
+        System.out.println("Started translate Test.");
     }
 
     @AfterTest
     public void end(){
-        System.out.println("\nFinished Translate Test.");
+        System.out.println("\nFinished translate Test.");
     }
 
     @DataProvider(name = "trans_test")
@@ -42,14 +42,14 @@ public class TranslatorTest {
         Translator tr = new Translator();
         String translatedVal = null;
         try {
-            translatedVal = tr.Translate(fromLang, toLang, text);
+            translatedVal = tr.translate(fromLang, toLang, text);
             Assert.assertEquals(expected, translatedVal, "Evaluate the translated text with expected result.");
-            //System.out.println("Translate Testing: from:"+fromLang+" to:"+toLang+"\tExpected:"+expected+"\tActual:\t"+translatedVal);
+            //System.out.println("translate Testing: from:"+fromLang+" to:"+toLang+"\tExpected:"+expected+"\tActual:\t"+translatedVal);
             System.out.print(".");
         } catch (Exception e) {
             Assert.assertNotNull(e);
             Assert.assertEquals(e.toString(), expected, "Check for the expected exception.");
-            //System.out.println("Translate Testing: from:"+fromLang+" to:"+toLang+"\tExpected:"+expected+"\tActual:\t"+e.toString());
+            //System.out.println("translate Testing: from:"+fromLang+" to:"+toLang+"\tExpected:"+expected+"\tActual:\t"+e.toString());
             System.out.print(".");
         }
     }

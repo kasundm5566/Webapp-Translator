@@ -2,7 +2,6 @@ package hsenid.webapp;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import java.sql.SQLException;
 
 /**
  * Created by hsenid.
@@ -14,7 +13,7 @@ public class ContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         PropertyReader propReader = new PropertyReader("system.properties");
-        DBCon.CreateConnection(propReader.readProperty("db.host"), propReader.readProperty("db.database"), propReader.readProperty("db.user"), propReader.readProperty("db.password"));
+        DBCon.createConnection(propReader.readProperty("db.driver"), propReader.readProperty("db.host"), propReader.readProperty("db.database"), propReader.readProperty("db.user"), propReader.readProperty("db.password"));
     }
 
     @Override
