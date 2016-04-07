@@ -1,45 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
     <properties>
+        <!-- Format of the data written to log files -->
         <property name="format">%d{yyyy-MMM-dd HH:mm:ss} %p [%t] %c %m%n</property>
     </properties>
     <Appenders>
-        <RollingRandomAccessFile name="TranslatorLog"
-                                 fileName="${env:CATALINA_HOME}/webapps/webapp-translator/logs/webapp.log"
-                                 filePattern="${env:CATALINA_HOME}/webapps/webapp-translator/logs/webapp-%d{yyyy-MM-dd}-%i.log">
+        <!-- Create a log file to hold error/fatal log level details -->
+        <RollingRandomAccessFile name="TranslatorErrorLog"
+                                 fileName="${env:CATALINA_HOME}/webapps/webapp-translator/logs/webapp.translator.error.log"
+                                 filePattern="${env:CATALINA_HOME}/webapps/webapp-translator/logs/webapp.translator.error.%d{yyyy-MM-dd}-%i.log">
             <PatternLayout>
                 <Pattern>${format}</Pattern>
             </PatternLayout>
             <Policies>
+                <!-- Roll over the file next day -->
+                <TimeBasedTriggeringPolicy/>
+                <!-- Maximum file size for the log file. Data will move to a new file after exceeding this limit. -->
                 <SizeBasedTriggeringPolicy size="2 MB"/>
             </Policies>
-            <DefaultRolloverStrategy max="50"/>
+            <!-- Maximum number of files to keep. -->
+            <DefaultRolloverStrategy max="20"/>
+            <!-- Data of error/fatal log levels will be printed to the file. -->
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
         </RollingRandomAccessFile>
-        <!--
-            <File name="TranslatorLog" fileName="${env:CATALINA_HOME}/webapps/webapp-translator/logs/webapp.log">
-                <PatternLayout>
-                    <Pattern>${format}</Pattern>
-                </PatternLayout>
-            </File>
 
-            <Console name="STDOUT" target="SYSTEM_OUT">
-                <PatternLayout pattern="${format}"/>
-            </Console>
+        <!-- Create a log file to hold info/warn log level details -->
+        <RollingRandomAccessFile name="TranslatorTraceLog"
+                                 fileName="${env:CATALINA_HOME}/webapps/webapp-translator/logs/webapp.translator.trace.log"
+                                 filePattern="${env:CATALINA_HOME}/webapps/webapp-translator/logs/webapp.translator.trace.%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout>
+                <Pattern>${format}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <!-- Roll over the file next day -->
+                <TimeBasedTriggeringPolicy/>
+                <!-- Maximum file size for the log file. Data will move to a new file after exceeding this limit. -->
+                <SizeBasedTriggeringPolicy size="2 MB"/>
+            </Policies>
+            <!-- Maximum number of files to keep. -->
+            <DefaultRolloverStrategy max="20"/>
+            <!-- Data of error/fatal log levels will be opted out when printing to the file. -->
+            <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/>
+        </RollingRandomAccessFile>
 
-            <File name="Log" fileName="${env:CATALINA_HOME}/webapps/webapp-translator/logs/web.log">
-              <PatternLayout>
-                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
-              </PatternLayout>
-            </File>
-        -->
+        <!-- Standard console output -->
+        <Console name="TranslatorConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="${format}"/>
+        </Console>
+
     </Appenders>
     <Loggers>
         <Root level="info">
-            <AppenderRef ref="TranslatorLog"/>
-            <!--
-            <AppenderRef ref="STDOUT"/>
-            <AppenderRef ref="Log" level="error"/>
-            -->
+            <AppenderRef ref="TranslatorErrorLog"/>
+            <AppenderRef ref="TranslatorTraceLog" level="info"/>
+            <AppenderRef ref="TranslatorConsole" level="info"/>
         </Root>
     </Loggers>
 </Configuration>

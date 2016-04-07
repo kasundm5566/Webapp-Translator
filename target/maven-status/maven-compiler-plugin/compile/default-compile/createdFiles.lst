@@ -1,0 +1,8 @@
+hsenid/webapp/Login.class
+hsenid/webapp/Translator.class
+hsenid/webapp/User.class
+hsenid/webapp/DBCon.class
+hsenid/webapp/test.class
+hsenid/webapp/ContextListener.class
+hsenid/webapp/Logout.class
+hsenid/webapp/PropertyReader.class

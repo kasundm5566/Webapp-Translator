@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <properties>
+        <property name="format">%d{yyyy-MMM-dd HH:mm:ss} %p [%t] %c %m%n</property>
+    </properties>
+    <Appenders>
+        <RollingRandomAccessFile name="TranslatorErrorLog"
+                                 fileName="${env:CATALINA_HOME}/webapps/webapp-translator/logs/webapp.translator.error.log"
+                                 filePattern="${env:CATALINA_HOME}/webapps/webapp-translator/logs/webapp.translator.error.%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout>
+                <Pattern>${format}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="2 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+            <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="TranslatorTraceLog"
+                                 fileName="${env:CATALINA_HOME}/webapps/webapp-translator/logs/webapp.translator.trace.log"
+                                 filePattern="${env:CATALINA_HOME}/webapps/webapp-translator/logs/webapp.translator.trace.$${date:MM-dd-yyyy}-%i.log">
+            <PatternLayout>
+                <Pattern>${format}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="2 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+            <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/>
+        </RollingRandomAccessFile>
+
+        <Console name="TranslatorConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="${format}"/>
+        </Console>
+
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="TranslatorErrorLog"/>
+            <AppenderRef ref="TranslatorTraceLog" level="info"/>
+            <AppenderRef ref="TranslatorConsole" level="info"/>
+        </Root>
+    </Loggers>
+</Configuration>
