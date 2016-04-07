@@ -23,7 +23,7 @@ public class Logout extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         if (session != null) {
-            session.invalidate();
+            session.invalidate();   // Invalidate the session.
             RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
             rd.forward(req, resp);
             log.info("Session invalidated.");

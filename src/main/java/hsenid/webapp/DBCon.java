@@ -41,6 +41,7 @@ public class DBCon {
         return connection;
     }
 
+    // Closing the databsae connection
     public static void closeConnection() {
         if (connection != null) {
             try {

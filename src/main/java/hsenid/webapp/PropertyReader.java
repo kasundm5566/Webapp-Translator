@@ -33,14 +33,14 @@ public class PropertyReader {
         Properties properties = new Properties();
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream input;
-        input = classLoader.getResourceAsStream(fileName);
+        input = classLoader.getResourceAsStream(fileName);  // Load file data to the stream.
         try {
-            properties.load(input);
+            properties.load(input); // Load stream data to the Property object.
         } catch (IOException ex) {
             log.error("Error while loading properties. "+ex);
         }finally{
             try {
-                input.close();
+                input.close();  // Closing the stream.
             } catch (IOException ex) {
                 log.error("Error while closing the property stream. "+ex);
             }

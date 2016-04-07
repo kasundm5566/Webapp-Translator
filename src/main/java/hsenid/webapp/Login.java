@@ -38,21 +38,21 @@ public class Login extends HttpServlet {
 
         try {
             boolean status = validateByDb(user);
-            if (status) {
+            if (status) {   // User validated.
                 log.info("User validated.");
                 HttpSession httpSession = req.getSession(false);
-                httpSession.setAttribute("username", user.getUserName());
-                Vector<String> list = translator.loadLanguages();
+                httpSession.setAttribute("username", user.getUserName());   // Create a new session.
+                Vector<String> list = translator.loadLanguages();   // Languages will be loaded to a vector.
                 httpSession.setAttribute("langs", list);
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/translate.jsp");
-                rd.forward(req, resp);
+                rd.forward(req, resp);  // Forward to a new page with data such as language list, user details.
                 log.info("New session initialized.");
             } else {
                 log.warn("Wrong username, password combination.");
                 error = "User name and password does not match!";
-                req.setAttribute("error_msg", error);
+                req.setAttribute("error_msg", error);   // Set an error message to pass to a next page.
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
-                rd.forward(req, resp);
+                rd.forward(req, resp);  // Forward to a new page with error message.
             }
         } catch (ServletException | SQLException e) {
             log.error("Error while validating user. "+e);
@@ -70,11 +70,11 @@ public class Login extends HttpServlet {
         PreparedStatement statement = null;
         ResultSet result = null;
         try {
-            Connection connection = DBCon.getConnection();
+            Connection connection = DBCon.getConnection();  // Get the connection already initialized.
             String query = "SELECT Name FROM user_cred WHERE Name=BINARY\"" + user.getUserName() + "\" && pass=md5(\"" + user.getPassword() + "\");";
             PreparedStatement statement1 = connection.prepareStatement(query);
-            result = statement1.executeQuery();
-            status = result.first();
+            result = statement1.executeQuery(); // Execute the query to validate the user.
+            status = result.first();    // If there is a record, user will be validated (query is for matching both the username & password).
         } catch (SQLException e) {
             log.error("Error while validating user. "+e);
             throw new ServletException(e);

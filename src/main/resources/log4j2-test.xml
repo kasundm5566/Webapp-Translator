@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
     <properties>
-        <!-- Format of the data written to log files -->
+        <!-- Format of the data written to log files. -->
         <property name="format">%d{yyyy-MMM-dd HH:mm:ss} %p [%t] %c %m%n</property>
     </properties>
     <Appenders>
-        <!-- Create a log file to hold error/fatal log level details -->
+        <!-- Create a log file to hold error/fatal log level details. -->
         <RollingRandomAccessFile name="TranslatorErrorLog"
                                  fileName="${env:CATALINA_HOME}/webapps/webapp-translator/logs/webapp.translator.error.log"
                                  filePattern="${env:CATALINA_HOME}/webapps/webapp-translator/logs/webapp.translator.error.%d{yyyy-MM-dd}-%i.log">
@@ -13,18 +13,16 @@
                 <Pattern>${format}</Pattern>
             </PatternLayout>
             <Policies>
-                <!-- Roll over the file next day -->
-                <TimeBasedTriggeringPolicy/>
+                <!-- Roll over the file next day. -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
                 <!-- Maximum file size for the log file. Data will move to a new file after exceeding this limit. -->
                 <SizeBasedTriggeringPolicy size="2 MB"/>
             </Policies>
             <!-- Maximum number of files to keep. -->
             <DefaultRolloverStrategy max="20"/>
-            <!-- Data of error/fatal log levels will be written to the file. -->
-            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
         </RollingRandomAccessFile>
 
-        <!-- Create a log file to hold info/warn log level details -->
+        <!-- Create a log file to hold info/warn log level details. -->
         <RollingRandomAccessFile name="TranslatorTraceLog"
                                  fileName="${env:CATALINA_HOME}/webapps/webapp-translator/logs/webapp.translator.trace.log"
                                  filePattern="${env:CATALINA_HOME}/webapps/webapp-translator/logs/webapp.translator.trace.%d{yyyy-MM-dd}-%i.log">
@@ -32,8 +30,8 @@
                 <Pattern>${format}</Pattern>
             </PatternLayout>
             <Policies>
-                <!-- Roll over the file next day -->
-                <TimeBasedTriggeringPolicy/>
+                <!-- Roll over the file next day. -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
                 <!-- Maximum file size for the log file. Data will move to a new file after exceeding this limit. -->
                 <SizeBasedTriggeringPolicy size="2 MB"/>
             </Policies>
@@ -43,7 +41,7 @@
             <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/>
         </RollingRandomAccessFile>
 
-        <!-- Standard console output -->
+        <!-- Standard console output. -->
         <Console name="TranslatorConsole" target="SYSTEM_OUT">
             <PatternLayout pattern="${format}"/>
         </Console>
@@ -51,7 +49,7 @@
     </Appenders>
     <Loggers>
         <Root level="info">
-            <AppenderRef ref="TranslatorErrorLog"/>
+            <AppenderRef ref="TranslatorErrorLog" level="error"/>
             <AppenderRef ref="TranslatorTraceLog" level="info"/>
             <AppenderRef ref="TranslatorConsole" level="info"/>
         </Root>

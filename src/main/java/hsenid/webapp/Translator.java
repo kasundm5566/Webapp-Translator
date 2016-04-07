@@ -93,7 +93,7 @@ public class Translator extends HttpServlet {
             } else {
                 url = translateUrl + KEY + "&lang=" + fromLang + "-" + toLang + "&text=" + fromText;
             }
-            url = url.replaceAll(" ", "%20");
+            url = url.replaceAll(" ", "%20");   // Replace all the spaces from %20. If the url contains spaces program will throw a illegalArgumentException.
             Document document = urlProcessor(url);
             NodeList nodeList = document.getElementsByTagName("Translation");
             text = nodeList.item(0).getTextContent();
