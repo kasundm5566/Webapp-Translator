@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0fe7827e-3fb2-40e9-9282-05dd9253f676" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/hsenid/webapp/ContextListener.java" afterPath="$PROJECT_DIR$/src/main/java/hsenid/webapp/ContextListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/hsenid/webapp/DBCon.java" afterPath="$PROJECT_DIR$/src/main/java/hsenid/webapp/DBCon.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/hsenid/webapp/Login.java" afterPath="$PROJECT_DIR$/src/main/java/hsenid/webapp/Login.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/hsenid/webapp/LoginTest.java" afterPath="$PROJECT_DIR$/src/test/java/hsenid/webapp/LoginTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/hsenid/webapp/Translator.java" afterPath="$PROJECT_DIR$/src/main/java/hsenid/webapp/Translator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/hsenid/webapp/TranslatorTest.java" afterPath="$PROJECT_DIR$/src/test/java/hsenid/webapp/TranslatorTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/system.properties" afterPath="$PROJECT_DIR$/src/main/resources/system.properties" />
-    </list>
+    <list default="true" id="0fe7827e-3fb2-40e9-9282-05dd9253f676" name="Default" comment="" />
     <ignored path="webapp-translator.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -280,10 +271,6 @@
         <subPane subId="Project Files">
           <PATH>
             <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="webapp-translator">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -1042,12 +1029,12 @@
       <workItem from="1459994022523" duration="1820000" />
       <workItem from="1460001007933" duration="25000" />
       <workItem from="1460001052274" duration="33000" />
-      <workItem from="1460006364512" duration="7848000" />
+      <workItem from="1460006364512" duration="7952000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="110394000" />
+    <option name="totallyTimeSpent" value="110498000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="51" y="24" width="1315" height="744" extended-state="6" />
