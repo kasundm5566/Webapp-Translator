@@ -94,8 +94,7 @@ public class Translator extends HttpServlet {
             } else {
                 url = translateUrl + KEY + "&lang=" + fromLang + "-" + toLang + "&text=" + fromText;
             }
-            //url = url.replaceAll(" ", "%20");
-
+            url = url.replaceAll(" ", "%20");
             Document document = URLProcessor(url);
             NodeList nodeList = document.getElementsByTagName("Translation");
             text = nodeList.item(0).getTextContent();
