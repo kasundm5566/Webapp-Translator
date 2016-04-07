@@ -20,7 +20,7 @@
             </Policies>
             <!-- Maximum number of files to keep. -->
             <DefaultRolloverStrategy max="20"/>
-            <!-- Data of error/fatal log levels will be printed to the file. -->
+            <!-- Data of error/fatal log levels will be written to the file. -->
             <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
         </RollingRandomAccessFile>
 
@@ -39,7 +39,7 @@
             </Policies>
             <!-- Maximum number of files to keep. -->
             <DefaultRolloverStrategy max="20"/>
-            <!-- Data of error/fatal log levels will be opted out when printing to the file. -->
+            <!-- Data of error/fatal log levels will be opted out when writing to the file. -->
             <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/>
         </RollingRandomAccessFile>
 

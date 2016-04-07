@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0fe7827e-3fb2-40e9-9282-05dd9253f676" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/hsenid/webapp/Translator.java" afterPath="$PROJECT_DIR$/src/main/java/hsenid/webapp/Translator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/log4j2-test.xml" afterPath="$PROJECT_DIR$/src/main/resources/log4j2-test.xml" />
     </list>
     <ignored path="webapp-translator.iws" />
@@ -53,21 +52,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="log4j2-test.xml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="log4j2-test.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/log4j2-test.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="815" max-vertical-offset="1984">
-              <caret line="41" column="79" selection-start-line="41" selection-start-column="79" selection-end-line="41" selection-end-column="79" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="testng.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/testng.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.099358976" vertical-offset="0" max-vertical-offset="837">
-              <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.050736498" vertical-offset="651" max-vertical-offset="1984">
+              <caret line="22" column="63" selection-start-line="22" selection-start-column="63" selection-end-line="22" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -126,8 +115,8 @@
         <option value="$PROJECT_DIR$/src/main/java/hsenid/webapp/DBCon.java" />
         <option value="$PROJECT_DIR$/src/main/java/hsenid/webapp/Login.java" />
         <option value="$PROJECT_DIR$/src/main/java/hsenid/webapp/Translator.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/log4j2-test.xml" />
         <option value="$PROJECT_DIR$/src/test/testng.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/log4j2-test.xml" />
       </list>
     </option>
   </component>
@@ -1038,12 +1027,12 @@
       <workItem from="1459994022523" duration="1820000" />
       <workItem from="1460001007933" duration="25000" />
       <workItem from="1460001052274" duration="33000" />
-      <workItem from="1460006364512" duration="5851000" />
+      <workItem from="1460006364512" duration="5976000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108397000" />
+    <option name="totallyTimeSpent" value="108522000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="51" y="24" width="1315" height="744" extended-state="6" />
@@ -1460,18 +1449,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j2-test.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="815" max-vertical-offset="1984">
-          <caret line="41" column="79" selection-start-line="41" selection-start-column="79" selection-end-line="41" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/testng.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.099358976" vertical-offset="0" max-vertical-offset="837">
           <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j2-test.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.050736498" vertical-offset="651" max-vertical-offset="1984">
+          <caret line="22" column="63" selection-start-line="22" selection-start-column="63" selection-end-line="22" selection-end-column="63" />
           <folding />
         </state>
       </provider>
