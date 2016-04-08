@@ -1,9 +1,8 @@
 package hsenid.webapp;
 
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import sun.rmi.runtime.Log;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -27,6 +26,12 @@ public class DBCon {
         try {
             log.info("Initializing the database connection.");
             Class.forName(driver).newInstance();
+            /*ComboPooledDataSource cpd=new ComboPooledDataSource();
+            cpd.setMinPoolSize(10);
+            cpd.setJdbcUrl(host + database);
+            cpd.setUser(dbuser);
+            cpd.setPassword(dbpass);
+            connection=cpd.getConnection();*/
             connection = (Connection) DriverManager.getConnection(host + database, dbuser, dbpass);
             log.info("Database connection initialized successfully.");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {

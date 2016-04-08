@@ -2,7 +2,7 @@
 <Configuration>
     <properties>
         <!-- Format of the data written to log files. -->
-        <property name="format">%d{yyyy-MMM-dd HH:mm:ss} %p [%t] %c %m%n</property>
+        <property name="format">%d{yyyy-MMM-dd HH:mm:ss:sss} %p [%t] %c %m%n</property>
     </properties>
     <Appenders>
         <!-- Create a log file to hold error/fatal log level details. -->
@@ -45,8 +45,8 @@
         <Console name="TranslatorConsole" target="SYSTEM_OUT">
             <PatternLayout pattern="${format}"/>
         </Console>
-
     </Appenders>
+
     <Loggers>
         <Root level="info">
             <AppenderRef ref="TranslatorErrorLog" level="error"/>
