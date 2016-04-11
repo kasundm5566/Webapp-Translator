@@ -4,12 +4,12 @@
 <%@ page import="java.util.Vector" %>
 <!DOCTYPE html>
 <html lang="en">
-    <head>        
+    <head>
         <title>Translator</title>
         <link rel='shortcut icon' type='image/x-icon' href='images/bi.png' />
         <link rel='stylesheet' href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
-        <link rel="stylesheet" href="css/translate.css">  
-        <script type="text/javascript" src="js/operations.js"></script>    
+        <link rel="stylesheet" href="css/translate.css">
+        <script type="text/javascript" src="js/operations.js"></script>
     </head>
 
     <body>
@@ -20,6 +20,7 @@
 
 
         <%
+            session.setAttribute("user",session.getAttribute("username"));
             out.println("<div id=\"session\" class=\"alert alert-info\" role=\"alert\">");
             out.println("Logged in as <strong><u>" + session.getAttribute("username") + "</u></strong>");
             out.println("<br><form action=\"logout\" method=\"post\"><table><tr><button type=\"submit\" class=\"btn btn-info btn-xs\" id=\"logout\"><span class=\"glyphicon glyphicon-off\"></span>&nbsp;&nbsp;&nbsp;Logout</button></tr></table></form></div>");
@@ -47,7 +48,7 @@
                             } else {
                                 out.println("<textarea name=fromtext id=\"fromtext\" class=\"form-control\" rows=\"4\" cols=\"22\">" + request.getSession().getAttribute("fromtext") + "</textarea>");
                             }
-                        %> 
+                        %>
                     </div>
                     <div style="float: right;">
                         <select name="fromlang" class="form-control" data-toggle="tooltip" title="Select language of your text">
@@ -83,7 +84,7 @@
                                 response.setCharacterEncoding("UTF-8");
                                 out.println("<textarea name=totext id=\"totext\" class=\"form-control\" rows=\"4\" cols=\"22\" disabled>" + request.getSession().getAttribute("final_result") + "</textarea>");
                             }
-                        %>                            
+                        %>
                     </div>
                     <div id="sep2">
                         <div style="float: right;">
@@ -100,7 +101,7 @@
                                     }
                                 %>
                             </select>
-                        </div>                                
+                        </div>
                         <button type="submit" class="btn btn-default" id="buttons">
                             <span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;&nbsp;Translate
                         </button>

@@ -26,6 +26,7 @@ public class Login extends HttpServlet {
     static String error = "Error in username or password!";
     Translator translator = new Translator();
     private static final Logger log = LogManager.getLogger(Login.class);
+    Connection connection;
 
     @Override
     /**
@@ -39,6 +40,7 @@ public class Login extends HttpServlet {
             boolean status = validateByDb(user);
             if (status) {   // User validated.
                 log.info("User validated.");
+                DBCon.connectionMap.put(user.getUserName(),connection);
                 HttpSession httpSession = req.getSession(false);
                 httpSession.setAttribute("username", user.getUserName());   // Create a new session.
                 Vector<String> list = translator.loadLanguages();   // Languages will be loaded to a vector.
@@ -64,12 +66,12 @@ public class Login extends HttpServlet {
      * @return status Returns whether user passed the validation or not
      * @throws java.lang.Exception
      */
-    public static boolean validateByDb(User user) throws ServletException, SQLException {
+    public boolean validateByDb(User user) throws ServletException, SQLException {
         boolean status = false;
         PreparedStatement statement = null;
         ResultSet result = null;
         try {
-            Connection connection = DBCon.getConnection();  // Get the connection already initialized.
+            connection = DBCon.getComboDataSource().getConnection();  // Get the connection already initialized.
             String query = "SELECT Name FROM user_cred WHERE Name=BINARY\"" + user.getUserName() + "\" && pass=md5(\"" + user.getPassword() + "\");";
             PreparedStatement statement1 = connection.prepareStatement(query);
             result = statement1.executeQuery(); // Execute the query to validate the user.

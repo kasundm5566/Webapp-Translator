@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
  *
  * @author Kasun Dinesh
  */
-public class LoginTest{
+/*public class LoginTest{
 
     @DataProvider(name = "test1")
     public Object[][] users() {
@@ -49,7 +49,7 @@ public class LoginTest{
         PropertyReader propReader = new PropertyReader("system.properties");
         Connection con;
         DBCon.createConnection(propReader.readProperty("db.driver"), propReader.readProperty("db.host"), propReader.readProperty("db.database"), propReader.readProperty("db.user"), propReader.readProperty("db.password"));
-        con = DBCon.getConnection();
+        con = DBCon.getComboDataSource();
         String query = "INSERT INTO user_cred (Name,Pass) VALUES ('test',md5('123'));";
         PreparedStatement st = con.prepareStatement(query);
         st.executeUpdate(query);
@@ -58,11 +58,11 @@ public class LoginTest{
     @AfterTest
     public void closeCon() throws SQLException {
         Connection con;
-        con = DBCon.getConnection();
+        con = DBCon.getComboDataSource();
         String query = "DELETE FROM user_cred WHERE Name='test';";
         PreparedStatement st = con.prepareStatement(query);
         st.executeUpdate(query);
-        DBCon.getConnection().close();
+        DBCon.getComboDataSource().close();
         System.out.println("\nFinished Login Test.");
     }
 
@@ -73,4 +73,4 @@ public class LoginTest{
         //System.out.println("Login Testing: UName:"+uname+" PWD:"+pass+"\tExpected:"+expected+"\tActual:\t"+b);
         System.out.print(".");
     }
-}
+}*/

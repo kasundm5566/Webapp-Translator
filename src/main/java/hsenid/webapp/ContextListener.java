@@ -20,6 +20,6 @@ public class ContextListener implements ServletContextListener {
     // This method will called when the webapp is closing.
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        DBCon.closeConnection();
+        DBCon.closeComboPoolDataSource();
     }
 }

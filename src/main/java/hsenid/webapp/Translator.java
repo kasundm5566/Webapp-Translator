@@ -30,7 +30,6 @@ public class Translator extends HttpServlet {
 
     private static final Logger log = LogManager.getLogger(Translator.class);
     final PropertyReader propReader = new PropertyReader("system.properties");
-    ContextListener cl = new ContextListener();
     final String KEY = propReader.readProperty("yandex.key");
     String getLangsUrl = propReader.readProperty("yandex.getlangsurl");
     String translateUrl = propReader.readProperty("yandex.translateurl");

@@ -3,9 +3,9 @@ package hsenid.webapp;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import java.beans.PropertyVetoException;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.util.HashMap;
 
 /**
  * Created by hsenid.
@@ -13,10 +13,12 @@ import java.sql.SQLException;
  * @author Kasun Dinesh
  */
 public class DBCon {
-    private static Connection connection;
     private static final Logger log = LogManager.getLogger(DBCon.class);
+    private static ComboPooledDataSource comboPooledDataSource;
+    static HashMap<String, Connection> connectionMap = new HashMap<String, Connection>();
 
     /**
+     * @param driver   Driver using to create the database connection
      * @param host     URL of the database
      * @param database Name of the database to use
      * @param dbuser   Database user name
@@ -24,37 +26,35 @@ public class DBCon {
      */
     public static void createConnection(String driver, String host, String database, String dbuser, String dbpass) {
         try {
+            PropertyReader propertyReader = new PropertyReader("c3p0.properties");
             log.info("Initializing the database connection.");
-            Class.forName(driver).newInstance();
-            /*ComboPooledDataSource cpd=new ComboPooledDataSource();
-            cpd.setMinPoolSize(10);
-            cpd.setJdbcUrl(host + database);
-            cpd.setUser(dbuser);
-            cpd.setPassword(dbpass);
-            connection=cpd.getConnection();*/
-            connection = (Connection) DriverManager.getConnection(host + database, dbuser, dbpass);
+            comboPooledDataSource = new ComboPooledDataSource();
+            comboPooledDataSource.setMinPoolSize(Integer.parseInt(propertyReader.readProperty("min.pool.size")));
+            comboPooledDataSource.setMaxPoolSize(Integer.parseInt(propertyReader.readProperty("max.pool.size")));
+            comboPooledDataSource.setAcquireIncrement(Integer.parseInt(propertyReader.readProperty("acquire.increment")));
+            comboPooledDataSource.setCheckoutTimeout(Integer.parseInt(propertyReader.readProperty("checkout.timeout")));
+            comboPooledDataSource.setDriverClass(driver);
+            comboPooledDataSource.setJdbcUrl(host + database);
+            comboPooledDataSource.setUser(dbuser);
+            comboPooledDataSource.setPassword(dbpass);
             log.info("Database connection initialized successfully.");
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+        } catch (/*ClassNotFoundException | InstantiationException | IllegalAccessException | */PropertyVetoException /*| SQLException*/ ex) {
             log.error("Error while connecting to the database. " + ex);
         }
     }
 
     /**
-     * @return returns Connection object
+     * @return returns ComboPooledDataSource object
      */
-    public static Connection getConnection() {
-        return connection;
+    public static ComboPooledDataSource getComboDataSource() {
+        return comboPooledDataSource;
     }
 
-    // Closing the databsae connection
-    public static void closeConnection() {
-        if (connection != null) {
-            try {
-                log.info("Closing the database connection.");
-                getConnection().close();
-            } catch (SQLException e) {
-                log.error("Error while closing the database connection. " + e);
-            }
+    // Closing the database connection pool
+    public static void closeComboPoolDataSource() {
+        if (comboPooledDataSource != null) {
+            log.info("Closing the database connection.");
+            getComboDataSource().close();
         }
     }
 }
