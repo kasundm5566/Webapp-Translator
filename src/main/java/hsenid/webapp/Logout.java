@@ -27,9 +27,9 @@ public class Logout extends HttpServlet {
         HttpSession session = req.getSession(false);
         if (session != null) {
             String user=req.getSession().getAttribute("user").toString();
-            Connection con=DBCon.connectionMap.get(user);
+            Connection connection=DBCon.connectionMap.get(user);
             try {
-                con.close();
+                connection.close();
                 log.info("Connection of user \'"+user+"\' closed.");
             } catch (SQLException e) {
                 log.error("Error closing connection of user \'" + user + "\'.");
