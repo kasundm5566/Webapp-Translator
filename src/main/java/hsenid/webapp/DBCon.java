@@ -24,7 +24,7 @@ public class DBCon {
      * @param dbuser   Database user name
      * @param dbpass   Password of the database
      */
-    public static void createConnection(String driver, String host, String database, String dbuser, String dbpass) {
+    public static void createComboDataSource(String driver, String host, String database, String dbuser, String dbpass) {
         try {
             PropertyReader propertyReader = new PropertyReader("c3p0.properties");
             log.info("Initializing the database connection.");

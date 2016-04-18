@@ -22,11 +22,11 @@ import javax.servlet.http.HttpSession;
  */
 public class Login extends HttpServlet {
 
-    User user;
+    private User user;
     static String error = "Error in username or password!";
-    Translator translator = new Translator();
+    private Translator translator = new Translator();
     private static final Logger log = LogManager.getLogger(Login.class);
-    Connection connection;
+    private Connection connection;
 
     @Override
     /**
@@ -35,11 +35,10 @@ public class Login extends HttpServlet {
      */
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         user = new User(req.getParameter("uname"), req.getParameter("pass"));
-
         try {
             boolean status = validateByDb(user);
             if (status) {   // User validated.
-                log.info("User validated.");
+                log.info("User \'" + user.getUserName() + "\' validated.");
                 DBCon.connectionMap.put(user.getUserName(),connection);
                 HttpSession httpSession = req.getSession(false);
                 httpSession.setAttribute("username", user.getUserName());   // Create a new session.
@@ -51,12 +50,18 @@ public class Login extends HttpServlet {
             } else {
                 log.warn("Wrong username, password combination.");
                 error = "User name and password does not match!";
+                connection.close();
                 req.setAttribute("error_msg", error);   // Set an error message to pass to a next page.
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
                 rd.forward(req, resp);  // Forward to a new page with error message.
             }
-        } catch (ServletException | SQLException e) {
-            log.error("Error while validating user. "+e);
+        } catch (SQLException e) {
+            log.error("Error while validating user. " + e);
+            try {
+                connection.close();
+            } catch (SQLException e1) {
+                log.error("Error while closing the connection of validating user. " + e1);
+            }
             throw new ServletException(e);
         }
     }
@@ -71,13 +76,15 @@ public class Login extends HttpServlet {
         PreparedStatement statement = null;
         ResultSet result = null;
         try {
-            connection = DBCon.getComboDataSource().getConnection();  // Get the connection already initialized.
+            connection = DBCon.getComboDataSource().getConnection();
             String query = "SELECT Name FROM user_cred WHERE Name=BINARY\"" + user.getUserName() + "\" && pass=md5(\"" + user.getPassword() + "\");";
             PreparedStatement statement1 = connection.prepareStatement(query);
             result = statement1.executeQuery(); // Execute the query to validate the user.
             status = result.first();    // If there is a record, user will be validated (query is for matching both the username & password).
         } catch (SQLException e) {
-            log.error("Error while validating user. "+e);
+            log.error("Error while validating user. " + e);
+            connection.close();
+            DBCon.connectionMap.remove(user.getUserName());
             throw new ServletException(e);
         } finally {
             if (statement != null) {

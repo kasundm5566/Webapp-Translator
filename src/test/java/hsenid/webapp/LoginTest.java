@@ -3,6 +3,8 @@ package hsenid.webapp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -14,8 +16,9 @@ import org.testng.annotations.Test;
  *
  * @author Kasun Dinesh
  */
-/*public class LoginTest{
-
+public class LoginTest {
+    static Connection con;
+    static ComboPooledDataSource dataSource;
     @DataProvider(name = "test1")
     public Object[][] users() {
         return new Object[][]{
@@ -47,9 +50,9 @@ import org.testng.annotations.Test;
     public void createCon() throws SQLException {
         System.out.println("Started Login Test.");
         PropertyReader propReader = new PropertyReader("system.properties");
-        Connection con;
-        DBCon.createConnection(propReader.readProperty("db.driver"), propReader.readProperty("db.host"), propReader.readProperty("db.database"), propReader.readProperty("db.user"), propReader.readProperty("db.password"));
-        con = DBCon.getComboDataSource();
+        DBCon.createComboDataSource(propReader.readProperty("db.driver"), propReader.readProperty("db.host"), propReader.readProperty("db.database"), propReader.readProperty("db.user"), propReader.readProperty("db.password"));
+        dataSource = DBCon.getComboDataSource();
+        con = dataSource.getConnection();
         String query = "INSERT INTO user_cred (Name,Pass) VALUES ('test',md5('123'));";
         PreparedStatement st = con.prepareStatement(query);
         st.executeUpdate(query);
@@ -57,20 +60,19 @@ import org.testng.annotations.Test;
 
     @AfterTest
     public void closeCon() throws SQLException {
-        Connection con;
-        con = DBCon.getComboDataSource();
         String query = "DELETE FROM user_cred WHERE Name='test';";
         PreparedStatement st = con.prepareStatement(query);
         st.executeUpdate(query);
-        DBCon.getComboDataSource().close();
+        con.close();
+        dataSource.close();
         System.out.println("\nFinished Login Test.");
     }
 
     @Test(dataProvider = "test1")
-    public void testValidateByDB(String uname, String pass, boolean expected) throws Exception {
-        boolean actual = Login.validateByDb(new User(uname, pass));
+    public void testValidateByDb(String uname, String pass, boolean expected) throws Exception {
+        boolean actual = new Login().validateByDb(new User(uname, pass));
         Assert.assertEquals(actual, expected, "Evaluate user validation results.");
         //System.out.println("Login Testing: UName:"+uname+" PWD:"+pass+"\tExpected:"+expected+"\tActual:\t"+b);
         System.out.print(".");
     }
-}*/
+}

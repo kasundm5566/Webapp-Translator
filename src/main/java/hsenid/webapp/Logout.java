@@ -2,7 +2,6 @@ package hsenid.webapp;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -30,6 +29,7 @@ public class Logout extends HttpServlet {
             Connection connection=DBCon.connectionMap.get(user);
             try {
                 connection.close();
+                DBCon.connectionMap.remove(user);
                 log.info("Connection of user \'"+user+"\' closed.");
             } catch (SQLException e) {
                 log.error("Error closing connection of user \'" + user + "\'.");
