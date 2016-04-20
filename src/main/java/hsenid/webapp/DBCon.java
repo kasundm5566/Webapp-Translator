@@ -4,8 +4,6 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.beans.PropertyVetoException;
-import java.sql.Connection;
-import java.util.HashMap;
 
 /**
  * Created by hsenid.
@@ -15,7 +13,6 @@ import java.util.HashMap;
 public class DBCon {
     private static final Logger log = LogManager.getLogger(DBCon.class);
     private static ComboPooledDataSource comboPooledDataSource;
-    static HashMap<String, Connection> connectionMap = new HashMap<String, Connection>();
 
     /**
      * @param driver   Driver using to create the database connection
@@ -29,6 +26,7 @@ public class DBCon {
             PropertyReader propertyReader = new PropertyReader("c3p0.properties");
             log.info("Initializing the database connection.");
             comboPooledDataSource = new ComboPooledDataSource();
+            comboPooledDataSource.setInitialPoolSize(Integer.parseInt(propertyReader.readProperty("initial.pool.size")));
             comboPooledDataSource.setMinPoolSize(Integer.parseInt(propertyReader.readProperty("min.pool.size")));
             comboPooledDataSource.setMaxPoolSize(Integer.parseInt(propertyReader.readProperty("max.pool.size")));
             comboPooledDataSource.setAcquireIncrement(Integer.parseInt(propertyReader.readProperty("acquire.increment")));
@@ -38,7 +36,7 @@ public class DBCon {
             comboPooledDataSource.setUser(dbuser);
             comboPooledDataSource.setPassword(dbpass);
             log.info("Database connection initialized successfully.");
-        } catch (/*ClassNotFoundException | InstantiationException | IllegalAccessException | */PropertyVetoException /*| SQLException*/ ex) {
+        } catch (PropertyVetoException ex) {
             log.error("Error while connecting to the database. " + ex);
         }
     }

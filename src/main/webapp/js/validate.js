@@ -1,11 +1,12 @@
 var background_color = "#fde99c";
 
-function validateName(name) {
+function validateFirstName() {
+    var name=document.getElementById("fname");
     if (name == null || name == "") {
-        document.getElementById("name_error").hidden = false;
-        document.getElementById("name_error").innerHTML = "Name should not be empty";
-        document.getElementById("name").focus();
-        document.getElementById("name").style.backgroundColor = background_color;
+        document.getElementById("fname_error").hidden = false;
+        document.getElementById("fname_error").innerHTML = "Name should not be empty";
+        document.getElementById("fname").focus();
+        document.getElementById("fname").style.backgroundColor = background_color;
     } else {
         var array = [];
         for (var i = 0; i < name.length; i++) {
@@ -13,21 +14,22 @@ function validateName(name) {
         }
         for (var b in array) {
             if (!isNaN(array[b])) {
-                document.getElementById("name_error").hidden = false;
-                document.getElementById("name_error").innerHTML = "Name should be in text";
-                document.getElementById("name").focus();
-                document.getElementById("name").select();
-                document.getElementById("name").style.backgroundColor = background_color;
+                document.getElementById("fname_error").hidden = false;
+                document.getElementById("fname_error").innerHTML = "Name should be in text";
+                document.getElementById("fname").focus();
+                document.getElementById("fname").select();
+                document.getElementById("fname").style.backgroundColor = background_color;
                 break;
             } else {
-                document.getElementById("name").style.backgroundColor = "white";
-                document.getElementById("name_error").hidden = true;
+                document.getElementById("fname").style.backgroundColor = "white";
+                document.getElementById("fname_error").hidden = true;
             }
         }
     }
 }
 
-function validateUserName(username) {
+function validateUserName() {
+    username=document.getElementById("username");
     if (username == null || username == "") {
         document.getElementById("uname_error").hidden = false;
         document.getElementById("uname_error").innerHTML = "Username should not be empty";
@@ -60,7 +62,8 @@ function validateUserName(username) {
     }
 }
 
-function validateTel(tel) {
+function validateTel() {
+    tel=document.getElementById("tel");
     if (tel.charAt(0) != 0) {
         document.getElementById("tel_error").hidden = false;
         document.getElementById("tel_error").innerHTML = "Telphone no should start with 0";
@@ -79,22 +82,24 @@ function validateTel(tel) {
     }
 }
 
-function validateEmail(email) {
-    var atIndex = email.indexOf("@");
-    var dotIndex = email.indexOf(".");
-    if (email == null || email == "") {
-        document.getElementById("email_error").hidden = false;
-        document.getElementById("email_error").innerHTML = "Email required";
-        document.getElementById("email").focus();
-        document.getElementById("email").style.backgroundColor = background_color;
-    } else if (atIndex <= 0 || dotIndex <= 0 || dotIndex + 2 >= email.length) {
+function validateEmail() {
+    var email = document.getElementById("email");
+    var pattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
+    if (pattern.test(email)) {
+        document.getElementById("email").style.backgroundColor = "white";
+        document.getElementById("email_error").hidden = true;
+        return true;
+    }
+    else {
         document.getElementById("email_error").hidden = false;
         document.getElementById("email_error").innerHTML = "Invalid email";
         document.getElementById("email").focus();
         document.getElementById("email").select();
         document.getElementById("email").style.backgroundColor = background_color;
-    } else {
-        document.getElementById("email").style.backgroundColor = "white";
-        document.getElementById("email_error").hidden = true;
+        return false;
     }
+}
+
+function validateForm() {
+    validateEmail();
 }

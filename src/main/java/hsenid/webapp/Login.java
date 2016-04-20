@@ -39,7 +39,6 @@ public class Login extends HttpServlet {
             boolean status = validateByDb(user);
             if (status) {   // User validated.
                 log.info("User \'" + user.getUserName() + "\' validated.");
-                DBCon.connectionMap.put(user.getUserName(),connection);
                 HttpSession httpSession = req.getSession(false);
                 httpSession.setAttribute("username", user.getUserName());   // Create a new session.
                 Vector<String> list = translator.loadLanguages();   // Languages will be loaded to a vector.
@@ -50,19 +49,19 @@ public class Login extends HttpServlet {
             } else {
                 log.warn("Wrong username, password combination.");
                 error = "User name and password does not match!";
-                connection.close();
                 req.setAttribute("error_msg", error);   // Set an error message to pass to a next page.
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
                 rd.forward(req, resp);  // Forward to a new page with error message.
             }
         } catch (SQLException e) {
             log.error("Error while validating user. " + e);
+            throw new ServletException(e);
+        } finally {
             try {
                 connection.close();
             } catch (SQLException e1) {
                 log.error("Error while closing the connection of validating user. " + e1);
             }
-            throw new ServletException(e);
         }
     }
 
@@ -83,8 +82,6 @@ public class Login extends HttpServlet {
             status = result.first();    // If there is a record, user will be validated (query is for matching both the username & password).
         } catch (SQLException e) {
             log.error("Error while validating user. " + e);
-            connection.close();
-            DBCon.connectionMap.remove(user.getUserName());
             throw new ServletException(e);
         } finally {
             if (statement != null) {
@@ -92,6 +89,9 @@ public class Login extends HttpServlet {
             }
             if (result != null) {
                 result.close();
+            }
+            if(connection!=null){
+                connection.close();
             }
         }
         return status;

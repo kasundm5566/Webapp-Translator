@@ -3,8 +3,6 @@ package hsenid.webapp;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,19 +23,11 @@ public class Logout extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         if (session != null) {
-            String user=req.getSession().getAttribute("user").toString();
-            Connection connection=DBCon.connectionMap.get(user);
-            try {
-                connection.close();
-                DBCon.connectionMap.remove(user);
-                log.info("Connection of user \'"+user+"\' closed.");
-            } catch (SQLException e) {
-                log.error("Error closing connection of user \'" + user + "\'.");
-            }
+            String user = req.getSession().getAttribute("user").toString();
             session.invalidate();   // Invalidate the session.
             RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
             rd.forward(req, resp);
-            log.info("Session invalidated.");
+            log.info("session of user \'" + user + "\' invalidated.");
         }
     }
 }

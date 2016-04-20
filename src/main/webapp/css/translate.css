@@ -1,11 +1,6 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
 /* 
     Created on : Mar 23, 2016, 9:30:12 AM
-    Author     : hsenid
+    Author     : Kasun Dinesh
 */
 input:not([type=checkbox]){
     /*border: 2px solid #dadada;*/
@@ -44,7 +39,7 @@ body{
 }
 #translate{
     padding: 25px;
-    width: 420px;
+    width: 630px;
     background-color: #F7F7F7;
     margin: 0 auto 10px;
     border-radius: 2px;
@@ -59,7 +54,7 @@ option:checked, option:hover {
     height: 60px;
     background-color: #111;
     opacity: 0.5;
-    font-family: "Lucida Console", Monaco, monospace;                
+    font-family: "Lucida Console", Monaco, monospace;
 }
 div#sep{
     height: 25px;
@@ -68,7 +63,7 @@ div#sep2{
     margin-top: 0.8em;
 }
 div#sep3{
-    height: 5px;
+    height: 10px;
 }
 .header-text{
     text-align: center;
