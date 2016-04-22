@@ -51,7 +51,7 @@ public class Translator extends HttpServlet {
         req.getSession().setAttribute("fromlang", fromLang);
         req.getSession().setAttribute("tolang", toLang);
         req.getSession().setAttribute("fromtext", fromText);
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/translate.jsp");
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/main.jsp");
         rd.forward(req, resp);
     }
 

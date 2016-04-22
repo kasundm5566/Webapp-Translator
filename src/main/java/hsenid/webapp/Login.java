@@ -43,7 +43,7 @@ public class Login extends HttpServlet {
                 httpSession.setAttribute("username", user.getUserName());   // Create a new session.
                 Vector<String> list = translator.loadLanguages();   // Languages will be loaded to a vector.
                 httpSession.setAttribute("langs", list);
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/translate.jsp");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/main.jsp");
                 rd.forward(req, resp);  // Forward to a new page with data such as language list, user details.
                 log.info("New session initialized.");
             } else {
@@ -76,7 +76,7 @@ public class Login extends HttpServlet {
         ResultSet result = null;
         try {
             connection = DBCon.getComboDataSource().getConnection();
-            String query = "SELECT Name FROM user_cred WHERE Name=BINARY\"" + user.getUserName() + "\" && pass=md5(\"" + user.getPassword() + "\");";
+            String query = "SELECT UserName FROM user_cred WHERE UserName=BINARY\"" + user.getUserName() + "\" && pass=md5(\"" + user.getPassword() + "\");";
             PreparedStatement statement1 = connection.prepareStatement(query);
             result = statement1.executeQuery(); // Execute the query to validate the user.
             status = result.first();    // If there is a record, user will be validated (query is for matching both the username & password).

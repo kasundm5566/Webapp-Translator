@@ -1,88 +1,124 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page errorPage="error.jsp" %>
-<html>
-    <head>
-        <title>Login Page</title>
-        <link rel='shortcut icon' type='image/x-icon' href='images/bi.png' />
-        <link rel='stylesheet' href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
-        <link rel="stylesheet" href="css/login.css">    
-        <script type="text/javascript" src="js/validate.js"></script>
-    </head>
+<h1 id="title">Enter details to add a user</h1>
+<div class="progress">
+    <div class="progress-bar" role="progressbar" aria-valuenow="70"
+         aria-valuemin="0" aria-valuemax="100" style="width:100%">
+        <span class="sr-only">70% Complete</span>
+    </div>
+</div>
+<form id="register" name="Register" method="post" action="register" onsubmit="validateForm();">
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                        User Details</a>
+                </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse in">
+                <label id="fname_error"
+                       style="color: red; font-weight: lighter; font-size: smaller;"></label>
 
-    <body>
-        <div id="header">
-            <p class="header-text">Welcome to Translator</p>
+                <div class="input-group">
+                    <span class="input-group-addon">First name</span>
+                    <input type="text" id="fname" class="form-control" name="fname"
+                           placeholder="Enter first name" required="true"/>
+                </div>
+
+                <label id="lname_error"
+                       style="color: red; font-weight: lighter; font-size: smaller;"></label>
+
+                <div class="input-group">
+                    <span class="input-group-addon">Last name</span>
+                    <input type="text" id="lname" class="form-control inp" name="lname"
+                           placeholder="Enter your last ame"/>
+                </div>
+                <div><label></label></div>
+                <div style="height: 40px;" class="input-group">
+                    <span class="input-group-addon">Country&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <select id="countrySelect" class="form-control">
+                        <option selected>Sri Lanka</option>
+                        <option>Australia</option>
+                        <option>China</option>
+                        <option>Japan</option>
+                        <option>USA</option>
+                    </select>
+                </div>
+                <div><label></label></div>
+                <div class="input-group">
+                    <span class="input-group-addon">DOB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <input type="text" class="form-control" id="date" name="date" placeholder="YYYY-MM-DD" data-fv/>
+                </div>
+            </div>
         </div>
-        <div id="sep">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                        Account Details</a>
+                </h4>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse">
+
+                <label id="uname_error"
+                       style="color: red; font-weight: lighter; font-size: smaller;"></label>
+
+                <div class="input-group">
+                    <span class="input-group-addon">User name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <input type="text" id="username" class="form-control" name="username"
+                           placeholder="Enter user name" required="true"/>
+                </div>
+
+                <label id="pass_error"
+                       style="color: red; font-weight: lighter; font-size: smaller;"></label>
+
+                <div class="input-group">
+                    <span class="input-group-addon">Password&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <input type="password" id="pass" class="form-control" name="pass"
+                           placeholder="Enter password" required="true"/>
+                </div>
+
+                <label id="repass_error"
+                       style="color: red; font-weight: lighter; font-size: smaller;"></label>
+
+                <div class="input-group">
+                    <span class="input-group-addon">Retype password</span>
+                    <input type="password" id="repass" class="form-control" name="repass"
+                           placeholder="Retype your password" required="true"/>
+                </div>
+            </div>
         </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                        Contact Details</a>
+                </h4>
+            </div>
+            <div id="collapse3" class="panel-collapse collapse">
 
-        <div id="register">
-            <form name="Register" method="post" action="register">
-                <h1 id="title">Enter details to Register</h1>
+                <label id="email_error"
+                       style="color: red; font-weight: lighter; font-size: smaller;"></label>
+                <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon">Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <input type="text" id="email" class="form-control" name="email"
+                           placeholder="Enter your email" required="true" pattern="^[a-zA-Z ]+$"/>
+                </div>
+                </div>
+                <label id="tel_error"
+                       style="color: red; font-weight: lighter; font-size: smaller;"></label>
 
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                         aria-valuemin="0" aria-valuemax="100" style="width:100%">
-                        <span class="sr-only">70% Complete</span>
-                    </div>
+                <div class="input-group">
+                    <span class="input-group-addon">Contact no</span>
+                    <input type="tel" id="tel" class="form-control" name="tel"
+                           placeholder="Enter your contact no" required="true"/>
                 </div>
-
-                <div>
-                    <label>Name:</label>
-                    <label id="name_error" style="color: red; font-weight: lighter; font-size: smaller;"></label>
-                </div>
-                <div>
-                    <input type="text" id="name" class="form-control" name="name" placeholder="Enter your name" required="true" onblur="validateName(this.value);"/>
-                </div>
-
-                <div>
-                    <label>User name:</label>
-                    <label id="uname_error" style="color: red; font-weight: lighter; font-size: smaller;"></label>
-                </div>
-                <div>
-                    <input type="text" id="username" class="form-control" name="username" placeholder="Enter user name" required="true" onblur="validateUserName(this.value);"/>
-                </div>
-
-                <div>
-                    <label>Email:</label>
-                    <label id="email_error" style="color: red; font-weight: lighter; font-size: smaller;"></label>
-                </div>
-                <div>
-                    <input type="email" id="email" class="form-control" name="email" placeholder="Enter your email" required="true" onblur="validateEmail(this.value);"/>
-                </div>
-
-                <div>
-                    <label>Telephone:</label>
-                    <label id="tel_error" style="color: red; font-weight: lighter; font-size: smaller;"></label>
-                </div>
-                <div>
-                    <input type="tel" id="tel" class="form-control" name="tel" placeholder="Enter your contact no" required="true" onblur="validateTel(this.value);"/>
-                </div>
-
-                <div>
-                    <label>Enter password:</label>
-                    <label id="pass_error" style="color: red; font-weight: lighter; font-size: smaller;"></label>
-                </div>
-                <div>
-                    <input type="password" id="pass" class="form-control" name="pass" placeholder="Enter password" required="true"/>
-                </div>
-
-                <div>
-                    <label>Retype password:</label>
-                    <label id="repass_error" style="color: red; font-weight: lighter; font-size: smaller;"></label>
-                </div>
-                <div>
-                    <input type="password" id="repass" class="form-control" name="repass" placeholder="Retype your password" required="true"/>
-                </div>
-
-                <div>    
-                    <button type="submit" class="btn btn-default" id="buttons">
-                        <span class="glyphicon glyphicon-user"></span>&nbsp;Register
-                    </button>
-                </div>
-
-            </form>           
+            </div>
         </div>
-
-    </body>
-</html>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-default" id="submit">
+            <span class="glyphicon glyphicon-user"></span>&nbsp;Register
+        </button>
+    </div>
+</form>

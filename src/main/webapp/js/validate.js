@@ -1,6 +1,6 @@
 var background_color = "#fde99c";
 
-function validateFirstName() {
+/*function validateFirstName() {
     var name=document.getElementById("fname");
     if (name == null || name == "") {
         document.getElementById("fname_error").hidden = false;
@@ -88,7 +88,6 @@ function validateEmail() {
     if (pattern.test(email)) {
         document.getElementById("email").style.backgroundColor = "white";
         document.getElementById("email_error").hidden = true;
-        return true;
     }
     else {
         document.getElementById("email_error").hidden = false;
@@ -98,8 +97,14 @@ function validateEmail() {
         document.getElementById("email").style.backgroundColor = background_color;
         return false;
     }
-}
+}*/
 
 function validateForm() {
-    validateEmail();
+    //$(document).ready(function() {
+        alert("wqe");
+        $('#register').bootstrapValidator();
+    //});
+    //$("#submit").on("click", function() {
+        $("#register").valid();
+    //});
 }

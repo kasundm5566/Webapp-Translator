@@ -8,12 +8,7 @@
     <link rel='stylesheet' href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
     <link rel="stylesheet" href="css/login.css">
 <body>
-<div id="header">
-    <p class="header-text">Welcome to Translator</p>
-</div>
-<div id="sep">
-</div>
-
+<%@include file="header.jsp" %>
 <div id="login">
     <form name="Login" method="post" action="login">
         <h1 id="title">Enter details to login</h1>
@@ -50,6 +45,5 @@
         }
     %>
 </div>
-
 </body>
 </html>
