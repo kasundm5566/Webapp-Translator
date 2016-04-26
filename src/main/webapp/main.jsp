@@ -22,10 +22,13 @@
 
 <body>
 <%@include file="header.jsp" %>
-
+<div id="sep">
+</div>
 <%
     session.setAttribute("user", session.getAttribute("username"));
-
+    out.println("<div id=\"session\" class=\"alert alert-info\" role=\"alert\">");
+    out.println("Logged in as <strong><u>" + session.getAttribute("username") + "</u></strong>");
+    out.println("<br><form action=\"logout\" method=\"post\"><table><tr><button type=\"submit\" class=\"btn btn-info btn-xs\" id=\"logout\"><span class=\"glyphicon glyphicon-off\"></span>&nbsp;&nbsp;&nbsp;Logout</button></tr></table></form></div>");
 %>
 
 <div id="sep">
@@ -33,9 +36,9 @@
 
 <div id="translate">
     <ul class="nav nav-pills">
-        <li class="active"><a data-toggle="tab" href="#home">Translate Text</a></li>
+        <li class="active"><a data-toggle="tab" href="#home"><span class="glyphicon glyphicon-list-alt"></span> Translate Text</a></li>
         <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown">User Management
+            <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> User Management
                 <span class="caret"></span></a>
             <ul class="dropdown-menu">
                 <li><a data-toggle="tab" href="#addUser">Add user</a></li>

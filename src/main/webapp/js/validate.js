@@ -151,35 +151,37 @@ function validateDOB() {
 
 // Check user name availability
 function validateUserName() {
+    $("#uname_error").css("color", "red");
     var userName = $("#username").val();
+    var unameRegex = /^[a-zA-z][a-zA-Z0-9_]+$/;
     if ($("#username").val().length == 0) {
         $("#uname_error").show();
         $("#username").css("background-color", background_color);
-        $("#uname_error").text("Please enter a user name");
+        $("#uname_error").text("User name should not empty.");
         return false;
     } else {
         $.ajax({
-            type: 'post',
-            url: 'data.php5',
-            data: {
-                user_name:userName
-            },
-            success: function (response) {
-                $( '#name_status' ).html(response);
-                if(response=="OK")
-                {
-                    alert("OK");
-                }
-                else
-                {
-                    alert("NO");
+            type: "POST",
+            url: "checkusername",
+            data: "username=" + userName,
+            success: function (result) {
+                if ($.trim(result) === "NO") {
+                    $("#uname_error").show();
+                    $("#username").css("background-color", background_color);
+                    $("#uname_error").text("That user name already used.");
+                    return false;
+                } else {
+                    $("#uname_error").css("color", "#009900");
+                    $("#uname_error").show();
+                    $("#username").css("background-color", "white");
+                    $("#uname_error").text("User name is valid.");
                 }
             }
         });
     }
 }
 
-function hideAllLabels() {
+function hideErrorLabels() {
     $("#fname_error").hide();
     $("#lname_error").hide();
     $("#dob_error").hide();
@@ -190,7 +192,7 @@ function hideAllLabels() {
     $("#tel_error").hide();
 }
 $(document).ready(function () {
-    hideAllLabels();
+    hideErrorLabels();
 
     $("#fname").keyup(function () {
         validateFirstName();
@@ -238,15 +240,32 @@ $(document).ready(function () {
         validateTelNo();
     });
 
+    $("#username").keyup(function () {
+        validateUserName();
+    });
     $("#username").focusout(function () {
         validateUserName();
     });
 
     $("#register").submit(function () {
-        if (validateFirstName() == false || validateLastName() == false || validateDOB() == false || validatePassword() == false || validateRetypedPass() == false || validateEmail() == false || validateTelNo() == false) {
+        if (validateFirstName() == false || validateLastName() == false || validateDOB() == false || validateUserName() == false || validatePassword() == false || validateRetypedPass() == false || validateEmail() == false || validateTelNo() == false) {
             $('#popup').modal('show');
             return false;
+        }else{
+            $('#addUserPopup').modal('show');
+            return false;
         }
-        return true;
+    });
+
+    $("#addOk").click(function(){
+        $.ajax({
+            type: "POST",
+            url: "register",
+            data: $('#register').serialize(),
+            success: function (result) {
+                alert(result);
+                $('#addUserPopup').modal('hide');
+            }
+        });
     });
 });

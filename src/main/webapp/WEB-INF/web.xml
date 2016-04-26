@@ -26,7 +26,25 @@
         <servlet-name>Translate</servlet-name>
         <url-pattern>/translator</url-pattern>
     </servlet-mapping>
-    
+
+    <servlet>
+        <servlet-name>CheckUserName</servlet-name>
+        <servlet-class>hsenid.webapp.CheckUserName</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckUserName</servlet-name>
+        <url-pattern>/checkusername</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Register</servlet-name>
+        <servlet-class>hsenid.webapp.Register</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Register</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>Logout</servlet-name>
         <servlet-class>hsenid.webapp.Logout</servlet-class>

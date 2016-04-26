@@ -8,7 +8,11 @@ var options = {
     weekStart: 1,
     orientation: "top left",
     daysOfWeekHighlighted: "0,6",
-    todayBtn: true
+    todayBtn: true,
+    endDate: "now",
+    startView: 2,
+    orientation: "top auto",
+    defaultViewDate: { year: 1990}
 };
 date_input.datepicker(options);
 

@@ -39,7 +39,7 @@ body{
 }
 #translate{
     padding: 25px;
-    width: 630px;
+    width: 550px;
     background-color: #F7F7F7;
     margin: 0px auto 10px;
     margin-top: 30px;
@@ -133,4 +133,16 @@ table{
     height: 25px;
     width: 50px;
     font-size: 12px;
+}
+
+#session{
+    float: right;
+    opacity: 0.7;
+}
+#session:hover{
+    opacity: 1.0;
+}
+#logout{
+    height: 25px;
+    width: 105px;
 }

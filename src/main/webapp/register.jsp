@@ -2,7 +2,7 @@
 
 <div class="progress">
     <div class="progress-bar" role="progressbar" aria-valuenow="70"
-         aria-valuemin="0" aria-valuemax="100" style="width:100%">
+         aria-valuemin="0" aria-valuemax="100" style="width:100%; height:5px;">
         <span class="sr-only">70% Complete</span>
     </div>
 </div>
@@ -12,7 +12,7 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                        User Details</a>
+                        <span class="glyphicon glyphicon-user"></span> User Details</a>
                 </h4>
             </div>
             <div id="collapse1" class="panel-collapse collapse in well" style="margin-top:5px; ">
@@ -21,7 +21,7 @@
                        style="color: red; font-weight: lighter; font-size: smaller;"></label>
 
                 <div class="input-group">
-                    <span class="input-group-addon">First name</span>
+                    <span class="input-group-addon">First name <font color="#FF0000">*</font></span>
                     <input type="text" id="fname" class="form-control" name="fname"
                            placeholder="Enter your first name"/>
                 </div>
@@ -35,9 +35,9 @@
                                placeholder="Enter your last name"/></div>
                 </div>
                 <div style="margin-top:5px;">
-                    <div style="height: 40px;" class="input-group">
-                        <span class="input-group-addon">Country&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        <select id="countrySelect" class="form-control">
+                    <div style="height: 35px;" class="input-group">
+                        <span class="input-group-addon">Country <font color="#FF0000">*</font>&nbsp;&nbsp;</span>
+                        <select id="countrySelect" class="form-control" name="country">
                             <option selected>Sri Lanka</option>
                             <option>Australia</option>
                             <option>China</option>
@@ -48,7 +48,7 @@
                 <div style="margin-top:5px;">
                     <div><label id="dob_error"></label></div>
                     <div class="input-group">
-                        <span class="input-group-addon">DOB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <span class="input-group-addon">DOB <font color="#FF0000">*</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         <input type="text" class="form-control" id="date" name="date" placeholder="Enter your date of birth" readonly/>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                        Account Details</a>
+                        <span class="glyphicon glyphicon-lock"></span> Account Details</a>
                 </h4>
             </div>
             <div id="collapse2" class="panel-collapse collapse well" style="margin-top:5px;">
@@ -67,7 +67,7 @@
                        style="color: red; font-weight: lighter; font-size: smaller;"></label>
 
                 <div class="input-group">
-                    <span class="input-group-addon">User name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <span class="input-group-addon">User name <font color="#FF0000">*</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                     <input type="text" id="username" class="form-control" name="username"
                            placeholder="Enter user name"/>
                 </div>
@@ -76,7 +76,7 @@
                            style="color: red; font-weight: lighter; font-size: smaller;"></label>
 
                     <div class="input-group">
-                        <span class="input-group-addon">Password&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <span class="input-group-addon">Password <font color="#FF0000">*</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         <input type="password" id="pass" class="form-control" name="pass"
                                placeholder="Enter password"/>
                     </div></div>
@@ -85,7 +85,7 @@
                            style="color: red; font-weight: lighter; font-size: smaller;"></label>
 
                     <div class="input-group">
-                        <span class="input-group-addon">Retype password</span>
+                        <span class="input-group-addon">Retype password <font color="#FF0000">*</font></span>
                         <input type="password" id="repass" class="form-control" name="repass"
                                placeholder="Retype your password"/>
                     </div></div>
@@ -95,7 +95,7 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                        Contact Details</a>
+                        <span class="glyphicon glyphicon-envelope"></span> Contact Details</a>
                 </h4>
             </div>
             <div id="collapse3" class="panel-collapse collapse well" style="margin-top:5px;">
@@ -105,7 +105,7 @@
 
                 <div class="form-group">
                     <div class="input-group">
-                        <span class="input-group-addon">Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <span class="input-group-addon">Email <font color="#FF0000">*</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         <input type="text" id="email" class="form-control" name="email"
                                placeholder="Enter your email. eg: example@host.com"/>
                     </div>
@@ -115,7 +115,7 @@
                        style="color: red; font-weight: lighter; font-size: smaller;"></label>
 
                 <div class="input-group">
-                    <span class="input-group-addon">Contact no</span>
+                    <span class="input-group-addon">Contact no <font color="#FF0000">*</font></span>
                     <input type="tel" id="tel" class="form-control" name="tel"
                            placeholder="Enter your contact no. eg: 94771234567"/>
                 </div>
@@ -144,6 +144,24 @@
                 </p>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="addUserPopup" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><img src="images/OK-128.png">&nbsp;&nbsp;Add New User</h4>
+            </div>
+            <div class="modal-body">
+                <p id="dat">Please verify the details and click 'Add user' to add the user.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" id="addOk">Add user</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
