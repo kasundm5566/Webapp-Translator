@@ -46,6 +46,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>Load</servlet-name>
+        <servlet-class>hsenid.webapp.Load</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Load</servlet-name>
+        <url-pattern>/load</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>Logout</servlet-name>
         <servlet-class>hsenid.webapp.Logout</servlet-class>
     </servlet>

@@ -47,6 +47,16 @@ public class User {
         this.contactNo = contactNo;
     }
 
+    public User(String firstName, String lastName, String country, String dob, String userName, String email, long contactNo) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.country = country;
+        this.dob = dob;
+        this.userName = userName;
+        this.email = email;
+        this.contactNo = contactNo;
+    }
+
     /**
      * @return the first name of the user
      */

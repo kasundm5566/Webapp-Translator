@@ -18,6 +18,9 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
 </head>
 
 <body>
@@ -36,9 +39,11 @@
 
 <div id="translate">
     <ul class="nav nav-pills">
-        <li class="active"><a data-toggle="tab" href="#home"><span class="glyphicon glyphicon-list-alt"></span> Translate Text</a></li>
+        <li class="active"><a data-toggle="tab" href="#home"><span class="glyphicon glyphicon-list-alt"></span>
+            Translate Text</a></li>
         <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> User Management
+            <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> User
+                Management
                 <span class="caret"></span></a>
             <ul class="dropdown-menu">
                 <li><a data-toggle="tab" href="#addUser">Add user</a></li>
@@ -61,6 +66,20 @@
 
 <script src="js/datepicker.js"></script>
 <script src="js/validate.js"></script>
-
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $('#empTable').dataTable({
+            "ajax": "empdata.json",
+            "columns": [
+                {"firstname": "firstname"},
+                {"data": "designation"},
+                {"data": "office"},
+                {"data": "extension"},
+                {"data": "joining_date"},
+                {"data": "salary"}
+            ]
+        });
+    });
+</script>
 </body>
 </html>

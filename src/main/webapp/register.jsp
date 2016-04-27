@@ -129,13 +129,11 @@
     </div>
 </form>
 
+<!-- Validation error popup -->
 <div id="popup" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <!--
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                -->
                 <h4 class="modal-title"><img src="images/error.png">&nbsp;&nbsp;Validation Errors...</h4>
             </div>
             <div class="modal-body">
@@ -150,15 +148,23 @@
     </div>
 </div>
 
+<!-- Popup for user adding confirmation -->
 <div id="addUserPopup" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><img src="images/OK-128.png">&nbsp;&nbsp;Add New User</h4>
+                <h4 class="modal-title"><img src="images/alert-triangle-yellow-128.png">&nbsp;&nbsp;Add New User</h4>
             </div>
             <div class="modal-body">
-                <p id="dat">Please verify the details and click 'Add user' to add the user.
+                <p id="dat">Please verify the details and click 'Add user' to add the user to the database.
                 </p>
+                <div><label id="lblFname"></label></div>
+                <div><label id="lblLname"></label></div>
+                <div><label id="lblCountry"></label></div>
+                <div><label id="lblDob"></label></div>
+                <div><label id="lblUsrname"></label></div>
+                <div><label id="lblEmail"></label></div>
+                <div><label id="lblTel"></label></div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-success" id="addOk">Add user</button>
@@ -166,4 +172,42 @@
             </div>
         </div>
     </div>
+</div>
+
+<!-- Add user success message popup -->
+<div id="addUserSuccess" class="modal fade">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title"><img src="images/OK.png">&nbsp;&nbsp;Process Succeeded</h4>
+        </div>
+        <div class="modal-body">
+            <p>New user record added successfully...
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Add user failed message popup -->
+<div id="addUserFail" class="modal fade">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title"><img src="images/Error-128.png">&nbsp;&nbsp;Error Occurred</h4>
+        </div>
+        <div class="modal-body">
+            <p>Error while trying to add a new user record.<br>
+                <b>Please verify the data entered and try again.</b><br>
+                Sorry for the inconvenience.
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+        </div>
+    </div>
+</div>
 </div>

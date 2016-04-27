@@ -252,6 +252,13 @@ $(document).ready(function () {
             $('#popup').modal('show');
             return false;
         }else{
+            $('#lblFname').text("First name: "+$('#fname').val());
+            $('#lblLname').text("Last name: "+$('#lname').val());
+            $('#lblCountry').text("Country: "+$('#countrySelect').val());
+            $('#lblDob').text("Date of birth: "+$('#date').val());
+            $('#lblUsrname').text("User name: "+$('#username').val());
+            $('#lblEmail').text("Email: "+$('#email').val());
+            $('#lblTel').text("Contact no: "+$('#tel').val());
             $('#addUserPopup').modal('show');
             return false;
         }
@@ -263,8 +270,14 @@ $(document).ready(function () {
             url: "register",
             data: $('#register').serialize(),
             success: function (result) {
-                alert(result);
-                $('#addUserPopup').modal('hide');
+                if($.trim(result)==1){
+                    $('#addUserPopup').modal('hide');
+                    $('#addUserSuccess').modal('show');
+                    $('#register').trigger('reset');
+                }else{
+                    $('#addUserPopup').modal('hide');
+                    $('#addUserFail').modal('show');
+                }
             }
         });
     });
