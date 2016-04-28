@@ -35,7 +35,7 @@
     </div>
 
     <div>
-      <label class="checkbox-inline"><input type="checkbox" name="autodetect" checked value="1"/>Auto
+      <label class="checkbox-inline"><input type="checkbox" id="autodetect" name="autodetect" checked value="1"/>Auto
         detect
         language</label>
       <button type="button" id="btnswap" class="btn btn-default btn-xs" onclick="swap();">

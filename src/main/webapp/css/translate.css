@@ -39,7 +39,7 @@ body{
 }
 #translate{
     padding: 25px;
-    width: 550px;
+    width: 1000px;
     background-color: #F7F7F7;
     margin: 0px auto 10px;
     margin-top: 30px;
@@ -80,7 +80,7 @@ div#sep3{
     font-size: 20px;
     width: 100%;
 }
-input[type=text]{
+/*input[type=text]{
     height: 44px;
     font-size: 16px;
     width: 100%;
@@ -91,7 +91,7 @@ input[type=text]{
     padding: 0 8px;
     box-sizing: border-box;
     height: 35px;
-}
+}*/
 select{
     border: 2px solid #dadada;
     /*height: 35px;

@@ -141,7 +141,7 @@ function validateDOB() {
     if ($("#date").val().length == 0) {
         $("#dob_error").show();
         $("#date").css("background-color", background_color);
-        $("#dob_error").text("Please re-type the password.");
+        $("#dob_error").text("Date of birth is mandatory");
         return false;
     } else {
         $("#date").css("background-color", "white");

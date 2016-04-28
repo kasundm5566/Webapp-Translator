@@ -1,15 +1,50 @@
-<h3>Menu 2</h3>
-<p>Menu</p>
-<input type="button" id="load" value="Test">
-<table id="empTable" class="display" width="100%" cellspacing="0">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Designation</th>
-        <th>Office</th>
-        <th>Extension</th>
-        <th>Joining Date</th>
-        <th>Salary</th>
-    </tr>
-    </thead>
-</table>
+<table id="table" data-click-to-select="true"></table>
+
+<!-- Popup to get the confirmation to delete the selected user. -->
+<div id="deleteUserPopup" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><img src="images/alert-triangle-yellow-128.png">&nbsp;&nbsp;Delete User</h4>
+            </div>
+            <div class="modal-body">
+                <p id="dat">Are you sure you want to delete the following user?
+                </p>
+
+                <div><label id="lbFname"></label></div>
+                <div><label id="lbLname"></label></div>
+                <div><label id="lbCountry"></label></div>
+                <div><label id="lbDob"></label></div>
+                <div><label id="lbUsrname"></label></div>
+                <div><label id="lbEmail"></label></div>
+                <div><label id="lbTel"></label></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" id="deleteOk">Delete user</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Popup to update the user details. -->
+<div id="updateUserPopup" class="modal fade" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><img src="images/alert-triangle-yellow-128.png">&nbsp;&nbsp;Update User</h4>
+            </div>
+            <div class="modal-body">
+                <p>Enter the data you need to update and click 'Update' button.
+                </p>
+            </div>
+            <div style="width: 80%;">
+            <%@include file="update.jsp" %>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" id="updateOk">Update user</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

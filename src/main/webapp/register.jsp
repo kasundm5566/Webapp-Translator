@@ -46,7 +46,7 @@
                         </select>
                     </div></div>
                 <div style="margin-top:5px;">
-                    <div><label id="dob_error"></label></div>
+                    <div><label id="dob_error" style="color: red; font-weight: lighter; font-size: smaller;"></label></div>
                     <div class="input-group">
                         <span class="input-group-addon">DOB <font color="#FF0000">*</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         <input type="text" class="form-control" id="date" name="date" placeholder="Enter your date of birth" readonly/>
