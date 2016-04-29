@@ -55,6 +55,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>Search</servlet-name>
+        <servlet-class>hsenid.webapp.Search</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Search</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
         <servlet-name>Logout</servlet-name>
         <servlet-class>hsenid.webapp.Logout</servlet-class>
     </servlet>

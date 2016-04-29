@@ -30,7 +30,7 @@
             </div>
             <div class="input-group" style="margin-top: 10px;">
                 <span class="input-group-addon">Password&nbsp;</span>
-                <input type="password" class="form-control" name="pass" placeholder="Enter password" required="true"/>
+                <input type="password" class="form-control" name="loginpass" placeholder="Enter password" required="true"/>
             </div>
             <div style="margin-top: 10px;">
                 <button type="submit" class="btn btn-default" id="buttons">

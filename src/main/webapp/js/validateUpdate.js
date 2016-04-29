@@ -8,7 +8,7 @@ function validateFirstName2() {
         $("#ufname_error").text("First name should not be empty.");
         return false;
     } else {
-        var inputVal = $("#fname").val();
+        var inputVal = $("#ufname").val();
         var numericReg = /^[a-zA-Z]+$/;
         if (!numericReg.test(inputVal)) {
             $("#ufname_error").show();

@@ -34,7 +34,7 @@ public class Login extends HttpServlet {
      * them.
      */
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        user = new User(req.getParameter("uname"), req.getParameter("pass"));
+        user = new User(req.getParameter("uname"), req.getParameter("loginpass"));
         try {
             boolean status = validateByDb(user);
             if (status) {   // User validated.

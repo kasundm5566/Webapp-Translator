@@ -1,4 +1,13 @@
-<table id="table" data-click-to-select="true"></table>
+<div class="input-group pull-right" style="margin-top:10px; margin-left:5px;">
+    <div class="input-group">
+        <input type="text" id="txtSearch" data-provide="typeahead" class="search form-control" placeholder="Search by user name">
+        <div class="input-group-btn">
+            <button class="btn btn-default" id="btnSearch" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+        </div>
+    </div>
+</div>
+
+<table id="table"></table>
 
 <!-- Popup to get the confirmation to delete the selected user. -->
 <div id="deleteUserPopup" class="modal fade">
