@@ -42,34 +42,6 @@ function validateLastName2() {
     }
 }
 
-// Validate the password
-function validatePassword2() {
-    if ($("#upass").val().length > 7 && $("#pass").val().length < 17) {
-        var inputVal = $("#upass").val();
-        var oneDigit = /^(?=.*\d).+$/;
-        var oneSpecChar = /^(?=.*[_\W]).+$/;
-        if (!oneDigit.test(inputVal)) {
-            $("#upass_error").show();
-            $("#upass").css("background-color", background_color);
-            $("#upass_error").text("Password should contain at least one digit.");
-            return false;
-        } else if (!oneSpecChar.test(inputVal)) {
-            $("#upass_error").show();
-            $("#upass").css("background-color", background_color);
-            $("#upass_error").text("Password should contain at least one special character.");
-            return false;
-        } else {
-            $("#upass").css("background-color", "white");
-            $("#upass_error").hide();
-        }
-    } else {
-        $("#upass_error").text("Password length should be in between 8 to 16.");
-        $("#upass").css("background-color", background_color);
-        $("#upass_error").show();
-        return false;
-    }
-}
-
 //Validate the email address
 function validateEmail2() {
     if ($("#uemail").val().length == 0) {
@@ -78,16 +50,16 @@ function validateEmail2() {
         $("#uemail_error").text("Email should not be empty.");
         return false;
     } else {
-        var inputVal = $("#uemail").val();
+        var inputVal2 = $("#uemail").val();
         var emailReg = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
-        if (!emailReg.test(inputVal)) {
+        if (!emailReg.test(inputVal2)) {
             $("#uemail_error").show();
             $("#uemail").css("background-color", background_color);
             $("#uemail_error").text("Please enter a valid email.");
             return false;
         } else {
-            $("#email").css("background-color", "white");
-            $("#email_error").hide();
+            $("#uemail").css("background-color", "white");
+            $("#uemail_error").hide();
         }
     }
 }
@@ -114,28 +86,6 @@ function validateTelNo2() {
     }
 }
 
-// Validate the re-typed password
-function validateRetypedPass2() {
-    if ($("#urepass").val().length == 0) {
-        $("#urepass_error").show();
-        $("#urepass").css("background-color", background_color);
-        $("#urepass_error").text("Please re-type the password.");
-        return false;
-    } else {
-        var pass = $("#upass").val();
-        var repass = $("#urepass").val();
-        if (pass != repass) {
-            $("#urepass_error").show();
-            $("#urepass").css("background-color", background_color);
-            $("#urepass_error").text("Passwords do not match.");
-            return false;
-        } else {
-            $("#urepass").css("background-color", "white");
-            $("#urepass_error").hide();
-        }
-    }
-}
-
 // Validate the DOB
 function validateDOB2() {
     if ($("#udate").val().length == 0) {
@@ -150,7 +100,7 @@ function validateDOB2() {
 }
 
 // Check user name availability
-function validateUserName2() {
+/*function validateUserName2() {
     $("#uuname_error").css("color", "red");
     var userName = $("#uusername").val();
     var unameRegex = /^[a-zA-z][a-zA-Z0-9_]+$/;
@@ -179,7 +129,7 @@ function validateUserName2() {
             }
         });
     }
-}
+}*/
 
 function hideErrorLabels2() {
     $("#ufname_error").hide();
@@ -234,7 +184,7 @@ $(document).ready(function () {
     });
 
     $("#utel").keyup(function () {
-        validateTelNo();
+        validateTelNo2();
     });
     $("#utel").focusout(function () {
         validateTelNo2();

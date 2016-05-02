@@ -35,6 +35,7 @@ public class Load extends HttpServlet {
 
             while (resultSet.next()) {
                 JsonObject jsonObj = new JsonObject();
+                jsonObj.addProperty("id", resultSet.getString("ID"));
                 jsonObj.addProperty("firstname", resultSet.getString("FirstName"));
                 jsonObj.addProperty("lastname", resultSet.getString("LastName"));
                 jsonObj.addProperty("country", resultSet.getString("Country"));
