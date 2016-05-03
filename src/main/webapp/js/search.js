@@ -4,7 +4,7 @@ $(document).ready(function () {
     $('#txtSearch').keyup(function () {
         autoFillSearch();
     });
-    $('#txtSearch').change(function () {
+    $('#txtSearch').keydown(function () {
         autoFillSearch();
     });
 
@@ -175,13 +175,15 @@ function autoFillSearch() {
         // data: "searchUsername="+searchUsername+"&typeahead="+"1",
         data: {"searchName": searchName},
         success: function (result) {
-            var firstNames = new Array();
-            $.each(result, function (index, txtSearch) {
-                firstNames.push(txtSearch.firstname);
+            $('#txtSearch').typeahead({
+                name: 'txtSearch',
+                limit: 10,
+                minLength: 1,
+                source:result
             });
-            $('#txtSearch').typeahead({source: firstNames});
         }
     });
+
 }
 
 function search() {

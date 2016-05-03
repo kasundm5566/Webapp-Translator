@@ -39,13 +39,15 @@ public class Typeahead extends HttpServlet {
         JsonArray jsonArray = new JsonArray();
         try {
             connection = DBCon.getComboDataSource().getConnection();
-            String query = "SELECT FirstName FROM user_cred HAVING FirstName LIKE\'" + match + "%\';";
+            //String query = "SELECT FirstName FROM user_cred HAVING FirstName LIKE \'" + match + "%\';";
+            String query = "SELECT FirstName FROM user_cred;";
             statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                jsonObject = new JsonObject();
+                /*jsonObject = new JsonObject();
                 jsonObject.addProperty("firstname", resultSet.getString("FirstName"));
-                jsonArray.add(jsonObject);
+                jsonArray.add(jsonObject);*/
+                jsonArray.add(resultSet.getString("FirstName"));
             }
         } catch (SQLException e) {
             log.error("Error while loading typeahead. " + e);
