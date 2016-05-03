@@ -27,6 +27,7 @@
                 <div><label id="lbFname" style="text-align: left; display: block;"></label></div>
                 <div><label id="lbLname" style="text-align: left; display: block;"></label></div>
                 <div><label id="lbCountry" style="text-align: left; display: block;"></label></div>
+                <div><label id="lbCity" style="text-align: left; display: block;"></label></div>
                 <div><label id="lbDob" style="text-align: left; display: block;"></label></div>
                 <div><label id="lbUsrname" style="text-align: left; display: block;"></label></div>
                 <div><label id="lbEmail" style="text-align: left; display: block;"></label></div>
@@ -56,7 +57,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-success" id="updateOk">Update user</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                <button type="button" id="updateCancel" class="btn btn-primary" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>

@@ -191,8 +191,29 @@ function hideErrorLabels() {
     $("#email_error").hide();
     $("#tel_error").hide();
 }
+
+function loadCities(){
+    var country = $('#countrySelect').val();
+    $.ajax({
+        type: "POST",
+        url: "cityloader",
+        dataType: "json",
+        data: {"country": country},
+        success: function (result) {
+
+            var select = $("#citySelect"), options = '';
+            select.empty();
+            for (var i = 0; i < result.length; i++) {
+                options += "<option value='"+result[i].cityname+"'>"+ result[i].cityname +"</option>";
+            }
+            select.append(options);
+        }
+    });
+}
+
 $(document).ready(function () {
     hideErrorLabels();
+    loadCities();
 
     $("#fname").keyup(function () {
         validateFirstName();
@@ -251,34 +272,39 @@ $(document).ready(function () {
         if (validateFirstName() == false || validateLastName() == false || validateDOB() == false || validateUserName() == false || validatePassword() == false || validateRetypedPass() == false || validateEmail() == false || validateTelNo() == false) {
             $('#popup').modal('show');
             return false;
-        }else{
-            $('#lblFname').text("First name: "+$('#fname').val());
-            $('#lblLname').text("Last name: "+$('#lname').val());
-            $('#lblCountry').text("Country: "+$('#countrySelect').val());
-            $('#lblDob').text("Date of birth: "+$('#date').val());
-            $('#lblUsrname').text("User name: "+$('#username').val());
-            $('#lblEmail').text("Email: "+$('#email').val());
-            $('#lblTel').text("Contact no: "+$('#tel').val());
+        } else {
+            $('#lblFname').text("First name: " + $('#fname').val());
+            $('#lblLname').text("Last name: " + $('#lname').val());
+            $('#lblCountry').text("Country: " + $('#countrySelect').val());
+            $('#lblCity').text("City: " + $('#citySelect').val());
+            $('#lblDob').text("Date of birth: " + $('#date').val());
+            $('#lblUsrname').text("User name: " + $('#username').val());
+            $('#lblEmail').text("Email: " + $('#email').val());
+            $('#lblTel').text("Contact no: " + $('#tel').val());
             $('#addUserPopup').modal('show');
             return false;
         }
     });
 
-    $("#addOk").click(function(){
+    $("#addOk").click(function () {
         $.ajax({
             type: "POST",
             url: "register",
             data: $('#register').serialize(),
             success: function (result) {
-                if($.trim(result)==1){
+                if ($.trim(result) == 1) {
                     $('#addUserPopup').modal('hide');
                     $('#addUserSuccess').modal('show');
                     $('#register').trigger('reset');
-                }else{
+                } else {
                     $('#addUserPopup').modal('hide');
                     $('#addUserFail').modal('show');
                 }
             }
         });
+    });
+
+    $('#countrySelect').change(function () {
+        loadCities();
     });
 });

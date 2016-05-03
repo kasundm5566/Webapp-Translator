@@ -22,10 +22,12 @@ public class Register extends HttpServlet {
     private Connection connection;
     private PreparedStatement statement;
     private static final Logger log = LogManager.getLogger(Register.class);
+    private String city=null;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = new User(req.getParameter("fname"), req.getParameter("lname"), req.getParameter("country"), req.getParameter("date"), req.getParameter("username"), req.getParameter("pass"), req.getParameter("email"), Long.parseLong(req.getParameter("tel")));
+        city=req.getParameter("city");
+        User user = new User(req.getParameter("fname"), req.getParameter("lname"), req.getParameter("country"), req.getParameter("city"), req.getParameter("date"), req.getParameter("username"), req.getParameter("pass"), req.getParameter("email"), Long.parseLong(req.getParameter("tel")));
         int result=addUser(user);
         resp.setContentType("text/html");
         PrintWriter out = resp.getWriter();
@@ -36,9 +38,16 @@ public class Register extends HttpServlet {
         int exec=0;
         try {
             connection = DBCon.getComboDataSource().getConnection();
-            String query="INSERT INTO user_cred (UserName,Pass,FirstName,LastName,DOB,Country,Email,ContactNo) VALUES (\'"+user.getUserName()+"\', md5(\'"+user.getPassword()+"\'),\'"+user.getFirstName()+"\',\'"+user.getLastName()+"\',"+user.getDob().replaceAll("-","")+",\'"+user.getCountry()+"\',\'"+user.getEmail()+"\',"+user.getContactNo()+");";
-            statement=connection.prepareStatement(query);
-            exec=statement.executeUpdate();
+            String queryCityId="SELECT ID FROM city WHERE Name=\'" +city+"\';";
+            statement=connection.prepareStatement(queryCityId);
+            ResultSet resultSet=statement.executeQuery();
+            if(resultSet.next()){
+                String query="INSERT INTO user_cred (UserName,Pass,FirstName,LastName,DOB,Country,CityId,Email,ContactNo) VALUES (\'"+user.getUserName()+"\', md5(\'"+user.getPassword()+"\'),\'"+user.getFirstName()+"\',\'"+user.getLastName()+"\',"+user.getDob().replaceAll("-","")+",\'"+user.getCountry()+"\',\'"+Integer.parseInt(resultSet.getString("ID"))+"\',\'"+user.getEmail()+"\',\'"+user.getContactNo()+"\');";
+                statement=connection.prepareStatement(query);
+                exec=statement.executeUpdate();
+            }else{
+                log.error("Error with city data while adding a new user.");
+            }
         } catch (SQLException e) {
             log.error("Error while adding a new user. "+e);
         }finally {

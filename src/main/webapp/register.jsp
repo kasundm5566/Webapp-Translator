@@ -49,6 +49,14 @@
                             </div>
                         </div>
                         <div style="margin-top:5px;">
+                            <div style="height: 35px;" class="input-group">
+                                <span class="input-group-addon">City <font
+                                        color="#FF0000">*</font>&nbsp;&nbsp;</span>
+                                <select id="citySelect" class="form-control" name="city">
+                                </select>
+                            </div>
+                        </div>
+                        <div style="margin-top:5px;">
                             <div><label id="dob_error"
                                         style="color: red; font-weight: lighter; font-size: smaller; text-align: left; display: block;"></label></div>
                             <div class="input-group">
@@ -170,6 +178,7 @@
                 <div style="text-align: left; display: block;"><label id="lblFname"></label></div>
                 <div style="text-align: left; display: block;"><label id="lblLname"></label></div>
                 <div style="text-align: left; display: block;"><label id="lblCountry"></label></div>
+                <div style="text-align: left; display: block;"><label id="lblCity"></label></div>
                 <div style="text-align: left; display: block;"><label id="lblDob"></label></div>
                 <div style="text-align: left; display: block;"><label id="lblUsrname"></label></div>
                 <div style="text-align: left; display: block;"><label id="lblEmail"></label></div>

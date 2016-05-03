@@ -99,37 +99,27 @@ function validateDOB2() {
     }
 }
 
-// Check user name availability
-/*function validateUserName2() {
-    $("#uuname_error").css("color", "red");
-    var userName = $("#uusername").val();
-    var unameRegex = /^[a-zA-z][a-zA-Z0-9_]+$/;
-    if ($("#uusername").val().length == 0) {
-        $("#uuname_error").show();
-        $("#uusername").css("background-color", background_color);
-        $("#uuname_error").text("User name should not empty.");
-        return false;
-    } else {
-        $.ajax({
-            type: "POST",
-            url: "checkusername",
-            data: "username=" + userName,
-            success: function (result) {
-                if ($.trim(result) === "NO") {
-                    $("#uuname_error").show();
-                    $("#uusername").css("background-color", background_color);
-                    $("#uuname_error").text("That user name already used.");
-                    return false;
-                } else {
-                    $("#uuname_error").css("color", "#009900");
-                    $("#uuname_error").show();
-                    $("#uusername").css("background-color", "white");
-                    $("#uuname_error").text("User name is valid.");
-                }
+function loadCities2(){
+    var country = $('#ucountrySelect').val();
+    $.ajax({
+        type: "POST",
+        url: "cityloader",
+        dataType: "json",
+        data: {"country": country},
+        success: function (result) {
+            var select = $("#ucitySelect"), options = '';
+            select.empty();
+            for (var i = 0; i < result.length; i++) {
+                options += "<option value='"+result[i].cityname+"'>"+ result[i].cityname +"</option>";
             }
-        });
-    }
-}*/
+            select.append(options);
+        }
+    });
+}
+
+$('#ucountrySelect').change(function(){
+   loadCities2();
+});
 
 function hideErrorLabels2() {
     $("#ufname_error").hide();
@@ -162,20 +152,6 @@ $(document).ready(function () {
         validateDOB2();
     });
 
-    $("#pass").keyup(function () {
-        validatePassword();
-    });
-    $("#upass").focusout(function () {
-        validatePassword2();
-    });
-
-    $("#urepass").keyup(function () {
-        validateRetypedPass2();
-    });
-    $("#urepass").focusout(function () {
-        validateRetypedPass2();
-    });
-
     $("#uemail").keyup(function () {
         validateEmail2();
     });
@@ -189,49 +165,4 @@ $(document).ready(function () {
     $("#utel").focusout(function () {
         validateTelNo2();
     });
-
-    $("#uusername").keyup(function () {
-        validateUserName2();
-    });
-    $("#uusername").focusout(function () {
-        validateUserName2();
-    });
-
- /*   $("#uregister").submit(function () {
-        if (validateFirstName() == false || validateLastName() == false || validateDOB() == false || validateUserName() == false || validatePassword() == false || validateRetypedPass() == false || validateEmail() == false || validateTelNo() == false) {
-            $('#popup').modal('show');
-            return false;
-        }else{
-            $('#lblFname').text("First name: "+$('#fname').val());
-            $('#lblLname').text("Last name: "+$('#lname').val());
-            $('#lblCountry').text("Country: "+$('#countrySelect').val());
-            $('#lblDob').text("Date of birth: "+$('#date').val());
-            $('#lblUsrname').text("User name: "+$('#username').val());
-            $('#lblEmail').text("Email: "+$('#email').val());
-            $('#lblTel').text("Contact no: "+$('#tel').val());
-            $('#addUserPopup').modal('show');
-            return false;
-        }
-    });
-*/
-
-/*
-    $("#addOk").click(function(){
-        $.ajax({
-            type: "POST",
-            url: "register",
-            data: $('#register').serialize(),
-            success: function (result) {
-                if($.trim(result)==1){
-                    $('#addUserPopup').modal('hide');
-                    $('#addUserSuccess').modal('show');
-                    $('#register').trigger('reset');
-                }else{
-                    $('#addUserPopup').modal('hide');
-                    $('#addUserFail').modal('show');
-                }
-            }
-        });
-    });
-*/
 });

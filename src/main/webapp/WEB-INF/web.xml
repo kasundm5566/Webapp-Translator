@@ -64,6 +64,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>Typeahead</servlet-name>
+        <servlet-class>hsenid.webapp.Typeahead</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Typeahead</servlet-name>
+        <url-pattern>/typeahead</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>Delete</servlet-name>
         <servlet-class>hsenid.webapp.Delete</servlet-class>
     </servlet>
@@ -79,6 +88,15 @@
     <servlet-mapping>
         <servlet-name>Update</servlet-name>
         <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CityLoader</servlet-name>
+        <servlet-class>hsenid.webapp.CityLoader</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CityLoader</servlet-name>
+        <url-pattern>/cityloader</url-pattern>
     </servlet-mapping>
 
 

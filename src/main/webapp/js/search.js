@@ -46,6 +46,10 @@ function loadTableData() {
                     title: 'Country',
                     sortable: true
                 }, {
+                    field: 'city',
+                    title: 'City',
+                    sortable: true
+                }, {
                     field: 'dob',
                     title: 'DOB',
                     sortable: true
@@ -90,11 +94,13 @@ window.operateEvents = {
         $('#ufname').val(obj["firstname"]);
         $('#ulname').val(obj["lastname"]);
         $('#ucountrySelect').val(obj["country"]);
+        $('#ucitySelect').val(obj["city"]);
         $('#udate').val(obj["dob"]);
         $('#uusername').val(obj["username"]);
         $('#uemail').val(obj["email"]);
         $('#utel').val(obj["tel"]);
         $('#updateUserPopup').modal('show');
+        loadCities2();
 
         $('#updateOk').off('click');
         $('#updateOk').click(function () {
@@ -106,6 +112,7 @@ window.operateEvents = {
                     "ufname": $('#ufname').val(),
                     "ulname": $('#ulname').val(),
                     "ucountry": $('#ucountrySelect').val(),
+                    "ucity": $('#ucitySelect').val(),
                     "udate": $('#udate').val(),
                     "uemail": $('#uemail').val(),
                     "utel": $('#utel').val()
@@ -121,7 +128,6 @@ window.operateEvents = {
                     }
                 }
             });
-
         });
     },
     'click .delete': function (e, value, row, index) {
@@ -131,6 +137,7 @@ window.operateEvents = {
         $('#lbFname').text("First name: " + obj["firstname"]);
         $('#lbLname').text("Last name: " + obj["lastname"]);
         $('#lbCountry').text("Country: " + obj["country"]);
+        $('#lbCity').text("Country: " + obj["city"]);
         $('#lbDob').text("Date of birth: " + obj["dob"]);
         $('#lbUsrname').text("User name: " + obj["username"]);
         $('#lbEmail').text("Email: " + obj["email"]);
@@ -160,14 +167,13 @@ window.operateEvents = {
 
 function autoFillSearch() {
     var searchName = $('#txtSearch').val();
-
     $.ajax({
         type: "POST",
-        //dataType:"json",
-        url: "search",
+        dataType: "json",
+        url: "typeahead",
         // To send data we can use following format as well.
         // data: "searchUsername="+searchUsername+"&typeahead="+"1",
-        data: {"searchName": searchName, "process": "typeahead"},
+        data: {"searchName": searchName},
         success: function (result) {
             var firstNames = new Array();
             $.each(result, function (index, txtSearch) {
@@ -184,7 +190,7 @@ function search() {
         type: "POST",
         url: "search",
         dataType: "json",
-        data: {"searchName": searchName, "process": "search"},
+        data: {"searchName": searchName},
         success: function (result) {
             $('#table').bootstrapTable('load', result);
         }

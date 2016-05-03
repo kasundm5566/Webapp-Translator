@@ -21,6 +21,11 @@ import java.sql.SQLException;
  */
 public class Search extends HttpServlet {
 
+    Connection connection = null;
+    PreparedStatement statement;
+    ResultSet resultSet;
+    JsonArray jsonArray = null;
+    String query = null;
     private static final Logger log = LogManager.getLogger(Search.class);
 
     @Override
@@ -28,56 +33,17 @@ public class Search extends HttpServlet {
         resp.setContentType("text/html");
         PrintWriter out = resp.getWriter();
         String process = req.getParameter("process");
-        JsonArray jsonArray=null;
-        if (process.equals("typeahead")) {
-            jsonArray = searchTypeahead(req.getParameter("searchName"));
-            out.println(jsonArray);
-        } else if (process.equals("search")) {
-            jsonArray=search(req.getParameter("searchName"));
-            out.println(jsonArray);
-        }
-    }
-
-    public JsonArray searchTypeahead(String match) {
-        Connection connection = null;
-        PreparedStatement statement;
-        ResultSet resultSet;
-        JsonObject jsonObject;
-        JsonArray jsonArray = new JsonArray();
-        try {
-            connection = DBCon.getComboDataSource().getConnection();
-            String query = "SELECT FirstName FROM user_cred HAVING UserName LIKE\'" + match + "%\';";
-            statement = connection.prepareStatement(query);
-            resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                jsonObject = new JsonObject();
-                jsonObject.addProperty("firstname", resultSet.getString("FirstName"));
-                jsonArray.add(jsonObject);
-            }
-        } catch (SQLException e) {
-            log.error("Error while loading typeahead. " + e);
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                log.error("Error while closing connection created to load typeahead. " + e);
-            }
-        }
-        return jsonArray;
+        JsonArray jsonArray = search(req.getParameter("searchName"));
+        out.println(jsonArray);
     }
 
     public JsonArray search(String firstName) {
-        Connection connection = null;
-        PreparedStatement statement;
-        ResultSet resultSet;
-        JsonArray jsonArray = null;
-        String query=null;
         try {
             connection = DBCon.getComboDataSource().getConnection();
-            if(firstName!=null && !firstName.isEmpty()){
+            if (firstName != null && !firstName.isEmpty()) {
                 query = "SELECT * FROM user_cred WHERE FirstName=\'" + firstName + "\';";
-            }else{
-                query="SELECT * FROM user_cred";
+            } else {
+                query = "SELECT * FROM user_cred";
             }
             statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
@@ -97,7 +63,7 @@ public class Search extends HttpServlet {
 
         } catch (SQLException e) {
             log.error("Error while searching users. " + e);
-        }finally {
+        } finally {
             try {
                 connection.close();
             } catch (SQLException e) {

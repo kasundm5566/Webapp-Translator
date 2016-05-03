@@ -20,6 +20,9 @@
         <option>USA</option>
     </select>
 
+    <label style="text-align: left; display: block;">City:</label>
+    <select id="ucitySelect" class="form-control" name="ucity" text-align: left; display: block;></select>
+
     <label style="text-align: left; display: block;">Date of birth:</label>
     <label id="udob_error" style="color: red; font-weight: lighter; font-size: smaller; text-align: left; display: block;"></label>
     <input type="text" class="form-control" id="udate" name="udate" placeholder="Enter your date of birth"

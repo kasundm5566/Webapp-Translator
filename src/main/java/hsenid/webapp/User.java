@@ -11,6 +11,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String country;
+    private String city;
     private String dob;
     private String userName;
     private String password;
@@ -26,7 +27,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String firstName, String lastName, String country, String dob, String userName, String password, String email, long contactNo) {
+    public User(String firstName, String lastName, String country, String city, String dob, String userName, String password, String email, long contactNo) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.country = country;
@@ -176,5 +177,13 @@ public class User {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCity() {
+        return city;
     }
 }
