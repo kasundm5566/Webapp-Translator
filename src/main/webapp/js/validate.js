@@ -204,7 +204,7 @@ function loadCities(){
             var select = $("#citySelect"), options = '';
             select.empty();
             for (var i = 0; i < result.length; i++) {
-                options += "<option value='"+result[i].cityname+"'>"+ result[i].cityname +"</option>";
+                options += "<option>"+ result[i].cityname +"</option>";
             }
             select.append(options);
         }

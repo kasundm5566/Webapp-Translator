@@ -26,6 +26,7 @@ public class Search extends HttpServlet {
     ResultSet resultSet;
     JsonArray jsonArray = null;
     String query = null;
+    String queryCityName=null;
     private static final Logger log = LogManager.getLogger(Search.class);
 
     @Override
@@ -54,6 +55,14 @@ public class Search extends HttpServlet {
                 jsonObj.addProperty("firstname", resultSet.getString("FirstName"));
                 jsonObj.addProperty("lastname", resultSet.getString("LastName"));
                 jsonObj.addProperty("country", resultSet.getString("Country"));
+                queryCityName="SELECT Name FROM city WHERE ID="+Integer.parseInt(resultSet.getString("CityId"))+";";
+                statement=connection.prepareStatement(queryCityName);
+                ResultSet cityNames=statement.executeQuery();
+                if(cityNames.next()){
+                    jsonObj.addProperty("city", cityNames.getString("Name"));
+                }else{
+                    jsonObj.addProperty("city", "-");
+                }
                 jsonObj.addProperty("dob", resultSet.getString("DOB"));
                 jsonObj.addProperty("username", resultSet.getString("UserName"));
                 jsonObj.addProperty("email", resultSet.getString("Email"));

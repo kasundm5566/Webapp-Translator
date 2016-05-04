@@ -23,7 +23,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
-
 </head>
 
 <body>
@@ -89,8 +88,8 @@
                     Management
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a data-toggle="tab" href="#addUser">Add user</a></li>
-                    <li><a data-toggle="tab" href="#searchUser">Search user</a></li>
+                    <li><a data-toggle="tab" href="#addUser"><span class="glyphicon glyphicon-plus"></span> &nbsp;Add user</a></li>
+                    <li><a data-toggle="tab" href="#searchUser"><span class="glyphicon glyphicon-search"></span> &nbsp;Search user</a></li>
                 </ul>
         </ul>
 

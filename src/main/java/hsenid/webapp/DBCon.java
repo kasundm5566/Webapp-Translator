@@ -1,8 +1,11 @@
 package hsenid.webapp;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.mchange.v2.c3p0.DataSources;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 
 /**
@@ -36,7 +39,7 @@ public class DBCon {
             comboPooledDataSource.setUser(dbuser);
             comboPooledDataSource.setPassword(dbpass);
             log.info("Database connection initialized successfully.");
-        } catch (PropertyVetoException ex) {
+        } catch (Exception ex) {
             log.error("Error while connecting to the database. " + ex);
         }
     }

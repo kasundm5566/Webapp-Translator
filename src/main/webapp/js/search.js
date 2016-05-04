@@ -26,7 +26,7 @@ function loadTableData() {
             $('#table').bootstrapTable({
                 pagination: true,
                 pageSize: 10,
-                pageList: [10, 25, 50, 100, 200],
+                pageList: [5, 10, 20, 30, 50],
                 showColumns: true,
                 singleSelect: true,
                 minimumCountColumns: 3,
@@ -209,3 +209,7 @@ function refresh() {
         }
     });
 }
+
+$('#dropAddUser').click(function(){
+   $('#drop').text('Add user');
+});

@@ -28,7 +28,6 @@ public class Typeahead extends HttpServlet {
         String process = req.getParameter("process");
         JsonArray jsonArray = searchTypeahead(req.getParameter("searchName"));
         out.println(jsonArray);
-
     }
 
     public JsonArray searchTypeahead(String match) {
@@ -39,14 +38,11 @@ public class Typeahead extends HttpServlet {
         JsonArray jsonArray = new JsonArray();
         try {
             connection = DBCon.getComboDataSource().getConnection();
-            //String query = "SELECT FirstName FROM user_cred HAVING FirstName LIKE \'" + match + "%\';";
+//            String query = "SELECT FirstName FROM user_cred HAVING FirstName LIKE \'" + match + "%\';";
             String query = "SELECT FirstName FROM user_cred;";
             statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                /*jsonObject = new JsonObject();
-                jsonObject.addProperty("firstname", resultSet.getString("FirstName"));
-                jsonArray.add(jsonObject);*/
                 jsonArray.add(resultSet.getString("FirstName"));
             }
         } catch (SQLException e) {
