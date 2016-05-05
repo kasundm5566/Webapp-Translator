@@ -27,8 +27,9 @@ public class Load extends HttpServlet {
 
         PrintWriter out = response.getWriter();
         try {
+            int pageNo=Integer.parseInt(request.getParameter("page"));
             connection = DBCon.getComboDataSource().getConnection();
-            String query = "SELECT * FROM user_cred;";
+            String query = "SELECT * FROM user_cred LIMIT 10 OFFSET "+10*(pageNo-1)+";";
             String queryCityName=null;
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
