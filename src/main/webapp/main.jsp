@@ -12,7 +12,9 @@
     <script type="text/javascript" src="js/operations.js"></script>
     <script type="text/javascript" src="js/validate.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/yeti/bootstrap.min.css">
+    <%--<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">--%>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
@@ -25,6 +27,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
 
     <script src="js/simple-bootstrap-paginator.js"></script>
+    <link rel="stylesheet" href="css/pace-theme-center-simple.css">
+    <script src="js/pace.js"></script>
 </head>
 
 <body>
@@ -38,44 +42,29 @@
     out.println("<br><form action=\"logout\" method=\"post\"><table><tr><button type=\"submit\" class=\"btn btn-info btn-xs\" id=\"logout\"><span class=\"glyphicon glyphicon-off\"></span>&nbsp;&nbsp;&nbsp;Logout</button></tr></table></form></div>");
 %>--%>
 <% session.setAttribute("user", session.getAttribute("username")); %>
-<div class="container" style="position: fixed; right: 0; padding: 20px; display: block;">
-    <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-user"></span>
-                    <% out.println("Logged in as <strong><u>" + session.getAttribute("username") + "</u></strong>");%>
-                    <span class="glyphicon glyphicon-chevron-down"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <div class="navbar-login">
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <p class="text-center">
-                                        <span class="glyphicon glyphicon-user icon-size"></span>
-                                    </p>
-                                </div>
-                                <div class="col-lg-8">
-                                    <p class="text-left"><% out.println("<strong><u>" + session.getAttribute("username") + "</u></strong>");%></p>
-                                    <p class="text-left">
-                                        <a href="#" class="btn btn-primary btn-block btn-sm">Profile</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="divider navbar-login-session-bg"></li>
-                    <li><a href="#">Account Settings <span class="glyphicon glyphicon-cog pull-right"></span></a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">User stats <span class="glyphicon glyphicon-stats pull-right"></span></a></li>
-                    <li class="divider"></li>
-                    <li class="divider"></li>
-                    <li><a href="/logout">Sign Out <span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
+<div id="logoutDiv" style="position: fixed; right: 0; padding: 10px; z-index: 3;">
+    <ul id="navi" class="nav navbar-nav">
+        <li id="drp" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><% out.println("Logged in as <strong><u>" + session.getAttribute("username") + "</u></strong>"); %><span class="glyphicon glyphicon-user pull-right"></span></a>
+            <ul id="drpmenu" class="dropdown-menu">
+                <li>
+                    <a href="#acc">Account Settings <span class="glyphicon glyphicon-cog pull-right"></span></a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="#fav">Favourites<span class="glyphicon glyphicon-heart pull-right"></span></a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="#status">Status <span class="glyphicon glyphicon-stats pull-right"></span></a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a id="out" href="logout">Logout<span class="glyphicon glyphicon-log-out pull-right"></span></a>
+                </li>
+            </ul>
+        </li>
+    </ul>
 </div>
 
 <div id="sep">
@@ -108,6 +97,7 @@
         </div>
     </div>
 </center>
+
 <script type="text/javascript" src="js/datepicker.js"></script>
 <script type="text/javascript" src="js/validate.js"></script>
 <script type="text/javascript" src="js/validateUpdate.js"></script>

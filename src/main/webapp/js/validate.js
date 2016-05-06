@@ -168,7 +168,7 @@ function validateUserName() {
                 if ($.trim(result) === "NO") {
                     $("#uname_error").show();
                     $("#username").css("background-color", background_color);
-                    $("#uname_error").text("That user name already used.");
+                    $("#uname_error").text("That user name is already used.");
                     return false;
                 } else {
                     $("#uname_error").css("color", "#009900");

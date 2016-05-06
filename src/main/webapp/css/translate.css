@@ -11,21 +11,21 @@ input:not([type=checkbox]) {
 
 input:focus {
     outline: none;
-    border-color: #9ecaed;
-    box-shadow: 0 0 10px #9ecaed;
+    border-color: #008cba/*#9ecaed*/;
+    box-shadow: 0 0 10px #008cba/*#9ecaed*/;
 }
 
 textarea {
     outline: none;
     border-color: #9ecaed;
-    box-shadow: 0 0 10px #9ecaed;
+    box-shadow: 0 0 10px #008cba/*#9ecaed*/;
     resize: none;
 }
 
 select:focus {
     outline: none;
-    border-color: #9ecaed;
-    box-shadow: 0 0 10px #9ecaed;
+    border-color: #008cba/*#9ecaed*/;
+    box-shadow: 0 0 10px #008cba/*#9ecaed*/;
 }
 
 #title {
@@ -58,7 +58,7 @@ body {
 
 option:checked, option:hover {
     color: white;
-    background: #4d90fe;
+    background: #008cba/*#4d90fe*/;
 }
 
 /*#header{
@@ -90,7 +90,7 @@ div#sep3 {
     border: 0px;
     color: #fff;
     text-shadow: 0 1px rgba(0, 0, 0, 0.1);
-    background-color: #4d90fe;
+    background-color: #008cba/*#4d90fe*/;
     font-size: 20px;
     width: 100%;
 }
@@ -147,7 +147,7 @@ table {
     border: 0px;
     color: #fff;
     text-shadow: 0 1px rgba(0, 0, 0, 0.1);
-    background-color: #4d90fe;
+    background-color: #008cba/*#4d90fe*/;
     font-size: 20px;
     height: 25px;
     width: 50px;
@@ -185,9 +185,9 @@ table {
 }
 
 #table th {
-    background-color: lightsteelblue;
+    background-color: #008cba;
 }
 
 #table tr {
-    background-color: #eeeeee;
+    background-color: ivory;
 }

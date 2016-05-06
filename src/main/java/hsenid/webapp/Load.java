@@ -29,7 +29,7 @@ public class Load extends HttpServlet {
         try {
             int pageNo=Integer.parseInt(request.getParameter("page"));
             connection = DBCon.getComboDataSource().getConnection();
-            String query = "SELECT * FROM user_cred LIMIT 10 OFFSET "+10*(pageNo-1)+";";
+            String query = "SELECT * FROM user_cred u,city c WHERE u.cityId=c.ID LIMIT 10 OFFSET "+10*(pageNo-1)+";";
             String queryCityName=null;
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
@@ -41,14 +41,7 @@ public class Load extends HttpServlet {
                 jsonObj.addProperty("firstname", resultSet.getString("FirstName"));
                 jsonObj.addProperty("lastname", resultSet.getString("LastName"));
                 jsonObj.addProperty("country", resultSet.getString("Country"));
-                queryCityName="SELECT Name FROM city WHERE ID="+Integer.parseInt(resultSet.getString("CityId"))+";";
-                statement=connection.prepareStatement(queryCityName);
-                ResultSet cityNames=statement.executeQuery();
-                if(cityNames.next()){
-                    jsonObj.addProperty("city", cityNames.getString("Name"));
-                }else{
-                    jsonObj.addProperty("city", "-");
-                }
+                jsonObj.addProperty("city", resultSet.getString("Name"));
                 jsonObj.addProperty("dob", resultSet.getString("DOB"));
                 jsonObj.addProperty("username", resultSet.getString("UserName"));
                 jsonObj.addProperty("email", resultSet.getString("Email"));

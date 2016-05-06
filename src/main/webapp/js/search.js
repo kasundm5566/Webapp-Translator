@@ -183,10 +183,9 @@ function autoFillSearch() {
                 limit: 10,
                 minLength: 1,
                 source: result
-            });
+            }).focus();
         }
     });
-
 }
 
 function search() {
@@ -200,7 +199,6 @@ function search() {
             $('#table').bootstrapTable('load', result);
         }
     });
-
 }
 
 function refresh(curPage) {
@@ -265,6 +263,7 @@ function pagination() {
                 }
             });
         }
+
     });
 
     $.ajax({
@@ -277,3 +276,5 @@ function pagination() {
         }
     });
 }
+
+

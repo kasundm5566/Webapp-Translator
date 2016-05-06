@@ -18,27 +18,31 @@
                     </div>
                     <div id="collapse1" class="panel-collapse collapse in well">
 
+                        <label style="text-align: left; display: block;">First name:<font
+                                color="#FF0000">*</font></label>
                         <label id="fname_error"
                                style="color: red; font-weight: lighter; font-size: smaller; text-align: left; display: block;"></label>
 
                         <div class="input-group">
-                            <span class="input-group-addon">First name <font color="#FF0000">*</font></span>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
                             <input type="text" id="fname" class="form-control" name="fname"
                                    placeholder="Enter your first name"/>
                         </div>
                         <div style="margin-top:5px;">
+                            <label style="text-align: left; display: block;">Last name:</label>
                             <label id="lname_error"
                                    style="color: red; font-weight: lighter; font-size: smaller;" text-align: left; display: block;></label>
 
                             <div class="input-group">
-                                <span class="input-group-addon">Last name</span>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
                                 <input type="text" id="lname" class="form-control inp" name="lname"
                                        placeholder="Enter your last name"/></div>
                         </div>
                         <div style="margin-top:5px;">
+                            <label style="text-align: left; display: block;">Country:<font
+                                    color="#FF0000">*</font></label>
                             <div style="height: 35px;" class="input-group">
-                                <span class="input-group-addon">Country <font
-                                        color="#FF0000">*</font>&nbsp;&nbsp;</span>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
                                 <select id="countrySelect" class="form-control" name="country">
                                     <option selected>Sri Lanka</option>
                                     <option>Australia</option>
@@ -49,18 +53,21 @@
                             </div>
                         </div>
                         <div style="margin-top:5px;">
+                            <label style="text-align: left; display: block;">City:<font
+                                    color="#FF0000">*</font></label>
                             <div style="height: 35px;" class="input-group">
-                                <span class="input-group-addon">City <font
-                                        color="#FF0000">*</font>&nbsp;&nbsp;</span>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
                                 <select id="citySelect" class="form-control" name="city">
                                 </select>
                             </div>
                         </div>
                         <div style="margin-top:5px;">
+                            <label style="text-align: left; display: block;">Date of birth:<font
+                                    color="#FF0000">*</font></label>
                             <div><label id="dob_error"
                                         style="color: red; font-weight: lighter; font-size: smaller; text-align: left; display: block;"></label></div>
                             <div class="input-group">
-                                <span class="input-group-addon">DOB <font color="#FF0000">*</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 <input type="text" class="form-control" id="date" name="date"
                                        placeholder="Enter your date of birth" readonly/>
                             </div>
@@ -75,31 +82,36 @@
                         </h4>
                     </div>
                     <div id="collapse2" class="panel-collapse collapse well">
-
+                        <label style="text-align: left; display: block;">User name:<font
+                                color="#FF0000">*</font></label>
                         <label id="uname_error"
                                style="color: red; font-weight: lighter; font-size: smaller; text-align: left; display: block;"></label>
 
                         <div class="input-group">
-                            <span class="input-group-addon">User name <font color="#FF0000">*</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                             <input type="text" id="username" class="form-control" name="username"
                                    placeholder="Enter user name"/>
                         </div>
                         <div style="margin-top:5px;">
+                            <label style="text-align: left; display: block;">Password:<font
+                                    color="#FF0000">*</font></label>
                             <label id="pass_error"
                                    style="color: red; font-weight: lighter; font-size: smaller; text-align: left; display: block;"></label>
 
                             <div class="input-group">
-                                <span class="input-group-addon">Password <font color="#FF0000">*</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                 <input type="password" id="pass" class="form-control" name="pass"
                                        placeholder="Enter password"/>
                             </div>
                         </div>
                         <div style="margin-top:5px;">
+                            <label style="text-align: left; display: block;">Retype password:<font
+                                    color="#FF0000">*</font></label>
                             <label id="repass_error"
                                    style="color: red; font-weight: lighter; font-size: smaller; text-align: left; display: block;"></label>
 
                             <div class="input-group">
-                                <span class="input-group-addon">Retype password <font color="#FF0000">*</font></span>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                 <input type="password" id="repass" class="form-control" name="repass"
                                        placeholder="Retype your password"/>
                             </div>
@@ -115,22 +127,25 @@
                     </div>
                     <div id="collapse3" class="panel-collapse collapse well" style="margin-top:5px;">
 
+                        <label style="text-align: left; display: block;">Email:<font
+                                color="#FF0000">*</font></label>
                         <label id="email_error"
                                style="color: red; font-weight: lighter; font-size: smaller; text-align: left; display: block;"></label>
 
                         <div class="form-group">
                             <div class="input-group">
-                                <span class="input-group-addon">Email <font color="#FF0000">*</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                                 <input type="text" id="email" class="form-control" name="email"
                                        placeholder="Enter your email. eg: example@host.com"/>
                             </div>
                         </div>
-
+                        <label style="text-align: left; display: block;">Contact no:<font
+                                color="#FF0000">*</font></label>
                         <label id="tel_error"
                                style="color: red; font-weight: lighter; font-size: smaller; text-align: left; display: block;"></label>
 
                         <div class="input-group">
-                            <span class="input-group-addon">Contact no <font color="#FF0000">*</font></span>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
                             <input type="tel" id="tel" class="form-control" name="tel"
                                    placeholder="Enter your contact no. eg: 94771234567"/>
                         </div>
@@ -185,8 +200,8 @@
                 <div style="text-align: left; display: block;"><label id="lblTel"></label></div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success" id="addOk">Add user</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button class="btn btn-success" id="addOk"><i class="glyphicon glyphicon-export"></i> Add user</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-step-backward"></i> Cancel</button>
             </div>
         </div>
     </div>

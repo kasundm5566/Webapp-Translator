@@ -8,8 +8,12 @@
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/translate.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/yeti/bootstrap.min.css">
+    <%--<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">--%>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/pace-theme-center-simple.css">
+    <script src="js/pace.js"></script>
 <body>
 <%@include file="header.jsp" %>
 <div id="login">
@@ -22,15 +26,19 @@
                 <span class="sr-only">70% Complete</span>
             </div>
         </div>
-
+        <center>
+            <div><img src="images/user_icon.png" height="150" width="150"
+                      style="margin-bottom: 20px; margin-top: -20px;"></div>
+        </center>
         <div>
             <div class="input-group">
-                <span class="input-group-addon">User name</span>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                 <input type="text" class="form-control" name="uname" placeholder="Enter user name" required="true"/>
             </div>
             <div class="input-group" style="margin-top: 10px;">
-                <span class="input-group-addon">Password&nbsp;</span>
-                <input type="password" class="form-control" name="loginpass" placeholder="Enter password" required="true"/>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <input type="password" class="form-control" name="loginpass" placeholder="Enter password"
+                       required="true"/>
             </div>
             <div style="margin-top: 10px;">
                 <button type="submit" class="btn btn-default" id="buttons">

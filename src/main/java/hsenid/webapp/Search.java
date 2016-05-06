@@ -42,9 +42,9 @@ public class Search extends HttpServlet {
         try {
             connection = DBCon.getComboDataSource().getConnection();
             if (firstName != null && !firstName.isEmpty()) {
-                query = "SELECT * FROM user_cred WHERE FirstName=\'" + firstName + "\';";
+                query = "SELECT * FROM user_cred u,city c WHERE u.cityId=c.ID AND FirstName LIKE\'" + firstName + "%\';";
             } else {
-                query = "SELECT * FROM user_cred";
+                query = "SELECT * FROM user_cred u,city c WHERE u.cityId=c.ID;";
             }
             statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
@@ -55,14 +55,15 @@ public class Search extends HttpServlet {
                 jsonObj.addProperty("firstname", resultSet.getString("FirstName"));
                 jsonObj.addProperty("lastname", resultSet.getString("LastName"));
                 jsonObj.addProperty("country", resultSet.getString("Country"));
-                queryCityName="SELECT Name FROM city WHERE ID="+Integer.parseInt(resultSet.getString("CityId"))+";";
+                /*queryCityName="SELECT Name FROM city WHERE ID="+Integer.parseInt(resultSet.getString("CityId"))+";";
                 statement=connection.prepareStatement(queryCityName);
                 ResultSet cityNames=statement.executeQuery();
                 if(cityNames.next()){
                     jsonObj.addProperty("city", cityNames.getString("Name"));
                 }else{
                     jsonObj.addProperty("city", "-");
-                }
+                }*/
+                jsonObj.addProperty("city", resultSet.getString("Name"));
                 jsonObj.addProperty("dob", resultSet.getString("DOB"));
                 jsonObj.addProperty("username", resultSet.getString("UserName"));
                 jsonObj.addProperty("email", resultSet.getString("Email"));

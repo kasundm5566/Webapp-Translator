@@ -29,7 +29,6 @@
             <div class="modal-body">
                 <p id="dat">Are you sure you want to delete the following user?
                 </p>
-
                 <div><label id="lbFname" style="text-align: left; display: block;"></label></div>
                 <div><label id="lbLname" style="text-align: left; display: block;"></label></div>
                 <div><label id="lbCountry" style="text-align: left; display: block;"></label></div>
@@ -40,8 +39,8 @@
                 <div><label id="lbTel" style="text-align: left; display: block;"></label></div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success" id="deleteOk">Delete user</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                <button class="btn btn-success" id="deleteOk"><i class="glyphicon glyphicon-trash"></i> Delete user</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-step-backward"></i> Cancel</button>
             </div>
         </div>
     </div>
@@ -62,8 +61,8 @@
                 <%@include file="update.jsp" %>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success" id="updateOk">Update user</button>
-                <button type="button" id="updateCancel" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                <button class="btn btn-success" id="updateOk"><i class="glyphicon glyphicon-edit"></i> Update user</button>
+                <button type="button" id="updateCancel" class="btn btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-step-backward"></i> Cancel</button>
             </div>
         </div>
     </div>
