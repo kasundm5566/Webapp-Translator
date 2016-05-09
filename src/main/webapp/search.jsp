@@ -18,6 +18,7 @@
     </select>
 </div>
 <div id="pagination" class="text-right"></div>
+<div id="pagination2" class="text-right"></div>
 
 <!-- Popup to get the confirmation to delete the selected user. -->
 <div id="deleteUserPopup" class="modal fade">

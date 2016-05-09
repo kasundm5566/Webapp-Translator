@@ -19,8 +19,8 @@ import java.sql.SQLException;
  */
 public class Update extends HttpServlet{
     private static final Logger log= LogManager.getLogger(Update.class);
-    Connection connection;
-    PreparedStatement statement;
+    private Connection connection=null;
+    private PreparedStatement statement=null;
     String city=null;
 
     @Override
@@ -54,7 +54,12 @@ public class Update extends HttpServlet{
             log.error("Error while deleting the user. "+e);
         }finally {
             try {
-                connection.close();
+                if(connection!=null){
+                    connection.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
             } catch (SQLException e) {
                 log.error("Error closing the connection while updating the user. "+e);
             }

@@ -8,12 +8,13 @@
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/translate.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="js/pace.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/yeti/bootstrap.min.css">
     <%--<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">--%>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/pace-theme-center-simple.css">
-    <script src="js/pace.js"></script>
+</head>
 <body>
 <%@include file="header.jsp" %>
 <div id="login">
@@ -33,7 +34,7 @@
         <div>
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input type="text" class="form-control" name="uname" placeholder="Enter user name" required="true"/>
+                <input type="text" class="form-control " name="uname" placeholder="Enter user name" required="true"/>
             </div>
             <div class="input-group" style="margin-top: 10px;">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>

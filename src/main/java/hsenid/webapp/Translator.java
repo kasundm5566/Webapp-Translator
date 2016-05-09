@@ -83,7 +83,6 @@ public class Translator extends HttpServlet {
      * @throws javax.servlet.ServletException
      */
     public String translate(String fromLang, String toLang, String fromText) throws ServletException {
-
         String text = null;
         String url;
         try {

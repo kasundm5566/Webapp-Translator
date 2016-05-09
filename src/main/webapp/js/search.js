@@ -1,4 +1,4 @@
-var curPage;
+var curPage = 1;
 $(document).ready(function () {
     loadTableData();
     pagination();
@@ -27,16 +27,11 @@ function loadTableData() {
         data: {"page": "1"},
         success: function (result) {
             $('#table').bootstrapTable({
-                /*pagination: true,*/
                 pageSize: 10,
-                /*pageList: [5, 10, 20, 30, 50],*/
                 showColumns: true,
                 singleSelect: true,
                 minimumCountColumns: 3,
-                columns: [/*{
-                 field: 'state',
-                 checkbox: true
-                 }, */{
+                columns: [{
                     field: 'firstname',
                     title: 'First name',
                     sortable: true
@@ -190,23 +185,77 @@ function autoFillSearch() {
 
 function search() {
     var searchName = $('#txtSearch').val();
-    $.ajax({
-        type: "POST",
-        url: "search",
-        dataType: "json",
-        data: {"searchName": searchName},
-        success: function (result) {
-            $('#table').bootstrapTable('load', result);
-        }
-    });
+    if (searchName.length == 0) {
+        $('#pagination2').hide();
+        $('#pagination').show();
+        $('#comboPages').show();
+
+        $.ajax({
+            type: "POST",
+            url: "load",
+            dataType: "json",
+            data: {"page": "1"},
+            success: function (result) {
+                $('#table').bootstrapTable('load', result);
+                paginationBar.simplePaginator('changePage', 1);
+            }
+        });
+    } else {
+        $('#pagination').hide();
+        $('#pagination2').show();
+        $('#comboPages').hide();
+
+        $.ajax({
+            type: "POST",
+            url: "search",
+            dataType: "json",
+            data: {"searchName": searchName, "offset": "1"},
+            success: function (result) {
+                $('#table').bootstrapTable('load', result);
+            }
+        });
+
+        $.ajax({
+            type: "post",
+            url: "searchpagination",
+            data: {"searchName": searchName},
+            success: function (result) {
+                var pageCount = Math.ceil(result / 10);
+                paginationBar2.simplePaginator('setTotalPages', pageCount);
+            }
+        });
+
+        paginationBar2 = $('#pagination2').simplePaginator({
+            totalPages: 1,
+            maxButtonsVisible: 5,
+            currentPage: 1,
+            nextLabel: 'Next',
+            prevLabel: 'Prev',
+            firstLabel: 'First',
+            lastLabel: 'Last',
+
+            pageChange: function (page) {
+                $.ajax({
+                    type: "post",
+                    url: "search",
+                    dataType: "json",
+                    data: {"searchName": searchName, "offset": page},
+                    success: function (result) {
+                        $('#table').bootstrapTable('load', result);
+                    }
+                });
+            }
+        });
+    }
 }
 
-function refresh(curPage) {
+function refresh(currentPage) {
+    currentPage = curPage;
     $.ajax({
         type: "POST",
         url: "load",
         dataType: "json",
-        data: {"page": curPage},
+        data: {"page": currentPage},
         success: function (result) {
             $('#table').bootstrapTable('load', result);
         }
@@ -238,13 +287,9 @@ $('#comboPages').change(function () {
 
 function pagination() {
     var paginationBar = $('#pagination').simplePaginator({
-
         totalPages: 1,
         maxButtonsVisible: 5,
-
-        // page selected
         currentPage: 1,
-
         nextLabel: 'Next',
         prevLabel: 'Prev',
         firstLabel: 'First',

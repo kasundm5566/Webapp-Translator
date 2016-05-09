@@ -19,7 +19,7 @@ import java.sql.SQLException;
  */
 public class CheckUserName extends HttpServlet{
     private static final Logger log = LogManager.getLogger(CheckUserName.class);
-    private Connection connection;
+    private Connection connection=null;
     private PreparedStatement statement = null;
     private ResultSet result = null;
     @Override
@@ -41,7 +41,15 @@ public class CheckUserName extends HttpServlet{
             log.error("Error while checking user name availability. "+e);
         }finally {
             try {
-                connection.close();
+                if(connection!=null){
+                    connection.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+                if (result != null) {
+                    result.close();
+                }
             } catch (SQLException e) {
                 log.error("Error while closing the connection create to check the user name availability. "+e);
             }

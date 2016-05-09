@@ -26,7 +26,6 @@ public class Search extends HttpServlet {
     ResultSet resultSet;
     JsonArray jsonArray = null;
     String query = null;
-    String queryCityName=null;
     private static final Logger log = LogManager.getLogger(Search.class);
 
     @Override
@@ -34,18 +33,15 @@ public class Search extends HttpServlet {
         resp.setContentType("text/html");
         PrintWriter out = resp.getWriter();
         String process = req.getParameter("process");
-        JsonArray jsonArray = search(req.getParameter("searchName"));
+        JsonArray jsonArray = search(req.getParameter("searchName"), Integer.parseInt(req.getParameter("offset")));
         out.println(jsonArray);
     }
 
-    public JsonArray search(String firstName) {
+    public JsonArray search(String firstName, int offset) {
         try {
             connection = DBCon.getComboDataSource().getConnection();
-            if (firstName != null && !firstName.isEmpty()) {
-                query = "SELECT * FROM user_cred u,city c WHERE u.cityId=c.ID AND FirstName LIKE\'" + firstName + "%\';";
-            } else {
-                query = "SELECT * FROM user_cred u,city c WHERE u.cityId=c.ID;";
-            }
+            query = "SELECT * FROM user_cred u,city c WHERE u.cityId=c.ID AND FirstName LIKE\'" + firstName + "%\' LIMIT 10 OFFSET " + 10 * (offset - 1) + ";";
+
             statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
             jsonArray = new JsonArray();
@@ -75,7 +71,15 @@ public class Search extends HttpServlet {
             log.error("Error while searching users. " + e);
         } finally {
             try {
-                connection.close();
+                if (connection != null) {
+                    connection.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+                if (resultSet != null) {
+                    resultSet.close();
+                }
             } catch (SQLException e) {
                 log.error("Error while closing connection created search users. " + e);
             }

@@ -22,11 +22,11 @@ import java.sql.SQLException;
  */
 public class CityLoader extends HttpServlet{
 
-    Connection connection = null;
-    PreparedStatement statement;
-    ResultSet resultSet;
-    JsonArray jsonArray = null;
-    String query = null;
+    private Connection connection = null;
+    private PreparedStatement statement=null;
+    private ResultSet resultSet=null;
+    private JsonArray jsonArray = null;
+    private String query = null;
     private static final Logger log = LogManager.getLogger(CityLoader.class);
 
     @Override
@@ -54,7 +54,15 @@ public class CityLoader extends HttpServlet{
             log.error("Error while loading cities. "+e);
         }finally {
             try {
-                connection.close();
+                if(connection!=null){
+                    connection.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+                if (resultSet != null) {
+                    resultSet.close();
+                }
             } catch (SQLException e) {
                 log.error("Error closing the connection while loading cities. "+e);
             }

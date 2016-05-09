@@ -9,7 +9,7 @@
             </div>
         </div>
 
-        <form name="translate_form" method="post" action="translator">
+        <form name="translate_form" method="post" action="translator" id="translate_form">
 
             <div style="display: table; border-spacing: 10px;">
                 <div style="display: table-row;">

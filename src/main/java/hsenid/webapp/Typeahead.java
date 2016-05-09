@@ -19,6 +19,10 @@ import java.sql.SQLException;
  * Created by hsenid on 5/3/16.
  */
 public class Typeahead extends HttpServlet {
+
+    private Connection connection=null;
+    private PreparedStatement statement=null;
+    private ResultSet resultSet=null;
     private static final Logger log = LogManager.getLogger(Typeahead.class);
 
     @Override
@@ -31,14 +35,10 @@ public class Typeahead extends HttpServlet {
     }
 
     public JsonArray searchTypeahead(String match) {
-        Connection connection = null;
-        PreparedStatement statement;
-        ResultSet resultSet;
-        JsonObject jsonObject;
         JsonArray jsonArray = new JsonArray();
         try {
             connection = DBCon.getComboDataSource().getConnection();
-//            String query = "SELECT FirstName FROM user_cred HAVING FirstName LIKE \'" + match + "%\';";
+//            String query = "SELECT FirstName FROM user_cred WHERE FirstName LIKE \'" + match + "%\';";
             String query = "SELECT FirstName FROM user_cred;";
             statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
@@ -49,7 +49,15 @@ public class Typeahead extends HttpServlet {
             log.error("Error while loading typeahead. " + e);
         } finally {
             try {
-                connection.close();
+                if(connection!=null){
+                    connection.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+                if (resultSet != null) {
+                    resultSet.close();
+                }
             } catch (SQLException e) {
                 log.error("Error while closing connection created to load typeahead. " + e);
             }

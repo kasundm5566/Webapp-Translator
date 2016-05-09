@@ -12,6 +12,7 @@
     <script type="text/javascript" src="js/operations.js"></script>
     <script type="text/javascript" src="js/validate.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="js/pace.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/yeti/bootstrap.min.css">
     <%--<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">--%>
@@ -28,24 +29,20 @@
 
     <script src="js/simple-bootstrap-paginator.js"></script>
     <link rel="stylesheet" href="css/pace-theme-center-simple.css">
-    <script src="js/pace.js"></script>
 </head>
 
 <body>
 <%@include file="header.jsp" %>
 <div id="sep">
 </div>
-<%--<%
-    session.setAttribute("user", session.getAttribute("username"));
-    out.println("<div id=\"session\" class=\"alert alert-info\" role=\"alert\">");
-    out.println("Logged in as <strong><u>" + session.getAttribute("username") + "</u></strong>");
-    out.println("<br><form action=\"logout\" method=\"post\"><table><tr><button type=\"submit\" class=\"btn btn-info btn-xs\" id=\"logout\"><span class=\"glyphicon glyphicon-off\"></span>&nbsp;&nbsp;&nbsp;Logout</button></tr></table></form></div>");
-%>--%>
+
 <% session.setAttribute("user", session.getAttribute("username")); %>
 <div id="logoutDiv" style="position: fixed; right: 0; padding: 10px; z-index: 3;">
     <ul id="navi" class="nav navbar-nav">
         <li id="drp" class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><% out.println("Logged in as <strong><u>" + session.getAttribute("username") + "</u></strong>"); %><span class="glyphicon glyphicon-user pull-right"></span></a>
+            <a href="#" class="dropdown-toggle"
+               data-toggle="dropdown"><% out.println("Logged in as <strong><u>" + session.getAttribute("username") + "</u></strong>"); %><span
+                    class="glyphicon glyphicon-user pull-right"></span></a>
             <ul id="drpmenu" class="dropdown-menu">
                 <li>
                     <a href="#acc">Account Settings <span class="glyphicon glyphicon-cog pull-right"></span></a>
@@ -79,8 +76,10 @@
                     Management
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a data-toggle="tab" href="#addUser"><span class="glyphicon glyphicon-plus"></span> &nbsp;Add user</a></li>
-                    <li><a data-toggle="tab" href="#searchUser"><span class="glyphicon glyphicon-search"></span> &nbsp;Search user</a></li>
+                    <li><a data-toggle="tab" href="#addUser"><span class="glyphicon glyphicon-plus"></span> &nbsp;Add
+                        user</a></li>
+                    <li><a data-toggle="tab" href="#searchUser"><span class="glyphicon glyphicon-search"></span> &nbsp;Search
+                        user</a></li>
                 </ul>
         </ul>
 

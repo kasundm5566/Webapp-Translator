@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,20 +20,23 @@ import java.sql.SQLException;
  * Created by hsenid on 4/27/16.
  */
 public class Load extends HttpServlet {
-    Connection connection;
+    private Connection connection = null;
+    private PreparedStatement statement = null;
+    private ResultSet resultSet = null;
+    private String query = null;
     private static final Logger log = LogManager.getLogger(Load.class);
+
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
-
+        response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         try {
-            int pageNo=Integer.parseInt(request.getParameter("page"));
+            int pageNo = Integer.parseInt(request.getParameter("page"));
             connection = DBCon.getComboDataSource().getConnection();
-            String query = "SELECT * FROM user_cred u,city c WHERE u.cityId=c.ID LIMIT 10 OFFSET "+10*(pageNo-1)+";";
-            String queryCityName=null;
-            PreparedStatement statement = connection.prepareStatement(query);
-            ResultSet resultSet = statement.executeQuery();
+            query = "SELECT * FROM user_cred u,city c WHERE u.cityId=c.ID LIMIT 10 OFFSET " + 10 * (pageNo - 1) + ";";
+            statement = connection.prepareStatement(query);
+            resultSet = statement.executeQuery();
             JsonArray jsonArray = new JsonArray();
 
             while (resultSet.next()) {
@@ -50,12 +54,20 @@ public class Load extends HttpServlet {
             }
             out.println(jsonArray);
         } catch (SQLException e) {
-            log.error("Error while loading all user details from the database. "+e);
+            log.error("Error while loading all user details from the database. " + e);
         } finally {
             try {
-                connection.close();
+                if(connection!=null){
+                    connection.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+                if (resultSet != null) {
+                    resultSet.close();
+                }
             } catch (SQLException e) {
-                log.error("Error while closing the connection created to load all users. "+e);
+                log.error("Error while closing the connection created to load all users. " + e);
             }
         }
     }

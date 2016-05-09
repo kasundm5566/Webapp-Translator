@@ -20,8 +20,8 @@ import java.sql.SQLException;
 public class Delete extends HttpServlet {
 
     private static final Logger log= LogManager.getLogger(Delete.class);
-    Connection connection;
-    PreparedStatement statement;
+    private Connection connection=null;
+    private PreparedStatement statement=null;
 
     @Override
     protected void doPost(HttpServletRequest request,
@@ -44,7 +44,12 @@ public class Delete extends HttpServlet {
             log.error("Error while deleting the user. "+e);
         }finally {
             try {
-                connection.close();
+                if(connection!=null){
+                    connection.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
             } catch (SQLException e) {
                 log.error("Error closing the connection while deleting the user. "+e);
             }

@@ -19,8 +19,8 @@ import java.sql.SQLException;
  * Created by hsenid on 4/26/16.
  */
 public class Register extends HttpServlet {
-    private Connection connection;
-    private PreparedStatement statement;
+    private Connection connection=null;
+    private PreparedStatement statement=null;
     private static final Logger log = LogManager.getLogger(Register.class);
     private String city=null;
 
@@ -52,7 +52,12 @@ public class Register extends HttpServlet {
             log.error("Error while adding a new user. "+e);
         }finally {
             try {
-                connection.close();
+                if(connection!=null){
+                    connection.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
             } catch (SQLException e) {
                 log.error("Error closing the connection while adding a new user. "+e);
             }
