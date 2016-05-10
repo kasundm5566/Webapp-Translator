@@ -200,7 +200,6 @@ function loadCities(){
         dataType: "json",
         data: {"country": country},
         success: function (result) {
-
             var select = $("#citySelect"), options = '';
             select.empty();
             for (var i = 0; i < result.length; i++) {
@@ -211,9 +210,26 @@ function loadCities(){
     });
 }
 
+function loadGroups(){
+    $.ajax({
+        type: "POST",
+        url: "grouploader",
+        dataType: "json",
+        success: function (result) {
+            var select = $("#groupSelect"), options = '';
+            select.empty();
+            for (var i = 0; i < result.length; i++) {
+                options += "<option>"+ result[i].groupname +"</option>";
+            }
+            select.append(options);
+        }
+    });
+}
+
 $(document).ready(function () {
     hideErrorLabels();
     loadCities();
+    loadGroups();
 
     $("#fname").keyup(function () {
         validateFirstName();
@@ -279,6 +295,7 @@ $(document).ready(function () {
             $('#lblCity').text("City: " + $('#citySelect').val());
             $('#lblDob').text("Date of birth: " + $('#date').val());
             $('#lblUsrname').text("User name: " + $('#username').val());
+            $('#lblGroup').text("User group: " + $('#groupSelect').val());
             $('#lblEmail').text("Email: " + $('#email').val());
             $('#lblTel').text("Contact no: " + $('#tel').val());
             $('#addUserPopup').modal('show');

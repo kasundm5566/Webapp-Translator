@@ -116,6 +116,17 @@
                                        placeholder="Retype your password"/>
                             </div>
                         </div>
+                        <div style="margin-top:5px;">
+                            <label style="text-align: left; display: block;">User group:<font
+                                    color="#FF0000">*</font></label>
+                            <%--<label id="pass_error"
+                                   style="color: red; font-weight: lighter; font-size: smaller; text-align: left; display: block;"></label>--%>
+                            <div style="height: 35px;" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <select id="groupSelect" class="form-control" name="group">
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="panel panel-default">
@@ -196,6 +207,7 @@
                 <div style="text-align: left; display: block;"><label id="lblCity"></label></div>
                 <div style="text-align: left; display: block;"><label id="lblDob"></label></div>
                 <div style="text-align: left; display: block;"><label id="lblUsrname"></label></div>
+                <div style="text-align: left; display: block;"><label id="lblGroup"></label></div>
                 <div style="text-align: left; display: block;"><label id="lblEmail"></label></div>
                 <div style="text-align: left; display: block;"><label id="lblTel"></label></div>
             </div>

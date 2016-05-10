@@ -28,13 +28,13 @@ public class Register extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         city=req.getParameter("city");
         User user = new User(req.getParameter("fname"), req.getParameter("lname"), req.getParameter("country"), req.getParameter("city"), req.getParameter("date"), req.getParameter("username"), req.getParameter("pass"), req.getParameter("email"), Long.parseLong(req.getParameter("tel")));
-        int result=addUser(user);
+        int result=addUser(user, req.getParameter("group"));
         resp.setContentType("text/html");
         PrintWriter out = resp.getWriter();
         out.println(result);
     }
 
-    public int addUser(User user) {
+    public int addUser(User user, String group) {
         int exec=0;
         try {
             connection = DBCon.getComboDataSource().getConnection();
@@ -45,9 +45,21 @@ public class Register extends HttpServlet {
                 String query="INSERT INTO user_cred (UserName,Pass,FirstName,LastName,DOB,Country,CityId,Email,ContactNo) VALUES (\'"+user.getUserName()+"\', md5(\'"+user.getPassword()+"\'),\'"+user.getFirstName()+"\',\'"+user.getLastName()+"\',"+user.getDob().replaceAll("-","")+",\'"+user.getCountry()+"\',\'"+Integer.parseInt(resultSet.getString("ID"))+"\',\'"+user.getEmail()+"\',\'"+user.getContactNo()+"\');";
                 statement=connection.prepareStatement(query);
                 exec=statement.executeUpdate();
+
+                String groupQuery="INSERT INTO user_group (user_id,group_id) VALUES ((SELECT ID FROM user_cred WHERE UserName=\'"+user.getUserName()+"\'),(SELECT ID FROM userdata.group WHERE Name=\'"+group+"\'));";
+                statement=connection.prepareStatement(groupQuery);
+                exec=statement.executeUpdate();
+
             }else{
                 log.error("Error with city data while adding a new user.");
             }
+/*            if(exec==1){
+                if(exec!=1){
+                    String rollbackQuery="DELETE FROM user_cred WHERE UserName=\'"+user.getUserName()+"\';";
+                    statement=connection.prepareStatement(rollbackQuery);
+                    statement.executeUpdate();
+                }
+            }*/
         } catch (SQLException e) {
             log.error("Error while adding a new user. "+e);
         }finally {

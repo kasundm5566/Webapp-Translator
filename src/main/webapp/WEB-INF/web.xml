@@ -91,6 +91,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>GroupLoader</servlet-name>
+        <servlet-class>hsenid.webapp.GroupLoader</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GroupLoader</servlet-name>
+        <url-pattern>/grouploader</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>Delete</servlet-name>
         <servlet-class>hsenid.webapp.Delete</servlet-class>
     </servlet>

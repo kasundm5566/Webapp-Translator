@@ -135,7 +135,7 @@ window.operateEvents = {
         $('#lbFname').text("First name: " + obj["firstname"]);
         $('#lbLname').text("Last name: " + obj["lastname"]);
         $('#lbCountry').text("Country: " + obj["country"]);
-        $('#lbCity').text("Country: " + obj["city"]);
+        $('#lbCity').text("City: " + obj["city"]);
         $('#lbDob').text("Date of birth: " + obj["dob"]);
         $('#lbUsrname').text("User name: " + obj["username"]);
         $('#lbEmail').text("Email: " + obj["email"]);
