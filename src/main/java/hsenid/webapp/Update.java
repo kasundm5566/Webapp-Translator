@@ -40,11 +40,11 @@ public class Update extends HttpServlet{
         int exec=0;
         try {
             connection=DBCon.getComboDataSource().getConnection();
-            String queryCityId="SELECT ID FROM city WHERE Name=\'"+city+"\';";
+            String queryCityId="SELECT CityId FROM city WHERE CityName=\'"+city+"\';";
             statement=connection.prepareStatement(queryCityId);
             ResultSet cityNames=statement.executeQuery();
             if (cityNames.next()){
-                String query="UPDATE user_cred SET FirstName=\'"+user.getFirstName()+"\',LastName=\'"+user.getLastName()+"\',Country=\'"+user.getCountry()+"\',DOB=\'"+user.getDob()+"\',Email=\'"+user.getEmail()+"\',ContactNo=\'"+user.getContactNo()+"\',CityId="+Integer.parseInt(cityNames.getString("ID"))+" WHERE ID="+id+";";
+                String query="UPDATE user_cred SET FirstName=\'"+user.getFirstName()+"\',LastName=\'"+user.getLastName()+"\',Country=\'"+user.getCountry()+"\',DOB=\'"+user.getDob()+"\',Email=\'"+user.getEmail()+"\',ContactNo=\'"+user.getContactNo()+"\',CityId="+Integer.parseInt(cityNames.getString("CityId"))+" WHERE ID="+id+";";
                 statement=connection.prepareStatement(query);
                 exec=statement.executeUpdate();
             }else{

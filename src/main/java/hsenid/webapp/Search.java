@@ -40,7 +40,7 @@ public class Search extends HttpServlet {
     public JsonArray search(String firstName, int offset) {
         try {
             connection = DBCon.getComboDataSource().getConnection();
-            query = "SELECT * FROM user_cred u,city c WHERE u.cityId=c.ID AND FirstName LIKE\'" + firstName + "%\' LIMIT 10 OFFSET " + 10 * (offset - 1) + ";";
+            query = "SELECT * FROM user_cred u,city c WHERE u.cityId=c.cityId AND FirstName LIKE\'" + firstName + "%\' LIMIT 10 OFFSET " + 10 * (offset - 1) + ";";
 
             statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
@@ -59,7 +59,7 @@ public class Search extends HttpServlet {
                 }else{
                     jsonObj.addProperty("city", "-");
                 }*/
-                jsonObj.addProperty("city", resultSet.getString("Name"));
+                jsonObj.addProperty("city", resultSet.getString("CityName"));
                 jsonObj.addProperty("dob", resultSet.getString("DOB"));
                 jsonObj.addProperty("username", resultSet.getString("UserName"));
                 jsonObj.addProperty("email", resultSet.getString("Email"));

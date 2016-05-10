@@ -38,11 +38,11 @@ public class Register extends HttpServlet {
         int exec=0;
         try {
             connection = DBCon.getComboDataSource().getConnection();
-            String queryCityId="SELECT ID FROM city WHERE Name=\'" +city+"\';";
+            String queryCityId="SELECT CityId FROM city WHERE CityName=\'" +city+"\';";
             statement=connection.prepareStatement(queryCityId);
             ResultSet resultSet=statement.executeQuery();
             if(resultSet.next()){
-                String query="INSERT INTO user_cred (UserName,Pass,FirstName,LastName,DOB,Country,CityId,Email,ContactNo) VALUES (\'"+user.getUserName()+"\', md5(\'"+user.getPassword()+"\'),\'"+user.getFirstName()+"\',\'"+user.getLastName()+"\',"+user.getDob().replaceAll("-","")+",\'"+user.getCountry()+"\',\'"+Integer.parseInt(resultSet.getString("ID"))+"\',\'"+user.getEmail()+"\',\'"+user.getContactNo()+"\');";
+                String query="INSERT INTO user_cred (UserName,Pass,FirstName,LastName,DOB,Country,CityId,Email,ContactNo) VALUES (\'"+user.getUserName()+"\', md5(\'"+user.getPassword()+"\'),\'"+user.getFirstName()+"\',\'"+user.getLastName()+"\',"+user.getDob().replaceAll("-","")+",\'"+user.getCountry()+"\',\'"+Integer.parseInt(resultSet.getString("CityId"))+"\',\'"+user.getEmail()+"\',\'"+user.getContactNo()+"\');";
                 statement=connection.prepareStatement(query);
                 exec=statement.executeUpdate();
 

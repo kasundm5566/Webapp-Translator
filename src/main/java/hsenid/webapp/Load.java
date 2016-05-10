@@ -34,7 +34,7 @@ public class Load extends HttpServlet {
         try {
             int pageNo = Integer.parseInt(request.getParameter("page"));
             connection = DBCon.getComboDataSource().getConnection();
-            query = "SELECT * FROM user_cred u,city c WHERE u.cityId=c.ID LIMIT 10 OFFSET " + 10 * (pageNo - 1) + ";";
+            query = "SELECT * FROM user_cred u,city c WHERE u.CityId=c.CityId LIMIT 10 OFFSET " + 10 * (pageNo - 1) + ";";
             statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
             JsonArray jsonArray = new JsonArray();
@@ -45,7 +45,7 @@ public class Load extends HttpServlet {
                 jsonObj.addProperty("firstname", resultSet.getString("FirstName"));
                 jsonObj.addProperty("lastname", resultSet.getString("LastName"));
                 jsonObj.addProperty("country", resultSet.getString("Country"));
-                jsonObj.addProperty("city", resultSet.getString("Name"));
+                jsonObj.addProperty("city", resultSet.getString("CityName"));
                 jsonObj.addProperty("dob", resultSet.getString("DOB"));
                 jsonObj.addProperty("username", resultSet.getString("UserName"));
                 jsonObj.addProperty("email", resultSet.getString("Email"));

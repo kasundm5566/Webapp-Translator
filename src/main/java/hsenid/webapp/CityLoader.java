@@ -41,13 +41,13 @@ public class CityLoader extends HttpServlet{
     public JsonArray loadCities(String country){
         try {
             connection=DBCon.getComboDataSource().getConnection();
-            query="SELECT Name FROM city WHERE Country=\'"+country+"\';";
+            query="SELECT CityName FROM city WHERE Country=\'"+country+"\';";
             statement=connection.prepareStatement(query);
             resultSet=statement.executeQuery();
             jsonArray=new JsonArray();
             while (resultSet.next()){
                 JsonObject jsonObject=new JsonObject();
-                jsonObject.addProperty("cityname",resultSet.getString("Name"));
+                jsonObject.addProperty("cityname",resultSet.getString("CityName"));
                 jsonArray.add(jsonObject);
             }
         } catch (SQLException e) {
