@@ -41,7 +41,7 @@ public class CityLoader extends HttpServlet{
     public JsonArray loadCities(String country){
         try {
             connection=DBCon.getComboDataSource().getConnection();
-            query="SELECT CityName FROM city WHERE Country=\'"+country+"\';";
+            query="SELECT CityName FROM city WHERE CityCountry=\'"+country+"\';";
             statement=connection.prepareStatement(query);
             resultSet=statement.executeQuery();
             jsonArray=new JsonArray();

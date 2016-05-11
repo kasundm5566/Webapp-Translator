@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `userdata` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `userdata`;
--- MySQL dump 10.13  Distrib 5.7.9, for linux-glibc2.5 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
 --
--- Host: localhost    Database: userdata
+-- Host: 127.0.0.1    Database: userdata
 -- ------------------------------------------------------
--- Server version	5.7.11
+-- Server version	5.5.39
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,10 +25,10 @@ DROP TABLE IF EXISTS `city`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `city` (
-  `ID` int(5) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(30) NOT NULL,
-  `Country` varchar(30) NOT NULL,
-  PRIMARY KEY (`ID`)
+  `CityId` int(5) NOT NULL AUTO_INCREMENT,
+  `CityName` varchar(30) NOT NULL,
+  `CityCountry` varchar(30) NOT NULL,
+  PRIMARY KEY (`CityId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -40,9 +40,9 @@ DROP TABLE IF EXISTS `group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `group` (
-  `ID` int(5) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(30) NOT NULL,
-  PRIMARY KEY (`ID`)
+  `GroupId` int(5) NOT NULL AUTO_INCREMENT,
+  `GroupName` varchar(30) NOT NULL,
+  PRIMARY KEY (`GroupId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -54,12 +54,12 @@ DROP TABLE IF EXISTS `group_permission`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `group_permission` (
-  `group_id` int(5) NOT NULL,
-  `permission_id` int(5) NOT NULL,
-  PRIMARY KEY (`group_id`,`permission_id`),
-  KEY `fk_group_permission_2_idx` (`permission_id`),
-  CONSTRAINT `fk_grouppermission$groupid` FOREIGN KEY (`group_id`) REFERENCES `group` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_grouppermission$permissionid` FOREIGN KEY (`permission_id`) REFERENCES `permission` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
+  `GroupId` int(5) NOT NULL,
+  `PermissionId` int(5) NOT NULL,
+  PRIMARY KEY (`GroupId`,`PermissionId`),
+  KEY `fk_grouppermission$permissionid_idx` (`PermissionId`),
+  CONSTRAINT `fk_grouppermission$groupid` FOREIGN KEY (`GroupId`) REFERENCES `group` (`GroupId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_grouppermission$permissionid` FOREIGN KEY (`PermissionId`) REFERENCES `permission` (`PermissionId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -71,9 +71,9 @@ DROP TABLE IF EXISTS `permission`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `permission` (
-  `ID` int(5) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(30) NOT NULL,
-  PRIMARY KEY (`ID`)
+  `PermissionId` int(5) NOT NULL AUTO_INCREMENT,
+  `PermissionName` varchar(30) NOT NULL,
+  PRIMARY KEY (`PermissionId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -98,8 +98,8 @@ CREATE TABLE `user_cred` (
   PRIMARY KEY (`ID`),
   UNIQUE KEY `UserName_UNIQUE` (`UserName`),
   KEY `fk_cityid_idx` (`CityId`),
-  CONSTRAINT `fk_cityid` FOREIGN KEY (`CityId`) REFERENCES `city` (`ID`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+  CONSTRAINT `fk_cityid` FOREIGN KEY (`CityId`) REFERENCES `city` (`CityId`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,13 +110,12 @@ DROP TABLE IF EXISTS `user_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_group` (
-  `user_id` int(5) NOT NULL,
-  `group_id` int(5) NOT NULL,
-  PRIMARY KEY (`user_id`,`group_id`),
-  KEY `fk_groupid_idx` (`group_id`),
-  KEY `fk_usergroup$groupid_idx` (`group_id`),
-  CONSTRAINT `fk_usergroup$groupid` FOREIGN KEY (`group_id`) REFERENCES `group` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_usergroup$userid` FOREIGN KEY (`user_id`) REFERENCES `user_cred` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
+  `UserId` int(5) NOT NULL,
+  `GrpId` int(5) NOT NULL,
+  PRIMARY KEY (`UserId`,`GrpId`),
+  KEY `fk_usergroup$groupid_idx` (`GrpId`),
+  CONSTRAINT `fk_usergroup$userid` FOREIGN KEY (`UserId`) REFERENCES `user_cred` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_usergroup$groupid` FOREIGN KEY (`GrpId`) REFERENCES `group` (`GroupId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -129,4 +128,4 @@ CREATE TABLE `user_group` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-10 11:56:12
+-- Dump completed on 2016-05-11  9:46:01

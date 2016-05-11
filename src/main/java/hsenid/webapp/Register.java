@@ -46,7 +46,7 @@ public class Register extends HttpServlet {
                 statement=connection.prepareStatement(query);
                 exec=statement.executeUpdate();
 
-                String groupQuery="INSERT INTO user_group (user_id,group_id) VALUES ((SELECT ID FROM user_cred WHERE UserName=\'"+user.getUserName()+"\'),(SELECT ID FROM userdata.group WHERE Name=\'"+group+"\'));";
+                String groupQuery="INSERT INTO user_group (UserId,GrpId) VALUES ((SELECT ID FROM user_cred WHERE UserName=\'"+user.getUserName()+"\'),(SELECT GroupId FROM userdata.group WHERE GroupName=\'"+group+"\'));";
                 statement=connection.prepareStatement(groupQuery);
                 exec=statement.executeUpdate();
 

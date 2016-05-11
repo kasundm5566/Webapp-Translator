@@ -39,13 +39,13 @@ public class GroupLoader extends HttpServlet {
     public JsonArray loadGroups(){
         try {
             connection=DBCon.getComboDataSource().getConnection();
-            query="SELECT Name FROM userdata.group;";
+            query="SELECT GroupName FROM userdata.group;";
             statement=connection.prepareStatement(query);
             resultSet=statement.executeQuery();
             jsonArray=new JsonArray();
             while (resultSet.next()){
                 JsonObject jsonObject=new JsonObject();
-                jsonObject.addProperty("groupname",resultSet.getString("Name"));
+                jsonObject.addProperty("groupname",resultSet.getString("GroupName"));
                 jsonArray.add(jsonObject);
             }
         } catch (SQLException e) {
