@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page errorPage="error.jsp" %>
 <%@ page import="java.util.Vector" %>
 
@@ -29,9 +31,12 @@
 
     <script src="js/simple-bootstrap-paginator.js"></script>
     <link rel="stylesheet" href="css/pace-theme-center-simple.css">
+    <link rel="stylesheet" href="css/bootstrap-multiselect.css">
+    <script src="js/bootstrap-multiselect.js"></script>
 </head>
 
 <body>
+<fmt:bundle basename="jstlmessages_eu">
 <%@include file="header.jsp" %>
 <div id="sep">
 </div>
@@ -101,5 +106,6 @@
 <script type="text/javascript" src="js/validate.js"></script>
 <script type="text/javascript" src="js/validateUpdate.js"></script>
 <script type="text/javascript" src="js/search.js"></script>
+</fmt:bundle>
 </body>
 </html>

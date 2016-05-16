@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page errorPage="error.jsp" %>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title>Login Page</title>
@@ -16,10 +17,11 @@
     <link rel="stylesheet" href="css/pace-theme-center-simple.css">
 </head>
 <body>
+<fmt:bundle basename="jstlmessages_eu">
 <%@include file="header.jsp" %>
 <div id="login">
     <form name="Login" method="post" action="login">
-        <h1 id="title">Enter details to login</h1>
+        <h1 id="title"><fmt:message key="login.title"/></h1>
 
         <div class="progress" style="height: 5px;">
             <div class="progress-bar" role="progressbar" aria-valuenow="70"
@@ -43,7 +45,7 @@
             </div>
             <div style="margin-top: 10px;">
                 <button type="submit" class="btn btn-default" id="buttons">
-                    <span class="glyphicon glyphicon-send"></span>&nbsp;Login
+                    <span class="glyphicon glyphicon-send"></span>&nbsp;<fmt:message key="login.submit.text"/>
                 </button>
             </div>
         </div>
@@ -57,5 +59,6 @@
         }
     %>
 </div>
+</fmt:bundle>
 </body>
 </html>

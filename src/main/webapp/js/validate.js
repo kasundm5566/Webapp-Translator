@@ -211,17 +211,21 @@ function loadCities(){
 }
 
 function loadGroups(){
+    $("#groupSelect").multiselect({
+       buttonWidth:'100%'
+    });
     $.ajax({
         type: "POST",
         url: "grouploader",
         dataType: "json",
         success: function (result) {
-            var select = $("#groupSelect"), options = '';
+           var select = $("#groupSelect"), options = '';
             select.empty();
             for (var i = 0; i < result.length; i++) {
                 options += "<option>"+ result[i].groupname +"</option>";
             }
             select.append(options);
+            $('#groupSelect').multiselect('rebuild');
         }
     });
 }

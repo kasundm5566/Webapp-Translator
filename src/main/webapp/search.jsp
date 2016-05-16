@@ -25,10 +25,10 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><img src="images/alert-yellow.png">&nbsp;&nbsp;Delete User</h4>
+                <h4 class="modal-title"><img src="images/alert-yellow.png">&nbsp;&nbsp;<fmt:message key="search.delete.popup.title"/></h4>
             </div>
             <div class="modal-body">
-                <p id="dat">Are you sure you want to delete the following user?
+                <p id="dat"><fmt:message key="search.delete.popup.message"/>
                 </p>
                 <div><label id="lbFname" style="text-align: left; display: block;"></label></div>
                 <div><label id="lbLname" style="text-align: left; display: block;"></label></div>
@@ -40,8 +40,8 @@
                 <div><label id="lbTel" style="text-align: left; display: block;"></label></div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success" id="deleteOk"><i class="glyphicon glyphicon-trash"></i> Delete user</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-step-backward"></i> Cancel</button>
+                <button class="btn btn-success" id="deleteOk"><i class="glyphicon glyphicon-trash"></i> <fmt:message key="search.delete.popup.btndelete.text"/></button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-step-backward"></i> <fmt:message key="search.delete.popup.btncancel.text"/></button>
             </div>
         </div>
     </div>
@@ -52,18 +52,18 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><img src="images/alert-yellow.png">&nbsp;&nbsp;Update User</h4>
+                <h4 class="modal-title"><img src="images/alert-yellow.png">&nbsp;&nbsp;<fmt:message key="search.update.popup.title"/></h4>
             </div>
             <div class="modal-body">
-                <p>Enter the data you need to update and click 'Update' button.
+                <p><fmt:message key="search.update.popup.message"/>
                 </p>
             </div>
             <div style="width: 80%;">
                 <%@include file="update.jsp" %>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success" id="updateOk"><i class="glyphicon glyphicon-edit"></i> Update user</button>
-                <button type="button" id="updateCancel" class="btn btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-step-backward"></i> Cancel</button>
+                <button class="btn btn-success" id="updateOk"><i class="glyphicon glyphicon-edit"></i> <fmt:message key="search.update.popup.btnupdate.text"/></button>
+                <button type="button" id="updateCancel" class="btn btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-step-backward"></i> <fmt:message key="register.confirmadd.popup.canceltext"/> </button>
             </div>
         </div>
     </div>
@@ -74,15 +74,15 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><img src="images/Error-128.png">&nbsp;&nbsp;Error Occurred</h4>
+                <h4 class="modal-title"><img src="images/Error-128.png">&nbsp;&nbsp;<fmt:message key="search.deleteerror.popup.title"/></h4>
             </div>
             <div class="modal-body">
-                <p>Error while trying to delete the user record.<br>
-                    <b>Please try again later.</b><br>
+                <p><fmt:message key="search.deleteerror.popup.text"/><br>
+                    <b>P<fmt:message key="search.deleteerror.popup.boldtext"/></b><br>
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><fmt:message key="register.addsuccess.popup.btnok.text"/></button>
             </div>
         </div>
     </div>
@@ -93,14 +93,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><img src="images/success.png">&nbsp;&nbsp;Process Succeeded</h4>
+                <h4 class="modal-title"><img src="images/success.png">&nbsp;&nbsp;<fmt:message key="search.deletesuccess.title"/></h4>
             </div>
             <div class="modal-body">
                 <p>User record deleted successfully...
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><fmt:message key="register.addsuccess.popup.btnok.text"/></button>
             </div>
         </div>
     </div>
@@ -111,15 +111,15 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><img src="images/Error-128.png">&nbsp;&nbsp;Error Occurred</h4>
+                <h4 class="modal-title"><img src="images/Error-128.png">&nbsp;&nbsp;<fmt:message key="search.deleteerror.popup.title"/></h4>
             </div>
             <div class="modal-body">
-                <p>Error while trying to update the user record.<br>
-                    <b>Please verify the data entered or try again later.</b><br>
+                <p><fmt:message key="search.updateerror.popup.text"/><br>
+                    <b><fmt:message key="search.updateerror.popup.boldtext"/></b><br>
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><fmt:message key="register.addsuccess.popup.btnok.text"/></button>
             </div>
         </div>
     </div>
@@ -130,14 +130,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><img src="images/success.png">&nbsp;&nbsp;Process Succeeded</h4>
+                <h4 class="modal-title"><img src="images/success.png">&nbsp;&nbsp;<fmt:message key="search.deletesuccess.title"/></h4>
             </div>
             <div class="modal-body">
-                <p>User record updated successfully...
+                <p><fmt:message key="search.updatesucess.message"/>
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><fmt:message key="register.addsuccess.popup.btnok.text"/></button>
             </div>
         </div>
     </div>
