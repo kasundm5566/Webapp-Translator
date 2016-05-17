@@ -130,15 +130,14 @@
                         <label style="text-align: left; display: block;"><fmt:message
                                 key="register.usergroup.text"/><font
                                 color="#FF0000"><fmt:message key="mandatory.indicator"/></font></label>
-                        <%--<label id="pass_error"
-                               style="color: red; font-weight: lighter; font-size: smaller; text-align: left; display: block;"></label>--%>
+                        <label id="group_error"
+                               style="color: red; font-weight: lighter; font-size: smaller; text-align: left; display: block;"></label>
 
                         <div style="height: 35px;" class="input-group btn-group" >
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                             <select id="groupSelect" class="form-control" name="group" multiple="multiple">
                             </select>
                         </div>
-
                     </div>
                 </div>
             </div>

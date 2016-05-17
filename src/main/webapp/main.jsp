@@ -3,6 +3,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page errorPage="error.jsp" %>
 <%@ page import="java.util.Vector" %>
+<%@ page import="java.util.ArrayList" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,76 +37,92 @@
 </head>
 
 <body>
-<fmt:bundle basename="jstlmessages_eu">
-<%@include file="header.jsp" %>
-<div id="sep">
-</div>
+<%
+    request.setAttribute("permissionList", request.getSession().getAttribute("permissions"));
+    request.setAttribute("userAddPermission", "AddUser");
+    request.setAttribute("TranslatePermission", "Translate");
+%>
 
-<% session.setAttribute("user", session.getAttribute("username")); %>
-<div id="logoutDiv" style="position: fixed; right: 0; padding: 10px; z-index: 3;">
-    <ul id="navi" class="nav navbar-nav">
-        <li id="drp" class="dropdown">
-            <a href="#" class="dropdown-toggle"
-               data-toggle="dropdown"><% out.println("Logged in as <strong><u>" + session.getAttribute("username") + "</u></strong>"); %><span
-                    class="glyphicon glyphicon-user pull-right"></span></a>
-            <ul id="drpmenu" class="dropdown-menu">
-                <li>
-                    <a href="#acc">Account Settings <span class="glyphicon glyphicon-cog pull-right"></span></a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#fav">Favourites<span class="glyphicon glyphicon-heart pull-right"></span></a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#status">Status <span class="glyphicon glyphicon-stats pull-right"></span></a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a id="out" href="logout">Logout<span class="glyphicon glyphicon-log-out pull-right"></span></a>
-                </li>
-            </ul>
-        </li>
-    </ul>
-</div>
+<fmt:bundle basename="jstlmessages_en">
+    <%@include file="header.jsp" %>
+    <div id="sep">
+    </div>
 
-<div id="sep">
-</div>
-<center>
-    <div id="translate">
-        <ul class="nav nav-pills">
-            <li class="active"><a data-toggle="tab" href="#home"><span class="glyphicon glyphicon-list-alt"></span>
-                Translate Text</a></li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> User
-                    Management
-                    <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a data-toggle="tab" href="#addUser"><span class="glyphicon glyphicon-plus"></span> &nbsp;Add
-                        user</a></li>
-                    <li><a data-toggle="tab" href="#searchUser"><span class="glyphicon glyphicon-search"></span> &nbsp;Search
-                        user</a></li>
+    <% session.setAttribute("user", session.getAttribute("username")); %>
+    <div id="logoutDiv" style="position: fixed; right: 0; padding: 10px; z-index: 3;">
+        <ul id="navi" class="nav navbar-nav">
+            <li id="drp" class="dropdown">
+                <a href="#" class="dropdown-toggle"
+                   data-toggle="dropdown"><% out.println("Logged in as <strong><u>" + session.getAttribute("username") + "</u></strong>"); %><span
+                        class="glyphicon glyphicon-user pull-right"></span></a>
+                <ul id="drpmenu" class="dropdown-menu">
+                    <li>
+                        <a href="#acc">Account Settings <span class="glyphicon glyphicon-cog pull-right"></span></a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#fav">Favourites<span class="glyphicon glyphicon-heart pull-right"></span></a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#status">Status <span class="glyphicon glyphicon-stats pull-right"></span></a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a id="out" href="logout">Logout<span class="glyphicon glyphicon-log-out pull-right"></span></a>
+                    </li>
                 </ul>
+            </li>
         </ul>
+    </div>
 
-        <div class="tab-content">
-            <div id="home" class="tab-pane fade in active">
-                <%@include file="translate.jsp" %>
-            </div>
-            <div id="addUser" class="tab-pane fade">
-                <%@include file="register.jsp" %>
-            </div>
-            <div id="searchUser" class="tab-pane fade" style="width:1100px;">
-                <%@include file="search.jsp" %>
+    <div id="sep">
+    </div>
+    <center>
+        <div id="translate">
+            <ul class="nav nav-pills">
+                <li class="active"><a data-toggle="tab" href="#home"><span
+                        class="glyphicon glyphicon-list-alt"></span>
+                    Translate Text</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>
+                        User
+                        Management
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <c:forEach items="${permissionList}" var="permissions">
+                            <c:choose>
+                                <c:when test="${permissions eq userAddPermission}">
+                                    <li><a data-toggle="tab" href="#addUser"><span
+                                            class="glyphicon glyphicon-plus"></span> &nbsp;Add
+                                        user</a></li>
+                                </c:when>
+                            </c:choose>
+                        </c:forEach>
+                        <li><a data-toggle="tab" href="#searchUser"><span class="glyphicon glyphicon-search"></span>
+                            &nbsp;Search
+                            user</a></li>
+                    </ul>
+            </ul>
+
+            <div class="tab-content">
+                <div id="home" class="tab-pane fade in active">
+                    <%@include file="translate.jsp" %>
+                </div>
+                <div id="addUser" class="tab-pane fade">
+                    <%@include file="register.jsp" %>
+                </div>
+                <div id="searchUser" class="tab-pane fade" style="width:1100px;">
+                    <%@include file="search.jsp" %>
+                </div>
             </div>
         </div>
-    </div>
-</center>
+    </center>
 
-<script type="text/javascript" src="js/datepicker.js"></script>
-<script type="text/javascript" src="js/validate.js"></script>
-<script type="text/javascript" src="js/validateUpdate.js"></script>
-<script type="text/javascript" src="js/search.js"></script>
+    <script type="text/javascript" src="js/datepicker.js"></script>
+    <script type="text/javascript" src="js/validate.js"></script>
+    <script type="text/javascript" src="js/validateUpdate.js"></script>
+    <script type="text/javascript" src="js/search.js"></script>
 </fmt:bundle>
 </body>
 </html>

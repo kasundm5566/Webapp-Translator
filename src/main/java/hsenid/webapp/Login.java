@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sound.midi.Soundbank;
 
 /**
  * Created by hsenid.
@@ -39,13 +41,26 @@ public class Login extends HttpServlet {
             boolean status = validateByDb(user);
             if (status) {   // User validated.
                 log.info("User \'" + user.getUserName() + "\' validated.");
-                HttpSession httpSession = req.getSession(false);
-                httpSession.setAttribute("username", user.getUserName());   // Create a new session.
-                Vector<String> list = translator.loadLanguages();   // Languages will be loaded to a vector.
-                httpSession.setAttribute("langs", list);
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/main.jsp");
-                rd.forward(req, resp);  // Forward to a new page with data such as language list, user details.
-                log.info("New session initialized.");
+                ArrayList<String> permissionList=getPermissionList(user);
+                if(!permissionList.contains("Login") || permissionList.contains("Blocked")){
+                    error="You have no enough permissions to login to the system or you are blocked.";
+                    log.info("User \'" + user.getUserName() + "\' has no login permissions or blocked.");
+                    req.setAttribute("error_msg", error);
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
+                    rd.forward(req, resp);  // Forward to a new page with error message.
+                }else{
+                    error=null;
+                    log.info("User \'" + user.getUserName() + "\': Login permissions granted.");
+                    HttpSession httpSession = req.getSession(false);
+                    httpSession.setAttribute("username", user.getUserName());   // Create a new session.
+                    Vector<String> list = translator.loadLanguages();   // Languages will be loaded to a vector.
+                    httpSession.setAttribute("langs", list);
+                    log.info("New session initialized.");
+                    req.setAttribute("error_msg", error);
+                    req.getSession().setAttribute("permissions", permissionList);
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/main.jsp");
+                    rd.forward(req, resp);  // Forward to a new page with data such as language list, user details.
+                }
             } else {
                 log.warn("Wrong username, password combination.");
                 error = "User name and password does not match!";
@@ -95,5 +110,33 @@ public class Login extends HttpServlet {
             }
         }
         return status;
+    }
+
+    public ArrayList<String> getPermissionList(User user){
+        String permissionQuery=null;
+        Connection con=null;
+        PreparedStatement preState=null;
+        ResultSet permissions=null;
+        ArrayList<String> permissionList=new ArrayList<>();
+        try {
+            con=DBCon.getComboDataSource().getConnection();
+            permissionQuery="SELECT Name FROM permission WHERE ID IN (SELECT permission_id FROM group_permission WHERE group_id IN (SELECT group_id FROM user_group ug,userdata.user_cred uc WHERE ug.user_id=uc.ID AND uc.UserName=\'"+user.getUserName()+"\'));";
+            preState=con.prepareStatement(permissionQuery);
+            permissions=preState.executeQuery();
+            while (permissions.next()){
+                permissionList.add(permissions.getString("Name"));
+            }
+        } catch (SQLException e) {
+            log.error("Error returning the permissions. "+e);
+        }finally {
+            try {
+                con.close();
+                preState.close();
+                permissions.close();
+            } catch (SQLException e) {
+                log.error("Error while closing connection, statement and resultset when returning the permissions. "+e);
+            }
+        }
+       return permissionList;
     }
 }

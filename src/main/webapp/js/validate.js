@@ -181,6 +181,17 @@ function validateUserName() {
     }
 }
 
+// Validate user group
+function validateGroup(){
+    if($("#groupSelect").val()==null){
+        $("#group_error").show();
+        $("#group_error").text("User must belongs to at least one group.");
+        return false;
+    }else{
+        $("#group_error").hide();
+    }
+}
+
 function hideErrorLabels() {
     $("#fname_error").hide();
     $("#lname_error").hide();
@@ -212,7 +223,10 @@ function loadCities(){
 
 function loadGroups(){
     $("#groupSelect").multiselect({
-       buttonWidth:'100%'
+       buttonWidth:'100%',
+        onChange: function(element,checked){
+            validateGroup();
+        }
     });
     $.ajax({
         type: "POST",
@@ -289,7 +303,7 @@ $(document).ready(function () {
     });
 
     $("#register").submit(function () {
-        if (validateFirstName() == false || validateLastName() == false || validateDOB() == false || validateUserName() == false || validatePassword() == false || validateRetypedPass() == false || validateEmail() == false || validateTelNo() == false) {
+        if (validateFirstName() == false || validateLastName() == false || validateDOB() == false || validateUserName() == false || validatePassword() == false || validateRetypedPass() == false || validateGroup()==false || validateEmail() == false || validateTelNo() == false) {
             $('#popup').modal('show');
             return false;
         } else {
