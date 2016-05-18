@@ -2,6 +2,8 @@ package hsenid.webapp;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.tools.ant.taskdefs.Get;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,6 +31,7 @@ public class Login extends HttpServlet {
     private Translator translator = new Translator();
     private static final Logger log = LogManager.getLogger(Login.class);
     private Connection connection;
+    GetUserPermissions getPermissionsClass=null;
 
     @Override
     /**
@@ -37,13 +40,14 @@ public class Login extends HttpServlet {
      */
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         user = new User(req.getParameter("uname"), req.getParameter("loginpass"));
+        getPermissionsClass=new GetUserPermissions();
         try {
             boolean status = validateByDb(user);
             if (status) {   // User validated.
                 log.info("User \'" + user.getUserName() + "\' validated.");
-                ArrayList<String> permissionList=getPermissionList(user);
+                ArrayList<String> permissionList=getPermissionsClass.getPermissionList(user);
                 if(!permissionList.contains("Login") || permissionList.contains("Blocked")){
-                    error="You have no enough permissions to login to the system or you are blocked.";
+                    error="You don't have enough permissions to login or you are blocked.";
                     log.info("User \'" + user.getUserName() + "\' has no login permissions or blocked.");
                     req.setAttribute("error_msg", error);
                     RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
@@ -110,33 +114,5 @@ public class Login extends HttpServlet {
             }
         }
         return status;
-    }
-
-    public ArrayList<String> getPermissionList(User user){
-        String permissionQuery=null;
-        Connection con=null;
-        PreparedStatement preState=null;
-        ResultSet permissions=null;
-        ArrayList<String> permissionList=new ArrayList<>();
-        try {
-            con=DBCon.getComboDataSource().getConnection();
-            permissionQuery="SELECT Name FROM permission WHERE ID IN (SELECT permission_id FROM group_permission WHERE group_id IN (SELECT group_id FROM user_group ug,userdata.user_cred uc WHERE ug.user_id=uc.ID AND uc.UserName=\'"+user.getUserName()+"\'));";
-            preState=con.prepareStatement(permissionQuery);
-            permissions=preState.executeQuery();
-            while (permissions.next()){
-                permissionList.add(permissions.getString("Name"));
-            }
-        } catch (SQLException e) {
-            log.error("Error returning the permissions. "+e);
-        }finally {
-            try {
-                con.close();
-                preState.close();
-                permissions.close();
-            } catch (SQLException e) {
-                log.error("Error while closing connection, statement and resultset when returning the permissions. "+e);
-            }
-        }
-       return permissionList;
     }
 }

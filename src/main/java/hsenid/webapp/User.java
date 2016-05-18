@@ -18,6 +18,10 @@ public class User {
     private String email;
     private long contactNo;
 
+    public User(String userName) {
+        this.userName = userName;
+    }
+
     /**
      * @param username userName for the new user object
      * @param password password for the new user object

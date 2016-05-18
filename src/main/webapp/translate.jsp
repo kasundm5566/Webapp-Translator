@@ -106,7 +106,7 @@
                 </div>
             </div>
             <div>
-                <button type="submit" class="btn btn-default" id="buttons">
+                <button type="submit" class="btn btn-default" id="translateButton">
                     <span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;&nbsp;<fmt:message
                         key="button.translate.text"/>
                 </button>

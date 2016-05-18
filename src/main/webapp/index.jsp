@@ -6,15 +6,14 @@
 <head>
     <title>Login Page</title>
     <link rel='shortcut icon' type='image/x-icon' href='images/bi.png'/>
-    <link rel="stylesheet" href="css/login.css">
-    <link rel="stylesheet" href="css/translate.css">
+    <link rel="stylesheet" href="css/login.css"/>
+    <link rel="stylesheet" href="css/translate.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="js/pace.js"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/yeti/bootstrap.min.css">
-    <%--<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">--%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/yeti/bootstrap.min.css"/>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/pace-theme-center-simple.css">
+    <link rel="stylesheet" href="css/pace-theme-center-simple.css"/>
 </head>
 <body>
 <fmt:bundle basename="jstlmessages_en">
@@ -36,7 +35,7 @@
             <div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="text" class="form-control " name="uname" placeholder="Enter user name"
+                    <input id="loginusername" type="text" class="form-control " name="uname" placeholder="Enter user name"
                            required="true"/>
                 </div>
                 <div class="input-group" style="margin-top: 10px;">
@@ -45,7 +44,7 @@
                            required="true"/>
                 </div>
                 <div style="margin-top: 10px;">
-                    <button type="submit" class="btn btn-default" id="buttons">
+                    <button type="submit" class="btn btn-default" id="loginButton">
                         <span class="glyphicon glyphicon-send"></span>&nbsp;<fmt:message key="login.submit.text"/>
                     </button>
                 </div>
@@ -60,5 +59,7 @@
         </c:if>
     </div>
 </fmt:bundle>
+
+<script src="js/permission.js"></script>
 </body>
 </html>

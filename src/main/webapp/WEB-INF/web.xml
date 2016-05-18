@@ -138,7 +138,17 @@
         <servlet-name>Logout</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
-    
+
+    <servlet>
+        <servlet-name>GetUserPermissions</servlet-name>
+        <servlet-class>hsenid.webapp.GetUserPermissions</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetUserPermissions</servlet-name>
+        <url-pattern>/getuserpermissions</url-pattern>
+    </servlet-mapping>
+
+
     <error-page>
         <location>/error.jsp</location>
     </error-page>
