@@ -99,6 +99,17 @@ function validateDOB2() {
     }
 }
 
+// Validate user group
+function validateGroup2(){
+    if($("#ugroupSelect").val()==null){
+        $("#ugroup_error").show();
+        $("#ugroup_error").text("User must belongs to at least one group.");
+        return false;
+    }else{
+        $("#ugroup_error").hide();
+    }
+}
+
 function loadCities2(){
     var country = $('#ucountrySelect').val();
     $.ajax({
@@ -121,11 +132,38 @@ $('#ucountrySelect').change(function(){
    loadCities2();
 });
 
+function loadGroups2(){
+    $("#ugroupSelect").multiselect({
+        buttonWidth:'100%',
+        onChange: function(element,checked){
+            validateGroup2();
+        }
+    });
+    $.ajax({
+        type: "POST",
+        url: "grouploader",
+        dataType: "json",
+        success: function (result) {
+            $.ajax({
+
+            });
+            var select = $("#ugroupSelect"), options = '';
+            select.empty();
+            for (var i = 0; i < result.length; i++) {
+                options += "<option>"+ result[i].groupname +"</option>";
+            }
+            select.append(options);
+            $('#ugroupSelect').multiselect('rebuild');
+        }
+    });
+}
+
 function hideErrorLabels2() {
     $("#ufname_error").hide();
     $("#ulname_error").hide();
     $("#udob_error").hide();
     $("#uuname_error").hide();
+    $("#ugroup_error").hide();
     $("#upass_error").hide();
     $("#urepass_error").hide();
     $("#uemail_error").hide();
@@ -133,6 +171,7 @@ function hideErrorLabels2() {
 }
 $(document).ready(function () {
     hideErrorLabels2();
+    loadGroups2();
 
     $("#ufname").keyup(function () {
         validateFirstName2();

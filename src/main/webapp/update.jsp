@@ -24,7 +24,8 @@
     <select id="ucitySelect" class="form-control" name="ucity" text-align: left; display: block;></select>
 
     <label style="text-align: left; display: block;"><fmt:message key="register.dob.text"/></label>
-    <label id="udob_error" style="color: red; font-weight: lighter; font-size: smaller; text-align: left; display: block;"></label>
+    <label id="udob_error"
+           style="color: red; font-weight: lighter; font-size: smaller; text-align: left; display: block;"></label>
     <input type="text" class="form-control" id="udate" name="udate" placeholder="Enter your date of birth"
     </div>
 
@@ -33,6 +34,14 @@
            style="color: red; font-weight: lighter; font-size: smaller; text-align: left; display: block;"></label>
     <input type="text" id="uusername" class="form-control" name="uusername"
            placeholder="Enter user name" disabled/>
+
+    <label style="text-align: left; display: block;"><fmt:message
+            key="register.usergroup.text"/></label>
+    <label id="ugroup_error"
+           style="color: red; font-weight: lighter; font-size: smaller; text-align: left; display: block;"></label>
+    <select id="ugroupSelect" class="form-control" name="ugroup" multiple="multiple">
+    </select>
+
 
     <label style="text-align: left; display: block;"><fmt:message key="register.email.text"/></label>
     <label id="uemail_error"

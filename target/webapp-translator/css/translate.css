@@ -1,0 +1,167 @@
+/* 
+    Created on : Mar 23, 2016, 9:30:12 AM
+    Author     : Kasun Dinesh
+*/
+input:not([type=checkbox]) {
+    width: 100%;
+}
+
+input:focus {
+    outline: none;
+    border-color: #008cba/*#9ecaed*/;
+    box-shadow: 0 0 10px #008cba/*#9ecaed*/;
+}
+
+textarea {
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 10px #008cba/*#9ecaed*/;
+    resize: none;
+}
+
+select:focus {
+    outline: none;
+    border-color: #008cba/*#9ecaed*/;
+    box-shadow: 0 0 10px #008cba/*#9ecaed*/;
+}
+
+#title {
+    font-weight: 100;
+    text-align: center;
+    font-size: 1.3em;
+    font-family: "Lucida Console", Monaco, monospace;
+}
+
+body {
+    background-size: cover;
+    font-family: 'Roboto', sans-serif;
+    background-color: darkgrey;
+    background-image: url(../images/shopping-cart-online.jpg);
+    background-size: cover;
+}
+
+#translate {
+    padding: 25px;
+    max-width: 1500px;
+    min-width: 500px;
+    display: inline-block;
+    background-color: #F7F7F7;
+    margin: 0px auto 10px;
+    /*margin-top: 30px;*/
+    border-radius: 2px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+option:checked, option:hover {
+    color: white;
+    background: #008cba/*#4d90fe*/;
+}
+
+div#sep {
+    height: 25px;
+}
+
+div#sep2 {
+    margin-top: 0.8em;
+}
+
+div#sep3 {
+    height: 10px;
+}
+
+.header-text {
+    text-align: center;
+    font-size: 32px;
+    padding-top: 10px;
+    color: #fff;
+}
+
+#buttons {
+    border: 0px;
+    color: #fff;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+    background-color: #008cba/*#4d90fe*/;
+    font-size: 20px;
+    width: 100%;
+}
+select {
+    border: 2px solid #dadada;
+    font-size: 16px;
+    margin-bottom: 60px;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-top: 1px solid #c0c0c0;
+    padding: 0 8px;
+    box-sizing: border-box;
+}
+
+input[type=checkbox] {
+    transform: scale(1.3);
+}
+
+#yandex {
+    font-style: oblique;
+    font-family: monospace;
+    font-size: 11px;
+    font-weight: bold;
+    color: blueviolet;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 5px;
+}
+
+.progress {
+    height: 5px;
+}
+
+#btnswap {
+    border: 0px;
+    color: #fff;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+    background-color: #008cba/*#4d90fe*/;
+    font-size: 20px;
+    height: 25px;
+    width: 50px;
+    font-size: 12px;
+}
+
+#session {
+    float: right;
+    opacity: 0.7;
+}
+
+#session:hover {
+    opacity: 1.0;
+}
+
+#logout {
+    height: 25px;
+    width: 105px;
+}
+
+.navbar-login {
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 10px;
+}
+
+.navbar-login-session {
+    padding: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.icon-size {
+    font-size: 87px;
+}
+
+#table th {
+    background-color: #008cba;
+}
+
+#table tr {
+    background-color: ivory;
+}

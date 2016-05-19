@@ -1,6 +1,5 @@
 function hideTableFeatures() {
     var userName = $("#userName").val();
-    alert("username: " + userName);
     $.ajax({
         type: "post",
         dataType: "json",
