@@ -1,22 +1,27 @@
 function hideTableFeatures() {
-    var userName = $("#loginusername").val();
+    var userName = $("#userName").val();
+    alert("username: " + userName);
     $.ajax({
         type: "post",
         dataType: "json",
         url: "getuserpermissions",
         data: {"userName": userName},
-
         success: function (result) {
-            /*alert(result);*/
-            if(result.indexOf("EditUser") < 0){
+            if (result.indexOf("EditUser") < 0) {
                 $(".edit").hide();
+            }
+            if (result.indexOf("DeleteUser") < 0) {
+                $(".delete").hide();
+            }
+            if(result.indexOf("EditUser") < 0 && result.indexOf("DeleteUser") < 0){
+                $("#table").bootstrapTable('hideColumn',"operations");
             }
         }
     });
 }
 
 $(document).ready(function () {
-    $("#loginButton").click(function () {
+    $('#tabSrch').click(function () {
         hideTableFeatures();
     });
 });

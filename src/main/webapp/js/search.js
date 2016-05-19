@@ -53,7 +53,8 @@ function loadTableData() {
                     sortable: true
                 }, {
                     field: 'username',
-                    title: 'User name'
+                    title: 'User name',
+                    sortable: true
                 }, {
                     field: 'email',
                     title: 'Email'

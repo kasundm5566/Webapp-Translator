@@ -37,6 +37,7 @@
 
 <%
     request.setAttribute("permissionList", request.getSession().getAttribute("permissions"));
+    request.setAttribute("uname", session.getAttribute("username"));
     request.setAttribute("userAddPermission", "AddUser");
     request.setAttribute("translatePermission", "Translate");
     request.setAttribute("searchPermission", "SearchUser");
@@ -50,10 +51,12 @@
     <% session.setAttribute("user", session.getAttribute("username")); %>
     <div id="logoutDiv" style="position: fixed; right: 0; padding: 10px; z-index: 3;">
         <ul id="navi" class="nav navbar-nav">
+            <input type="hidden" id="userName" value="${uname}"/>
             <li id="drp" class="dropdown">
                 <a href="#" class="dropdown-toggle"
-                   data-toggle="dropdown"><% out.println("Logged in as <strong><u>" + session.getAttribute("username") + "</u></strong>"); %><span
-                        class="glyphicon glyphicon-user pull-right"></span></a>
+                   data-toggle="dropdown">Logged in as <strong><u><c:out value="${uname}"/></u></strong><span
+                        class="glyphicon glyphicon-user pull-right"></span>
+                </a>
                 <ul id="drpmenu" class="dropdown-menu">
                     <li>
                         <a href="#acc">Account Settings <span class="glyphicon glyphicon-cog pull-right"></span></a>
@@ -84,9 +87,12 @@
                 <c:forEach items="${permissionList}" var="permissions">
                     <c:choose>
                         <c:when test="${permissions eq translatePermission}">
-                            <li class="active"><a data-toggle="tab" href="#home"><span
-                                    class="glyphicon glyphicon-list-alt"></span>
-                                Translate Text</a></li>
+                            <li class="active">
+                                <a data-toggle="tab" href="#home"><span
+                                        class="glyphicon glyphicon-list-alt"></span>
+                                    Translate Text
+                                </a>
+                            </li>
                         </c:when>
                     </c:choose>
                 </c:forEach>
@@ -122,7 +128,8 @@
                                 </c:when>
                             </c:choose>
                         </c:forEach>
-                        <li><a data-toggle="tab" href="#searchUser"><span class="glyphicon glyphicon-search"></span>
+                        <li><a id="tabSrch" data-toggle="tab" href="#searchUser"><span
+                                class="glyphicon glyphicon-search"></span>
                             &nbsp;Search
                             user</a></li>
                     </ul>
@@ -166,6 +173,7 @@
     <script type="text/javascript" src="js/validate.js"></script>
     <script type="text/javascript" src="js/validateUpdate.js"></script>
     <script type="text/javascript" src="js/search.js"></script>
+    <script type="text/javascript" src="js/permission.js"></script>
 </fmt:bundle>
 </body>
 </html>

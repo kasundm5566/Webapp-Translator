@@ -60,6 +60,6 @@
     </div>
 </fmt:bundle>
 
-<script src="js/permission.js"></script>
+<%--<script src="js/permission.js"></script>--%>
 </body>
 </html>
