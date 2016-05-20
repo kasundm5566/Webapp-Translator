@@ -52,7 +52,7 @@ public class Pagination extends HttpServlet {
                     result.close();
                 }
             } catch (SQLException e) {
-                log.error("Error closing connection while get the data count for the pagination. " + e);
+                log.error("Error closing connection related objects created while retrieving the data count for the pagination. " + e);
             }
         }
     }

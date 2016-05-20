@@ -42,7 +42,6 @@
     <select id="ugroupSelect" class="form-control" name="ugroup" multiple="multiple">
     </select>
 
-
     <label style="text-align: left; display: block;"><fmt:message key="register.email.text"/></label>
     <label id="uemail_error"
            style="color: red; font-weight: lighter; font-size: smaller; text-align: left; display: block;"></label>

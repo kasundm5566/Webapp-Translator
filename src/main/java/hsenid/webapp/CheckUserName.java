@@ -51,7 +51,7 @@ public class CheckUserName extends HttpServlet{
                     result.close();
                 }
             } catch (SQLException e) {
-                log.error("Error while closing the connection create to check the user name availability. "+e);
+                log.error("Error while closing the connection related objects created to check the user name availability. "+e);
             }
         }
     }

@@ -100,17 +100,17 @@ function validateDOB2() {
 }
 
 // Validate user group
-function validateGroup2(){
-    if($("#ugroupSelect").val()==null){
+function validateGroup2() {
+    if ($("#ugroupSelect").val() == null) {
         $("#ugroup_error").show();
         $("#ugroup_error").text("User must belongs to at least one group.");
         return false;
-    }else{
+    } else {
         $("#ugroup_error").hide();
     }
 }
 
-function loadCities2(){
+function loadCities2() {
     var country = $('#ucountrySelect').val();
     $.ajax({
         type: "POST",
@@ -121,21 +121,37 @@ function loadCities2(){
             var select = $("#ucitySelect"), options = '';
             select.empty();
             for (var i = 0; i < result.length; i++) {
-                options += "<option value='"+result[i].cityname+"'>"+ result[i].cityname +"</option>";
+                options += "<option value='" + result[i].cityname + "'>" + result[i].cityname + "</option>";
             }
             select.append(options);
         }
     });
 }
 
-$('#ucountrySelect').change(function(){
-   loadCities2();
+function loadUserCity() {
+    var uname = $("#uusername").val();
+    $.ajax({
+        type: "POST",
+        url: "getusercity",
+        dataType: "json",
+        data: {"username": uname},
+        success: function (userCity) {
+            for (var i = 0; i < userCity.length; i++) {
+                $("#ucitySelect option[value='" + userCity[i].cityname + "']").prop('selected', true);
+            }
+        }
+    });
+}
+
+$('#ucountrySelect').change(function () {
+    loadCities2();
 });
 
-function loadGroups2(){
+function loadGroups2() {
+    var username = $("#uusername").val();
     $("#ugroupSelect").multiselect({
-        buttonWidth:'100%',
-        onChange: function(element,checked){
+        buttonWidth: '100%',
+        onChange: function (element, checked) {
             validateGroup2();
         }
     });
@@ -143,17 +159,25 @@ function loadGroups2(){
         type: "POST",
         url: "grouploader",
         dataType: "json",
-        success: function (result) {
+        success: function (groups) {
             $.ajax({
-
+                type: "POST",
+                url: "usergroupsloader",
+                dataType: "json",
+                data: {"userName": username},
+                success: function (userGroups) {
+                    var select = $("#ugroupSelect"), options = '';
+                    select.empty();
+                    for (var i = 0; i < groups.length; i++) {
+                        options += "<option value='" + groups[i].groupname + "'>" + groups[i].groupname + "</option>";
+                    }
+                    select.append(options);
+                    for (var i = 0; i < userGroups.length; i++) {
+                        $("#ugroupSelect option[value='" + userGroups[i].groupname + "']").prop('selected', true);
+                    }
+                    $('#ugroupSelect').multiselect('rebuild');
+                }
             });
-            var select = $("#ugroupSelect"), options = '';
-            select.empty();
-            for (var i = 0; i < result.length; i++) {
-                options += "<option>"+ result[i].groupname +"</option>";
-            }
-            select.append(options);
-            $('#ugroupSelect').multiselect('rebuild');
         }
     });
 }
@@ -171,7 +195,6 @@ function hideErrorLabels2() {
 }
 $(document).ready(function () {
     hideErrorLabels2();
-    loadGroups2();
 
     $("#ufname").keyup(function () {
         validateFirstName2();

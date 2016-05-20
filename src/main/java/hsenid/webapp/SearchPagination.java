@@ -56,7 +56,7 @@ public class SearchPagination extends HttpServlet {
                     result.close();
                 }
             } catch (SQLException e) {
-                log.error("Error closing connection while get the data count for the search pagination. " + e);
+                log.error("Error closing the connection related objects created while retrieving the data count for the search pagination. " + e);
             }
         }
         return count;

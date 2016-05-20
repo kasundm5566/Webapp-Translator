@@ -100,6 +100,8 @@ window.operateEvents = {
         $('#utel').val(obj["tel"]);
         $('#updateUserPopup').modal('show');
         loadCities2();
+        loadGroups2();
+        loadUserCity();
 
         $('#updateOk').off('click');
         $('#updateOk').click(function () {
@@ -112,11 +114,13 @@ window.operateEvents = {
                     "ulname": $('#ulname').val(),
                     "ucountry": $('#ucountrySelect').val(),
                     "ucity": $('#ucitySelect').val(),
+                    //"ugroup": $("#ugroupSelect").val(),
                     "udate": $('#udate').val(),
                     "uemail": $('#uemail').val(),
                     "utel": $('#utel').val()
                 },
                 success: function (result) {
+                    alert(result);
                     if ($.trim(result) == 1) {
                         $('#updateUserPopup').modal('hide');
                         $('#updateUserSuccess').modal('show');

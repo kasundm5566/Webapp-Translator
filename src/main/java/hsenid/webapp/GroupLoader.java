@@ -62,7 +62,7 @@ public class GroupLoader extends HttpServlet {
                     resultSet.close();
                 }
             } catch (SQLException e) {
-                log.error("Error closing the connection while loading groups. "+e);
+                log.error("Error closing the connection related objects created while loading groups. "+e);
             }
         }
         return jsonArray;

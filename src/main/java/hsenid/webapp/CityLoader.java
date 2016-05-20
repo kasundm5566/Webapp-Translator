@@ -64,7 +64,7 @@ public class CityLoader extends HttpServlet{
                     resultSet.close();
                 }
             } catch (SQLException e) {
-                log.error("Error closing the connection while loading cities. "+e);
+                log.error("Error closing the connection related objects while loading cities. "+e);
             }
         }
         return jsonArray;

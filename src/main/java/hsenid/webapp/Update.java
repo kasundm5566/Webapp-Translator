@@ -32,7 +32,6 @@ public class Update extends HttpServlet{
         response.setContentType("text/html");
         PrintWriter out=response.getWriter();
         int result=updateUser(user,userId);
-        //out.println(user.getFirstName()+" "+user.getLastName()+" "+user.getCountry()+" "+user.getDob()+" "+user.getUserName()+" "+user.getEmail()+" "+user.getContactNo());
         out.println(result);
     }
 
@@ -51,7 +50,7 @@ public class Update extends HttpServlet{
                 log.error("Error getting the city id while updating the user.");
             }
         } catch (SQLException e) {
-            log.error("Error while deleting the user. "+e);
+            log.error("Error while updating the user. "+e);
         }finally {
             try {
                 if(connection!=null){
@@ -61,9 +60,24 @@ public class Update extends HttpServlet{
                     statement.close();
                 }
             } catch (SQLException e) {
-                log.error("Error closing the connection while updating the user. "+e);
+                log.error("Error closing the connection related objects created while updating the user. "+e);
             }
         }
         return exec;
+    }
+
+    public void updateUserGroups(int userId){
+        Connection con=null;
+        PreparedStatement preStatement=null;
+        String groupUpdateQuery=null;
+        String groupDeleteQuery=null;
+        try {
+            con=DBCon.getComboDataSource().getConnection();
+            groupDeleteQuery="DELETE FROM user_group WHERE user_id="+userId+";";
+
+            preStatement=con.prepareStatement(groupUpdateQuery);
+        } catch (SQLException e) {
+            log.error("Error while updating user_groups. "+e);
+        }
     }
 }

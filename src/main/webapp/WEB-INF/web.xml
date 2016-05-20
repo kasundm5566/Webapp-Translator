@@ -148,6 +148,23 @@
         <url-pattern>/getuserpermissions</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>UserGroupsLoader</servlet-name>
+        <servlet-class>hsenid.webapp.UserGroupsLoader</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserGroupsLoader</servlet-name>
+        <url-pattern>/usergroupsloader</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GetUserCity</servlet-name>
+        <servlet-class>hsenid.webapp.GetUserCity</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetUserCity</servlet-name>
+        <url-pattern>/getusercity</url-pattern>
+    </servlet-mapping>
 
     <error-page>
         <location>/error.jsp</location>

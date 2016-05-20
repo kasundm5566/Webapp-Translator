@@ -63,7 +63,7 @@ public class GetUserPermissions extends HttpServlet{
                 preState.close();
                 permissions.close();
             } catch (SQLException e) {
-                log.error("Error while closing connection, statement and resultset when returning the permissions. "+e);
+                log.error("Error while closing connection related objects when returning the permissions. "+e);
             }
         }
         return perlist;

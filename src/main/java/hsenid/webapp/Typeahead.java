@@ -59,7 +59,7 @@ public class Typeahead extends HttpServlet {
                     resultSet.close();
                 }
             } catch (SQLException e) {
-                log.error("Error while closing connection created to load typeahead. " + e);
+                log.error("Error while closing the connection related objects created to load typeahead. " + e);
             }
         }
         return jsonArray;

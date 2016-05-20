@@ -20,15 +20,16 @@ import java.sql.SQLException;
  * Created by hsenid on 4/27/16.
  */
 public class Load extends HttpServlet {
-    private Connection connection = null;
-    private PreparedStatement statement = null;
-    private ResultSet resultSet = null;
-    private String query = null;
+
     private static final Logger log = LogManager.getLogger(Load.class);
+    String query = null;
 
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         try {
@@ -67,7 +68,7 @@ public class Load extends HttpServlet {
                     resultSet.close();
                 }
             } catch (SQLException e) {
-                log.error("Error while closing the connection created to load all users. " + e);
+                log.error("Error while closing the connection related objects created to load all users. " + e);
             }
         }
     }
