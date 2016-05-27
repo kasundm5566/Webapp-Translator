@@ -12,8 +12,8 @@ function hideTableFeatures() {
             if (result.indexOf("DeleteUser") < 0) {
                 $(".delete").hide();
             }
-            if(result.indexOf("EditUser") < 0 && result.indexOf("DeleteUser") < 0){
-                $("#table").bootstrapTable('hideColumn',"operations");
+            if (result.indexOf("EditUser") < 0 && result.indexOf("DeleteUser") < 0) {
+                $("#table").bootstrapTable('hideColumn', "operations");
             }
         }
     });

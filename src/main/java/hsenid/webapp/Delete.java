@@ -37,9 +37,12 @@ public class Delete extends HttpServlet {
         int exec=0;
         try {
             connection=DBCon.getComboDataSource().getConnection();
-            String query="DELETE FROM user_cred WHERE ID="+id+";";
-            statement=connection.prepareStatement(query);
+            String userDeleteQuery="DELETE FROM user_cred WHERE ID="+id+";";
+            String groupDeletequery="DELETE FROM user_group WHERE user_id="+id+";";
+            statement=connection.prepareStatement(userDeleteQuery);
             exec=statement.executeUpdate();
+            statement=connection.prepareStatement(groupDeletequery);
+            statement.executeUpdate();
         } catch (SQLException e) {
             log.error("Error while deleting the user. "+e);
         }finally {

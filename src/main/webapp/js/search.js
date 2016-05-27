@@ -105,6 +105,10 @@ window.operateEvents = {
 
         $('#updateOk').off('click');
         $('#updateOk').click(function () {
+            var selectednumbers = [];
+            $('#ugroupSelect :selected').each(function(i, selected) {
+                selectednumbers[i] = $(selected).val();
+            });
             $.ajax({
                 type: "POST",
                 url: "update",
@@ -114,13 +118,12 @@ window.operateEvents = {
                     "ulname": $('#ulname').val(),
                     "ucountry": $('#ucountrySelect').val(),
                     "ucity": $('#ucitySelect').val(),
-                    //"ugroup": $("#ugroupSelect").val(),
+                    "ugroup[]": selectednumbers,
                     "udate": $('#udate').val(),
                     "uemail": $('#uemail').val(),
                     "utel": $('#utel').val()
                 },
                 success: function (result) {
-                    alert(result);
                     if ($.trim(result) == 1) {
                         $('#updateUserPopup').modal('hide');
                         $('#updateUserSuccess').modal('show');
@@ -286,6 +289,7 @@ $('#comboPages').change(function () {
         success: function (result) {
             $('#table').bootstrapTable('load', result);
             $('#comboPages').val(selectedPage);
+            $('#pagination').simplePaginator('currentPage', selectedPage);
         }
     });
 });
