@@ -14,7 +14,17 @@
 
 <table id="table"></table>
 <div class="input-group pull-right" style="margin-top:21px; margin-left:5px;">
+    <label class="pagiTexts" style="display: inline;"><small><fmt:message key="search.gotopage"></fmt:message></small></label>
     <select id="comboPages" style="height: 32px; border-radius:4px;">
+    </select>
+    &nbsp;&nbsp;
+    <label class="pagiTexts" style="display: inline;"><small><fmt:message key="search.recordsperpage"></fmt:message></small></label>
+    <select id="comboRecCount" style="height: 32px; border-radius:4px;">
+        <option value="10" selected>10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+        <option value="1000">1000</option>
     </select>
 </div>
 <div id="pagination" class="text-right"></div>

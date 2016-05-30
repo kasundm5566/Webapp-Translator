@@ -1,4 +1,6 @@
 var curPage = 1;
+var recPerPage = 10;
+var paginationBar;
 $(document).ready(function () {
     loadTableData();
     pagination();
@@ -24,10 +26,10 @@ function loadTableData() {
         type: "POST",
         url: "load",
         dataType: "json",
-        data: {"page": "1"},
+        data: {"page": "1", "recordsCount": recPerPage},
         success: function (result) {
             $('#table').bootstrapTable({
-                pageSize: 10,
+                pageSize: recPerPage,
                 showColumns: true,
                 singleSelect: true,
                 minimumCountColumns: 3,
@@ -105,35 +107,39 @@ window.operateEvents = {
 
         $('#updateOk').off('click');
         $('#updateOk').click(function () {
-            var selectednumbers = [];
-            $('#ugroupSelect :selected').each(function(i, selected) {
-                selectednumbers[i] = $(selected).val();
-            });
-            $.ajax({
-                type: "POST",
-                url: "update",
-                data: {
-                    "id": userId,
-                    "ufname": $('#ufname').val(),
-                    "ulname": $('#ulname').val(),
-                    "ucountry": $('#ucountrySelect').val(),
-                    "ucity": $('#ucitySelect').val(),
-                    "ugroup[]": selectednumbers,
-                    "udate": $('#udate').val(),
-                    "uemail": $('#uemail').val(),
-                    "utel": $('#utel').val()
-                },
-                success: function (result) {
-                    if ($.trim(result) == 1) {
-                        $('#updateUserPopup').modal('hide');
-                        $('#updateUserSuccess').modal('show');
-                        $('#update').trigger('reset');
-                        refresh(curPage);
-                    } else {
-                        $('#updateUserFail').modal('show');
+            if (validateFirstName2() == false || validateLastName2() == false || validateDOB2() == false || validateGroup2() == false || validateEmail2() == false || validateTelNo2() == false) {
+                $('#updateUserFail').modal('show');
+            } else {
+                var selectednumbers = [];
+                $('#ugroupSelect :selected').each(function (i, selected) {
+                    selectednumbers[i] = $(selected).val();
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "update",
+                    data: {
+                        "id": userId,
+                        "ufname": $('#ufname').val(),
+                        "ulname": $('#ulname').val(),
+                        "ucountry": $('#ucountrySelect').val(),
+                        "ucity": $('#ucitySelect').val(),
+                        "ugroup[]": selectednumbers,
+                        "udate": $('#udate').val(),
+                        "uemail": $('#uemail').val(),
+                        "utel": $('#utel').val()
+                    },
+                    success: function (result) {
+                        if ($.trim(result) == 1) {
+                            $('#updateUserPopup').modal('hide');
+                            $('#updateUserSuccess').modal('show');
+                            $('#update').trigger('reset');
+                            refresh(curPage);
+                        } else {
+                            $('#updateUserFail').modal('show');
+                        }
                     }
-                }
-            });
+                });
+            }
         });
     },
     'click .delete': function (e, value, row, index) {
@@ -197,12 +203,14 @@ function search() {
         $('#pagination2').hide();
         $('#pagination').show();
         $('#comboPages').show();
+        $('#comboRecCount').show();
+        $('.pagiTexts').show();
 
         $.ajax({
             type: "POST",
             url: "load",
             dataType: "json",
-            data: {"page": "1"},
+            data: {"page": "1", "recordsCount": recPerPage},
             success: function (result) {
                 $('#table').bootstrapTable('load', result);
                 paginationBar.simplePaginator('changePage', 1);
@@ -212,6 +220,8 @@ function search() {
         $('#pagination').hide();
         $('#pagination2').show();
         $('#comboPages').hide();
+        $('#comboRecCount').hide();
+        $('.pagiTexts').hide();
 
         $.ajax({
             type: "POST",
@@ -228,7 +238,7 @@ function search() {
             url: "searchpagination",
             data: {"searchName": searchName},
             success: function (result) {
-                var pageCount = Math.ceil(result / 10);
+                var pageCount = Math.ceil(result / recPerPage);
                 paginationBar2.simplePaginator('setTotalPages', pageCount);
             }
         });
@@ -263,7 +273,7 @@ function refresh(currentPage) {
         type: "POST",
         url: "load",
         dataType: "json",
-        data: {"page": currentPage},
+        data: {"page": currentPage, "recordsCount": recPerPage},
         success: function (result) {
             $('#table').bootstrapTable('load', result);
         }
@@ -285,17 +295,41 @@ $('#comboPages').change(function () {
         type: "post",
         url: "load",
         dataType: "json",
-        data: {"page": selectedPage},
+        data: {"page": selectedPage, "recordsCount": recPerPage},
         success: function (result) {
             $('#table').bootstrapTable('load', result);
             $('#comboPages').val(selectedPage);
-            $('#pagination').simplePaginator('currentPage', selectedPage);
+            $('#pagination').simplePaginator('change', selectedPage);
+        }
+    });
+});
+
+$('#comboRecCount').change(function () {
+    recPerPage = $('#comboRecCount').val();
+    $.ajax({
+        type: "POST",
+        url: "load",
+        dataType: "json",
+        data: {"page": "1", "recordsCount": recPerPage},
+        success: function (result) {
+            $('#table').bootstrapTable('load', result);
+            paginationBar.simplePaginator('changePage', 1);
+        }
+    });
+
+    $.ajax({
+        type: "get",
+        url: "pagination",
+        success: function (result) {
+            var totalPages=Math.ceil(result / recPerPage);
+            paginationBar.simplePaginator('setTotalPages', totalPages);
+            loadPageSelect(totalPages);
         }
     });
 });
 
 function pagination() {
-    var paginationBar = $('#pagination').simplePaginator({
+    paginationBar = $('#pagination').simplePaginator({
         totalPages: 1,
         maxButtonsVisible: 5,
         currentPage: 1,
@@ -310,25 +344,22 @@ function pagination() {
                 type: "post",
                 url: "load",
                 dataType: "json",
-                data: {"page": page},
+                data: {"page": page, "recordsCount": recPerPage},
                 success: function (result) {
                     $('#table').bootstrapTable('load', result);
                     $('#comboPages').val(page);
                 }
             });
         }
-
     });
 
     $.ajax({
         type: "get",
         url: "pagination",
         success: function (result) {
-            var pageCount = Math.ceil(result / 10);
+            var pageCount = Math.ceil(result / recPerPage);
             paginationBar.simplePaginator('setTotalPages', pageCount);
             loadPageSelect(pageCount);
         }
     });
 }
-
-

@@ -3,7 +3,7 @@
 <suite name="TestSuite" verbose="1">
     <test name="login_test">
         <classes>
-            <class name="hsenid.webapp.LoginTest"/>
+            <class name="hsenid.webapp.common.LoginTest"/>
         </classes>
     </test>
     <test name="translate_test">
@@ -14,7 +14,7 @@
                 <parameter name="expected" value="enfant"/>
         -->
         <classes>
-            <class name="hsenid.webapp.TranslatorTest">
+            <class name="hsenid.webapp.translator.TranslatorTest">
             </class>
         </classes>
     </test>

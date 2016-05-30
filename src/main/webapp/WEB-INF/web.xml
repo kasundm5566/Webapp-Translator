@@ -10,12 +10,12 @@
     <display-name>Archetype Created Web Application</display-name>
     
     <listener>
-        <listener-class>hsenid.webapp.ContextListener</listener-class>
+        <listener-class>hsenid.webapp.common.ContextListener</listener-class>
     </listener>
 
     <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>hsenid.webapp.Login</servlet-class>
+        <servlet-class>hsenid.webapp.common.Login</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -24,7 +24,7 @@
   
     <servlet>
         <servlet-name>Translate</servlet-name>
-        <servlet-class>hsenid.webapp.Translator</servlet-class>
+        <servlet-class>hsenid.webapp.translator.Translator</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Translate</servlet-name>
@@ -33,7 +33,7 @@
 
     <servlet>
         <servlet-name>CheckUserName</servlet-name>
-        <servlet-class>hsenid.webapp.CheckUserName</servlet-class>
+        <servlet-class>hsenid.webapp.usermanagement.adduser.CheckUserName</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CheckUserName</servlet-name>
@@ -42,7 +42,7 @@
 
     <servlet>
         <servlet-name>Register</servlet-name>
-        <servlet-class>hsenid.webapp.Register</servlet-class>
+        <servlet-class>hsenid.webapp.usermanagement.adduser.Register</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
@@ -51,7 +51,7 @@
 
     <servlet>
         <servlet-name>Load</servlet-name>
-        <servlet-class>hsenid.webapp.Load</servlet-class>
+        <servlet-class>hsenid.webapp.usermanagement.searchuser.Load</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Load</servlet-name>
@@ -60,7 +60,7 @@
 
     <servlet>
         <servlet-name>Search</servlet-name>
-        <servlet-class>hsenid.webapp.Search</servlet-class>
+        <servlet-class>hsenid.webapp.usermanagement.searchuser.Search</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Search</servlet-name>
@@ -69,7 +69,7 @@
 
     <servlet>
         <servlet-name>Typeahead</servlet-name>
-        <servlet-class>hsenid.webapp.Typeahead</servlet-class>
+        <servlet-class>hsenid.webapp.usermanagement.searchuser.Typeahead</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Typeahead</servlet-name>
@@ -78,7 +78,7 @@
 
     <servlet>
         <servlet-name>Pagination</servlet-name>
-        <servlet-class>hsenid.webapp.Pagination</servlet-class>
+        <servlet-class>hsenid.webapp.usermanagement.searchuser.Pagination</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Pagination</servlet-name>
@@ -87,7 +87,7 @@
 
     <servlet>
         <servlet-name>SearchPagination</servlet-name>
-        <servlet-class>hsenid.webapp.SearchPagination</servlet-class>
+        <servlet-class>hsenid.webapp.usermanagement.searchuser.SearchPagination</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SearchPagination</servlet-name>
@@ -96,7 +96,7 @@
 
     <servlet>
         <servlet-name>GroupLoader</servlet-name>
-        <servlet-class>hsenid.webapp.GroupLoader</servlet-class>
+        <servlet-class>hsenid.webapp.usermanagement.common.GroupLoader</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>GroupLoader</servlet-name>
@@ -105,7 +105,7 @@
 
     <servlet>
         <servlet-name>Delete</servlet-name>
-        <servlet-class>hsenid.webapp.Delete</servlet-class>
+        <servlet-class>hsenid.webapp.usermanagement.searchuser.Delete</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Delete</servlet-name>
@@ -114,7 +114,7 @@
 
     <servlet>
         <servlet-name>Update</servlet-name>
-        <servlet-class>hsenid.webapp.Update</servlet-class>
+        <servlet-class>hsenid.webapp.usermanagement.searchuser.Update</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Update</servlet-name>
@@ -123,7 +123,7 @@
 
     <servlet>
         <servlet-name>CityLoader</servlet-name>
-        <servlet-class>hsenid.webapp.CityLoader</servlet-class>
+        <servlet-class>hsenid.webapp.usermanagement.common.CityLoader</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CityLoader</servlet-name>
@@ -132,7 +132,7 @@
 
     <servlet>
         <servlet-name>Logout</servlet-name>
-        <servlet-class>hsenid.webapp.Logout</servlet-class>
+        <servlet-class>hsenid.webapp.common.Logout</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
@@ -141,7 +141,7 @@
 
     <servlet>
         <servlet-name>GetUserPermissions</servlet-name>
-        <servlet-class>hsenid.webapp.GetUserPermissions</servlet-class>
+        <servlet-class>hsenid.webapp.usermanagement.searchuser.GetUserPermissions</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>GetUserPermissions</servlet-name>
@@ -150,7 +150,7 @@
 
     <servlet>
         <servlet-name>UserGroupsLoader</servlet-name>
-        <servlet-class>hsenid.webapp.UserGroupsLoader</servlet-class>
+        <servlet-class>hsenid.webapp.usermanagement.common.UserGroupsLoader</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserGroupsLoader</servlet-name>
@@ -159,7 +159,7 @@
 
     <servlet>
         <servlet-name>GetUserCity</servlet-name>
-        <servlet-class>hsenid.webapp.GetUserCity</servlet-class>
+        <servlet-class>hsenid.webapp.usermanagement.searchuser.GetUserCity</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>GetUserCity</servlet-name>
