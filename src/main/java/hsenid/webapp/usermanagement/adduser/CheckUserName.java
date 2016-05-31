@@ -18,31 +18,39 @@ import java.sql.SQLException;
 /**
  * Created by hsenid on 4/26/16.
  */
-public class CheckUserName extends HttpServlet{
+public class CheckUserName extends HttpServlet {
     private static final Logger log = LogManager.getLogger(CheckUserName.class);
-    private Connection connection=null;
+    private Connection connection = null;
     private PreparedStatement statement = null;
     private ResultSet result = null;
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String username = req.getParameter("username");
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
+        if (validateUserName(username)) {
+            out.println("OK");
+        } else {
+            out.println("NO");
+        }
+    }
+
+    public boolean validateUserName(String username) {
+        boolean availability = false;
         try {
-            String username=req.getParameter("username");
-            connection= DBCon.getComboDataSource().getConnection();
-            String query = "SELECT UserName FROM user_cred WHERE UserName=\'"+username+"\';";
+            connection = DBCon.getComboDataSource().getConnection();
+            String query = "SELECT UserName FROM user_cred WHERE UserName=\'" + username + "\';";
             PreparedStatement statement = connection.prepareStatement(query);
             result = statement.executeQuery();
-            resp.setContentType("text/html");
-            PrintWriter out = resp.getWriter();
-            if(result.first()){
-                out.println("NO");
-            }else{
-                out.println("OK");
+            if (!result.first()) {
+                availability = true;
             }
         } catch (SQLException e) {
-            log.error("Error while checking user name availability. "+e);
-        }finally {
+            log.error("Error while checking user name availability. " + e);
+        } finally {
             try {
-                if(connection!=null){
+                if (connection != null) {
                     connection.close();
                 }
                 if (statement != null) {
@@ -52,8 +60,9 @@ public class CheckUserName extends HttpServlet{
                     result.close();
                 }
             } catch (SQLException e) {
-                log.error("Error while closing the common related objects created to check the user name availability. "+e);
+                log.error("Error while closing the common related objects created to check the user name availability. " + e);
             }
         }
+        return availability;
     }
 }

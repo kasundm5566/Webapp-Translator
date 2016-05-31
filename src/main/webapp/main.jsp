@@ -49,7 +49,7 @@
     </div>
 
     <% session.setAttribute("user", session.getAttribute("username")); %>
-    <div id="logoutDiv" style="position: fixed; right: 0; padding: 10px; z-index: 3;">
+    <div id="logoutDiv">
         <ul id="navi" class="nav navbar-nav">
             <input type="hidden" id="userName" value="${uname}"/>
             <li id="drp" class="dropdown">

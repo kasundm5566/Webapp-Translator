@@ -50,7 +50,7 @@ public class DBCon {
     // Closing the database common pool
     public static void closeComboPoolDataSource() {
         if (comboPooledDataSource != null) {
-            log.info("Closing the database common.");
+            log.info("Closing the database connection pool.");
             getComboDataSource().close();
         }
     }

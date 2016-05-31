@@ -26,7 +26,6 @@ public class LoginTest {
     @DataProvider(name = "test1")
     public Object[][] users() {
         return new Object[][]{
-                {"", "", false},
                 {"", "123", false},
                 {"test", "", false},
                 {" ", "abc", false},
@@ -39,7 +38,7 @@ public class LoginTest {
                 {" test", " 123", false},
                 {" test ", " 123 ", false},
                 {"tESt", "123", false},
-                {"kdm", "abc", true},
+                {"kdm", "123", true},
                 {"Kdm", "abc", false},
                 {"kdm", "Abc", false},
                 {"KDM", "ABC", false},
@@ -57,14 +56,14 @@ public class LoginTest {
         DBCon.createComboDataSource(propReader.readProperty("db.driver"), propReader.readProperty("db.host"), propReader.readProperty("db.database"), propReader.readProperty("db.user"), propReader.readProperty("db.password"));
         dataSource = DBCon.getComboDataSource();
         con = dataSource.getConnection();
-        String query = "INSERT INTO user_cred (Name,Pass) VALUES ('test',md5('123'));";
+        String query = "INSERT INTO user_cred (UserName,Pass,FirstName,DOB,Country,CityId,Email,ContactNo) VALUES ('test',md5('123'),'test','1990-10-10','Sri Lanka',1,'asdasdas@asd.com',94778587663);";
         PreparedStatement st = con.prepareStatement(query);
         st.executeUpdate(query);
     }
 
     @AfterTest
     public void closeCon() throws SQLException {
-        String query = "DELETE FROM user_cred WHERE Name='test';";
+        String query = "DELETE FROM user_cred WHERE UserName='test';";
         PreparedStatement st = con.prepareStatement(query);
         st.executeUpdate(query);
         con.close();
@@ -77,6 +76,6 @@ public class LoginTest {
         boolean actual = new Login().validateByDb(new User(uname, pass));
         Assert.assertEquals(actual, expected, "Evaluate user validation results.");
         //System.out.println("Login Testing: UName:"+uname+" PWD:"+pass+"\tExpected:"+expected+"\tActual:\t"+b);
-        System.out.print(".");
+        //System.out.print(".");
     }
 }

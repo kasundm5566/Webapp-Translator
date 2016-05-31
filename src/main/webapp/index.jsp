@@ -59,7 +59,5 @@
         </c:if>
     </div>
 </fmt:bundle>
-
-<%--<script src="js/permission.js"></script>--%>
 </body>
 </html>
