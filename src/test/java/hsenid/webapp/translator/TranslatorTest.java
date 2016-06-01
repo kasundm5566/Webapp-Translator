@@ -24,7 +24,7 @@ public class TranslatorTest {
         System.out.println("\nFinished translate Test.");
     }
 
-    @DataProvider(name = "trans_test")
+    @DataProvider(name = "translateTest")
     public Object[][] transData() {
         return new Object[][]{
                 {"en", "fr", "child", "enfant"},
@@ -38,7 +38,7 @@ public class TranslatorTest {
         };
     }
 
-    @Test(dataProvider = "trans_test")
+    @Test(dataProvider = "translateTest")
     public void testTranslate(String fromLang, String toLang, String text, String expected){
         Translator tr = new Translator();
         String translatedVal = null;

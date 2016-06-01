@@ -1,12 +1,17 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="TestSuite" verbose="1">
-    <test name="login_test">
+    <test name="loginTest">
         <classes>
             <class name="hsenid.webapp.common.LoginTest"/>
         </classes>
     </test>
-    <test name="translate_test">
+    <test name="loginTestSelenium">
+        <classes>
+            <class name="hsenid.webapp.common.LoginTestSelenium"/>
+        </classes>
+    </test>
+    <test name="translateTest">
         <!--
                 <parameter name="toLang" value="en"/>
                 <parameter name="fromLang" value="fr"/>
@@ -16,6 +21,11 @@
         <classes>
             <class name="hsenid.webapp.translator.TranslatorTest">
             </class>
+        </classes>
+    </test>
+    <test name="checkUserNameTest">
+        <classes>
+            <class name="hsenid.webapp.usermanagement.adduser.CheckUserNameTest"/>
         </classes>
     </test>
 </suite>

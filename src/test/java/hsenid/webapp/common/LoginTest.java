@@ -56,14 +56,14 @@ public class LoginTest {
         DBCon.createComboDataSource(propReader.readProperty("db.driver"), propReader.readProperty("db.host"), propReader.readProperty("db.database"), propReader.readProperty("db.user"), propReader.readProperty("db.password"));
         dataSource = DBCon.getComboDataSource();
         con = dataSource.getConnection();
-        String query = "INSERT INTO user_cred (UserName,Pass,FirstName,DOB,Country,CityId,Email,ContactNo) VALUES ('test',md5('123'),'test','1990-10-10','Sri Lanka',1,'asdasdas@asd.com',94778587663);";
+        String query = "INSERT INTO user_cred (UserName,Pass,FirstName,DOB,Country,CityId,Email,ContactNo) VALUES ('temp',md5('123'),'test','1990-10-10','Sri Lanka',1,'asdasdas@asd.com',94778587663);";
         PreparedStatement st = con.prepareStatement(query);
         st.executeUpdate(query);
     }
 
     @AfterTest
     public void closeCon() throws SQLException {
-        String query = "DELETE FROM user_cred WHERE UserName='test';";
+        String query = "DELETE FROM user_cred WHERE UserName='temp';";
         PreparedStatement st = con.prepareStatement(query);
         st.executeUpdate(query);
         con.close();
