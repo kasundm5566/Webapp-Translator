@@ -11,6 +11,8 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by hsenid.
  *
@@ -21,30 +23,25 @@ public class TranslatorTestSelenium {
     String url;
 
     @BeforeTest
-    public void start() throws InterruptedException {
+    public void start() {
         driver = new ChromeDriver();
         url = "http://localhost:8080/";
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(url);
-        wait(1000);
 
         driver.findElement(By.id("loginusername")).clear();
         driver.findElement(By.id("loginusername")).sendKeys("kdm");
-        wait(1000);
 
         driver.findElement(By.id("loginpassword")).clear();
         driver.findElement(By.id("loginpassword")).sendKeys("123");
-        wait(1000);
 
         driver.findElement(By.id("loginButton")).click();
-        wait(1000);
     }
 
     @AfterTest
     public void end() throws InterruptedException {
         driver.findElement(By.id("navi")).click();
-        wait(500);
         driver.findElement(By.id("out")).click();
-        wait(1000);
         driver.quit();
     }
 
@@ -52,38 +49,30 @@ public class TranslatorTestSelenium {
     public Object[][] transData() {
         return new Object[][]{
                 {"English", "French", "child", "enfant"},
-                /*{"French", "English", "enfant", "child"},
+                {"French", "English", "enfant", "child"},
                 {"French", "Japanese", "enfant", "子ども"},
                 {"Japanese", "French", "子ども", "Les enfants"},
                 {"Japanese", "English", "子ども", "Children"},
-                {"English", "French", " ", ""}*/
+                {"English", "French", " ", ""}
         };
     }
 
     @Test(dataProvider = "provider",testName = "translateTestSelenium")
-    public void testTranslate(String fromLang, String toLang, String text, String expected) throws InterruptedException {
+    public void testTranslate(String fromLang, String toLang, String text, String expected) {
         driver.findElement(By.id("fromtext")).clear();
         driver.findElement(By.id("fromtext")).sendKeys(text);
-        wait(1000);
 
         Select comboFromLanguages = new Select(driver.findElement(By.id("fromlang")));
         comboFromLanguages.selectByVisibleText(fromLang);
-        wait(1000);
 
         Select comboToLanguages = new Select(driver.findElement(By.id("tolang")));
         comboToLanguages.selectByVisibleText(toLang);
-        wait(1000);
 
         driver.findElement(By.id("translateButton")).click();
-        wait(500);
-
 
         WebElement textarea = driver.findElement(By.id("totext"));
         String actual = textarea.getText();
-        Assert.assertEquals(actual, expected, "Evaluate the translated text with expected result.");
-    }
 
-    public void wait(int miliseconds) throws InterruptedException {
-        Thread.sleep(miliseconds);
+        Assert.assertEquals(actual, expected, "Evaluate the translated text with expected result.");
     }
 }

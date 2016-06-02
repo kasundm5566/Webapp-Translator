@@ -9,6 +9,8 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by hsenid on 6/1/16.
  */
@@ -41,6 +43,7 @@ public class LoginTestSelenium {
     public void setupDriver() {
         System.setProperty("webdriver.chrome.driver", "chromedriver");
         driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         url = "http://localhost:8080/";
     }
 
@@ -50,26 +53,17 @@ public class LoginTestSelenium {
     }
 
     @Test(dataProvider = "provider",testName ="loginTestSelenium")
-    public void loginTestWithSelenium(String username, String password, String expected) throws InterruptedException {
+    public void loginTestWithSelenium(String username, String password, String expected) {
         driver.get(url);
-        wait(1000);
-
         driver.findElement(By.id("loginusername")).clear();
         driver.findElement(By.id("loginusername")).sendKeys(username);
-        wait(1000);
 
         driver.findElement(By.id("loginpassword")).clear();
         driver.findElement(By.id("loginpassword")).sendKeys(password);
-        wait(1000);
 
         driver.findElement(By.id("loginButton")).click();
         String actualTitle = driver.getTitle();
-        wait(500);
 
         Assert.assertEquals(actualTitle, expected, "Evaluate user validation results.");
-    }
-
-    public void wait(int miliseconds) throws InterruptedException {
-        Thread.sleep(miliseconds);
     }
 }

@@ -6,26 +6,35 @@
             <class name="hsenid.webapp.common.LoginTest"/>
         </classes>
     </test>
+
     <test name="loginTestSelenium">
         <classes>
             <class name="hsenid.webapp.common.LoginTestSelenium"/>
         </classes>
     </test>
+
     <test name="translateTest">
-        <!--
-                <parameter name="toLang" value="en"/>
-                <parameter name="fromLang" value="fr"/>
-                <parameter name="text" value="child"/>
-                <parameter name="expected" value="enfant"/>
-        -->
         <classes>
             <class name="hsenid.webapp.translator.TranslatorTest">
             </class>
         </classes>
     </test>
+    <test name="translateTestSelenium">
+        <classes>
+            <class name="hsenid.webapp.translator.TranslatorTestSelenium">
+            </class>
+        </classes>
+    </test>
+
     <test name="checkUserNameTest">
         <classes>
             <class name="hsenid.webapp.usermanagement.adduser.CheckUserNameTest"/>
         </classes>
     </test>
+    <test name="checkUserNameTestSelenium">
+        <classes>
+            <class name="hsenid.webapp.usermanagement.adduser.CheckUserNameTestSelenium"/>
+        </classes>
+    </test>
+
 </suite>

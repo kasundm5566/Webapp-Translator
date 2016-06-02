@@ -2,10 +2,12 @@ package hsenid.webapp.usermanagement.adduser;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.Assert;
+import org.testng.annotations.*;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by hsenid on 6/1/16.
@@ -15,52 +17,52 @@ public class CheckUserNameTestSelenium {
     String url;
 
     @BeforeTest
-    public void initTest() throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
-        String url = "http://localhost:8080/";
+    public void initiateTest() throws InterruptedException {
+        System.setProperty("webdriver.chrome.driver", "chromedriver");
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        url = "http://localhost:8080/";
         driver.get(url);
-        wait(700);
 
         driver.findElement(By.id("loginusername")).clear();
         driver.findElement(By.id("loginusername")).sendKeys("kdm");
-        wait(700);
 
         driver.findElement(By.id("loginpassword")).clear();
         driver.findElement(By.id("loginpassword")).sendKeys("123");
-        wait(700);
 
         driver.findElement(By.id("loginButton")).click();
-        wait(700);
 
         driver.findElement(By.id("userManagement")).click();
-        wait(700);
 
         driver.findElement(By.id("addUserDrp")).click();
-        wait(700);
+        Thread.sleep(600);
 
         driver.findElement(By.id("accoutDetailsTab")).click();
-        wait(700);
+        Thread.sleep(600);
     }
 
     @AfterTest
-    public void endTest(){
+    public void closeDriver() {
         driver.quit();
     }
 
-    @Test
-    public void execTest() throws InterruptedException {
-        String val="test";
-        for (int i = 0; i < val.length(); i++){
-            char c = val.charAt(i);
-            String s = new StringBuilder().append(c).toString();
-            driver.findElement(By.id("username")).sendKeys(s);
-            wait(1000);
-        }
-        wait(700);
-        driver.quit();
+    @DataProvider(name = "provider")
+    public Object[][] usernames() {
+        return new Object[][]{
+                {"kdm", "That user name is already used."},
+                {"abc", "That user name is already used."},
+                {"xyz", "User name is valid."},
+                {"pqr", "User name is valid."},
+                {"peter123", "That user name is already used."}
+        };
     }
 
-    public void wait(int miliseconds) throws InterruptedException {
-        Thread.sleep(miliseconds);
+    @Test(dataProvider = "provider", testName = "checkUserNameTestSelenium")
+    public void loginTestWithSelenium(String username, String expect) throws InterruptedException {
+        driver.findElement(By.id("username")).clear();
+        driver.findElement(By.id("username")).sendKeys(username);
+        Thread.sleep(300);
+        String actual=driver.findElement(By.id("uname_error")).getText();
+        Assert.assertEquals(actual,expect,"Checking username availability");
     }
 }
