@@ -2,8 +2,9 @@ package hsenid.webapp.usermanagement.adduser;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -15,30 +16,36 @@ import java.util.concurrent.TimeUnit;
 public class CheckUserNameTestSelenium {
     WebDriver driver;
     String url;
+    WebDriverWait wait;
 
     @BeforeTest
     public void initiateTest() throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", "chromedriver");
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         url = "http://localhost:8080/";
         driver.get(url);
+        wait = new WebDriverWait(driver, 10);
 
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("loginusername")));
         driver.findElement(By.id("loginusername")).clear();
         driver.findElement(By.id("loginusername")).sendKeys("kdm");
 
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("loginpassword")));
         driver.findElement(By.id("loginpassword")).clear();
         driver.findElement(By.id("loginpassword")).sendKeys("123");
 
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("loginButton")));
         driver.findElement(By.id("loginButton")).click();
 
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("userManagement")));
         driver.findElement(By.id("userManagement")).click();
 
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("addUserDrp")));
         driver.findElement(By.id("addUserDrp")).click();
-        Thread.sleep(600);
 
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("accoutDetailsTab")));
         driver.findElement(By.id("accoutDetailsTab")).click();
-        Thread.sleep(600);
     }
 
     @AfterTest
@@ -59,10 +66,11 @@ public class CheckUserNameTestSelenium {
 
     @Test(dataProvider = "provider", testName = "checkUserNameTestSelenium")
     public void loginTestWithSelenium(String username, String expect) throws InterruptedException {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
         driver.findElement(By.id("username")).clear();
         driver.findElement(By.id("username")).sendKeys(username);
-        Thread.sleep(300);
         String actual=driver.findElement(By.id("uname_error")).getText();
+
         Assert.assertEquals(actual,expect,"Checking username availability");
     }
 }

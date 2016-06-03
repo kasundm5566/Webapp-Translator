@@ -37,4 +37,10 @@
         </classes>
     </test>
 
+    <test name="registerTestSelenium">
+        <classes>
+            <class name="hsenid.webapp.usermanagement.adduser.RegisterTestSelenium"/>
+        </classes>
+    </test>
+
 </suite>
