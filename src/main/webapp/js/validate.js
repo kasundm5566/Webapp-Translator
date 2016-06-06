@@ -160,6 +160,7 @@ function validateUserName() {
         $("#uname_error").text("User name should not empty.");
         return false;
     } else {
+        var b=false;
         $.ajax({
             type: "POST",
             url: "checkusername",
@@ -182,12 +183,12 @@ function validateUserName() {
 }
 
 // Validate user group
-function validateGroup(){
-    if($("#groupSelect").val()==null){
+function validateGroup() {
+    if ($("#groupSelect").val() == null) {
         $("#group_error").show();
         $("#group_error").text("User must belongs to at least one group.");
         return false;
-    }else{
+    } else {
         $("#group_error").hide();
     }
 }
@@ -203,7 +204,7 @@ function hideErrorLabels() {
     $("#tel_error").hide();
 }
 
-function loadCities(){
+function loadCities() {
     var country = $('#countrySelect').val();
     $.ajax({
         type: "POST",
@@ -214,17 +215,17 @@ function loadCities(){
             var select = $("#citySelect"), options = '';
             select.empty();
             for (var i = 0; i < result.length; i++) {
-                options += "<option>"+ result[i].cityname +"</option>";
+                options += "<option>" + result[i].cityname + "</option>";
             }
             select.append(options);
         }
     });
 }
 
-function loadGroups(){
+function loadGroups() {
     $("#groupSelect").multiselect({
-       buttonWidth:'100%',
-        onChange: function(element,checked){
+        buttonWidth: '100%',
+        onChange: function (element, checked) {
             validateGroup();
         }
     });
@@ -233,10 +234,10 @@ function loadGroups(){
         url: "grouploader",
         dataType: "json",
         success: function (result) {
-           var select = $("#groupSelect"), options = '';
+            var select = $("#groupSelect"), options = '';
             select.empty();
             for (var i = 0; i < result.length; i++) {
-                options += "<option>"+ result[i].groupname +"</option>";
+                options += "<option>" + result[i].groupname + "</option>";
             }
             select.append(options);
             $('#groupSelect').multiselect('rebuild');
@@ -303,7 +304,7 @@ $(document).ready(function () {
     });
 
     $("#register").submit(function () {
-        if (validateFirstName() == false || validateLastName() == false || validateDOB() == false || validateUserName() == false || validatePassword() == false || validateRetypedPass() == false || validateGroup()==false || validateEmail() == false || validateTelNo() == false) {
+        if (validateFirstName() == false || validateLastName() == false || validateDOB() == false || validateUserName() == false || validatePassword() == false || validateRetypedPass() == false || validateGroup() == false || validateEmail() == false || validateTelNo() == false) {
             $('#popup').modal('show');
             return false;
         } else {

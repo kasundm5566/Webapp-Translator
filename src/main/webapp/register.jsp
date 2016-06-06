@@ -12,7 +12,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title" style="text-align: left;">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                        <a id="userDetailsTab" data-toggle="collapse" data-parent="#accordion" href="#collapse1">
                             <span class="glyphicon glyphicon-user"></span> <fmt:message
                                 key="register.userdetailstab.text"/></a>
                     </h4>
