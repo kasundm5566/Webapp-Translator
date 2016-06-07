@@ -33,7 +33,7 @@ public class CheckUserNameTestSelenium {
 
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("loginpassword")));
         driver.findElement(By.id("loginpassword")).clear();
-        driver.findElement(By.id("loginpassword")).sendKeys("123");
+        driver.findElement(By.id("loginpassword")).sendKeys("12345678*");
 
         wait.until(ExpectedConditions.elementToBeClickable(By.id("loginButton")));
         driver.findElement(By.id("loginButton")).click();
@@ -69,6 +69,8 @@ public class CheckUserNameTestSelenium {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
         driver.findElement(By.id("username")).clear();
         driver.findElement(By.id("username")).sendKeys(username);
+        
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("uname_error")));
         String actual=driver.findElement(By.id("uname_error")).getText();
 
         Assert.assertEquals(actual,expect,"Checking username availability");

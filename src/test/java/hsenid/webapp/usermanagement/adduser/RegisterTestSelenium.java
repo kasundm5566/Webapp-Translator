@@ -47,7 +47,7 @@ public class RegisterTestSelenium {
 
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("loginpassword")));
         driver.findElement(By.id("loginpassword")).clear();
-        driver.findElement(By.id("loginpassword")).sendKeys("123");
+        driver.findElement(By.id("loginpassword")).sendKeys("12345678*");
 
         wait.until(ExpectedConditions.elementToBeClickable(By.id("loginButton")));
         driver.findElement(By.id("loginButton")).click();

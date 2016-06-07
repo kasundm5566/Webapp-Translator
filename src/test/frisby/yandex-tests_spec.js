@@ -3,8 +3,13 @@
  */
 var frisby = require('frisby');
 
+var key="trnsl.1.1.20160310T063945Z.14945888ac849b23.fc507cddeb7ec9d96e1255e0a348b1b4a076f9c3";
+var detectLangUrl="https://translate.yandex.net/api/v1.5/tr.json/detect?key=";
+var translateUrl="https://translate.yandex.net/api/v1.5/tr.json/translate?key=";
+var getLangsUrl="https://translate.yandex.net/api/v1.5/tr.json/getLangs?key=";
+
 frisby.create('Yandex language detection test')
-    .get('https://translate.yandex.net/api/v1.5/tr.json/detect?key=trnsl.1.1.20160310T063945Z.14945888ac849b23.fc507cddeb7ec9d96e1255e0a348b1b4a076f9c3&text=hello')
+    .get(detectLangUrl+key+'&text=hello')
     .expectStatus(200)
     .inspectJSON()
     .expectJSONTypes({
@@ -18,7 +23,7 @@ frisby.create('Yandex language detection test')
     .toss();
 
 frisby.create("Yandex text translation text")
-    .get("https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20160310T063945Z.14945888ac849b23.fc507cddeb7ec9d96e1255e0a348b1b4a076f9c3&lang=en-fr&text=child")
+    .get(translateUrl+key+"&lang=en-fr&text=child")
     .expectStatus(200)
     .inspectJSON()
 
@@ -39,7 +44,7 @@ function test(){
 }
 
 frisby.create("Yandex get all languages text")
-    .get("https://translate.yandex.net/api/v1.5/tr.json/getLangs?key=trnsl.1.1.20160310T063945Z.14945888ac849b23.fc507cddeb7ec9d96e1255e0a348b1b4a076f9c3")
+    .get(getLangsUrl+key)
     .expectStatus(200)
     .inspectJSON()
 

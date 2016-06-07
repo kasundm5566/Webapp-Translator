@@ -38,7 +38,7 @@ public class LoginTest {
                 {" test", " 123", false},
                 {" test ", " 123 ", false},
                 {"tESt", "123", false},
-                {"kdm", "123", true},
+                {"kdm", "12345678*", true},
                 {"Kdm", "abc", false},
                 {"kdm", "Abc", false},
                 {"KDM", "ABC", false},
