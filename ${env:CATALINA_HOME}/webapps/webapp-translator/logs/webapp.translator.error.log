@@ -1,1 +1,0 @@
-2016-Jun-07 08:09:34:034 ERROR [main] hsenid.webapp.translator.Translator Error while processing the url. java.lang.IllegalArgumentException: Malformed escape pair at index 156: https://translate.yandex.net/api/v1.5/tr/translate?key=trnsl.1.1.20160310T063945Z.14945888ac849b23.fc507cddeb7ec9d96e1255e0a348b1b4a076f9c3&lang=en-fr&text=%^%$
