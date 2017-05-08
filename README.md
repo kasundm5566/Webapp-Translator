@@ -9,7 +9,7 @@ This webapp can be used to translate text between several languages. This webapp
 * Apache Maven 3.3
 * Apache Tomcat 8.0
 
-##### Config & Bu
+##### Config & Build
 1.Goto the location of the program folder</br>
 `$ cd <path>`</br>
 2.Run following command</br>
